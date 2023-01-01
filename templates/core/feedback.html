@@ -1,0 +1,28 @@
+{% extends '_base.html' %}
+{% load bulma_tags %}
+{% block title %}Leave feedback{% endblock %}
+{% block content %}
+<section class="section">
+<div class="container">
+    <div class="columns is-multiline">
+        <div class="column is-8 is-offset-2">
+          <div class="columns box">
+            <div class="column left column-auth">
+                <h1 class="title colored">Leave feedback</h1>
+            </div>
+            <div class="column right column-auth">
+                {% include "includes/messages.html" %}
+                <form class="block" method="post">
+                {% csrf_token %}
+                {{ form|bulma }}
+                <div class="field">
+                    <button type="submit" class="button is-primary">Submit</button>
+                </div>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+{% endblock content %}
+</div>
+</section>

@@ -1,0 +1,19 @@
+{% load static %}
+{% load bulma_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<title>{% block full_title %}{% block title %}{% endblock title %} | {{ PROJECT_NAME }}{% endblock full_title %}</title>
+<meta name="description" content="">
+<link rel="stylesheet" href="{% static 'mybulma/mybulma.css' %}">
+<link rel="stylesheet" href="{% static 'styles.css' %}">
+<script src="{% static 'js/htmx.min.js' %}" defer></script>
+</head>
+<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+{% block content %}
+{% endblock content %}
+</body>
+</html>

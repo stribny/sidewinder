@@ -1,0 +1,334 @@
+---
+- hosts: all
+  become: yes
+
+  vars:
+    ansible_ssh_pipelining: 1
+
+  handlers:
+    - name: restart caddy
+      service: name=caddy state=restarted
+
+    - name: restart postgres
+      service: name=postgresql state=restarted
+
+    - name: restart app
+      systemd: "name={{ project_name }} state=restarted daemon_reload=yes"
+
+  pre_tasks:
+    - name: "Install system packages"
+      dnf: "name={{ item }} state=present"
+      with_items:
+        - pip # Required by ansible to install Python packages
+        - caddy
+        - postgresql
+        - postgresql-server
+        - rsync
+
+    - name: "Install Python packages"
+      pip: "name={{ item }}  state=present"
+      with_items:
+        - psycopg2-binary # Required by ansible to create pg db/user
+        - poetry
+
+  tasks:
+    # System
+
+    - name: "Create system user for the application"
+      user:
+        state: present
+        name: "{{ project_user }}"
+        group: caddy
+        createhome: true
+
+    # System | Static file serving
+
+    - name: "Clean static directory"
+      file:
+        state: absent
+        path: "/var/www/{{ project_name }}/static/"
+
+    - name: "Create static dir"
+      file: state=directory
+        path=/var/www/{{ project_name }}/static/
+        owner="{{ project_user }}"
+        group="caddy"
+        mode="u=rwx,g=rx"
+
+    - name: "Create media dir"
+      file: state=directory
+        path=/var/www/{{ project_name }}/media/
+        owner="{{ project_user }}"
+        group="caddy"
+        mode="u+rwx,g=rx"
+
+    - name: "Create gunicorn logs dir"
+      file: state=directory
+        path=/var/log/{{ project_name }}
+        owner="{{ project_user }}"
+        group="caddy"
+        mode="u+rwx,g=rx"
+
+    - name: "Create caddy logs dir"
+      file: state=directory
+        path=/var/log/caddy
+        owner="{{ project_user }}"
+        group="caddy"
+        mode="u+rwx,g=+rwx"
+
+    - name: "Create socket dir"
+      file: state=directory
+        path=/var/run/{{ project_name }}
+        owner="{{ project_user }}"
+        group="caddy"
+        mode="u+rwx,g=+rx"
+
+    # Caddy
+
+    - name: "Setup caddyfile with SSL"
+      copy:
+        content: |
+          import *.caddy
+        dest: "/etc/caddy/Caddyfile"
+        mode: "a+r"
+      when: django_ssl == 1
+      notify:
+        - restart caddy
+
+    - name: "Setup caddyfile without SSL"
+      copy:
+        content: |
+          {
+            auto_https off
+          }
+          import *.caddy
+        dest: "/etc/caddy/Caddyfile"
+        mode: "a+r"
+      when: django_ssl == 0
+      notify:
+        - restart caddy
+
+    - name: "Caddy configuration with SSL"
+      copy:
+        content: |
+          www.{{ domain_name }} {
+            redir https://{{ domain_name }}{uri}
+          }
+          {{ domain_name }} {
+            log {
+              output file /var/log/caddy/access.log
+              format filter {
+                wrap console
+                fields {
+                  request>headers>Authorization delete
+                }
+              }
+            }
+            encode gzip
+            header Strict-Transport-Security "max-age=31536000; preload"
+            @excludeDirs {
+              not path /static/* /media/*
+            }
+            reverse_proxy @excludeDirs unix//var/run/{{ project_name }}/app.sock
+            file_server {
+              root /var/www/{{ project_name }}/
+            }
+          }
+        mode: "a+r"
+        dest: "/etc/caddy/{{ project_name }}.caddy"
+      when: django_ssl == 1
+      notify:
+        - restart caddy
+
+    - name: "Caddy configuration without SSL"
+      copy:
+        content: |
+          :80 {
+            log {
+              output file /var/log/caddy/access.log
+              format filter {
+                wrap console
+                fields {
+                  request>headers>Authorization delete
+                }
+              }
+            }
+            encode gzip
+            @excludeDirs {
+              not path /static/* /media/*
+            }
+            reverse_proxy @excludeDirs unix//var/run/{{ project_name }}/app.sock
+            file_server {
+              root /var/www/{{ project_name }}/
+            }
+          }
+        mode: "a+r"
+        dest: "/etc/caddy/{{ project_name }}.caddy"
+      when: django_ssl == 0
+      notify:
+        - restart caddy
+
+    # PostgreSQL
+
+    - name: "Find out if PostgreSQL is initialized"
+      ansible.builtin.stat:
+        path: "/var/lib/pgsql/data/pg_hba.conf"
+      register: postgres_data
+
+    - name: "Initialize PostgreSQL"
+      shell: "postgresql-setup initdb"
+      when: not postgres_data.stat.exists
+ 
+    - name: "Start and enable services"
+      service: "name={{ item }} state=started enabled=yes"
+      with_items:
+        - postgresql
+
+    - name: "Create app database"
+      postgresql_db:
+        state: present
+        name: "{{ db_name }}"
+      become: yes
+      become_user: postgres
+
+    - name: "Create db user"
+      postgresql_user:
+        state: present
+        name: "{{ db_user }}"
+        password: "{{ db_password }}"
+      become: yes
+      become_user: postgres
+
+    - name: "Grant db user access to app db"
+      postgresql_privs:
+        type: database
+        database: "{{ db_name }}"
+        roles: "{{ db_user }}"
+        grant_option: no
+        privs: all
+      become: yes
+      become_user: postgres
+
+    # Application
+
+    - name: "Check out app from git"
+      git:
+        repo: "{{ git_url }}"
+        dest: ./tmp-repo
+        accept_hostkey: yes
+        force: yes
+        recursive: no
+        key_file: "{{ git_key_file }}"
+      delegate_to: localhost
+      become: no
+      run_once: true
+
+    - name: "Clean sources directory"
+      file:
+        state: absent
+        path: "/srv/{{ project_name }}/"
+
+    - name: "Copy sources to server"
+      synchronize:
+        src: ./tmp-repo/
+        dest: "/srv/{{ project_name }}/"
+        delete: true
+        use_ssh_args: true
+        rsync_opts:
+          - "--exclude=.*"
+          - "--exclude=*.pyc"
+          - "--exclude=*.sqlite3"
+          - "--exclude=node_modules/"
+          - "--exclude=deployment/"
+      notify:
+        - restart app
+
+    # Application | systemd service
+
+    - name: "Setup application service"
+      copy:
+        content: |
+          [Unit]
+          Description={{ project_name }} daemon
+          After=network.target
+
+          [Service]
+          Type=notify
+          User={{ project_user }}
+          Group=caddy
+          WorkingDirectory=/srv/{{ project_name }}
+          ExecReload=/bin/kill -HUP $MAINPID
+          ExecStart=/usr/local/bin/poetry run gunicorn appname.wsgi:application --workers 2 --bind unix:/var/run/{{ project_name }}/app.sock --access-logfile /var/log/{{ project_name }}/gunicorn_access_log.txt --error-logfile /var/log/{{ project_name }}/gunicorn_error_log.txt
+          #Restart=on-failure
+          #RestartSec=5s
+          KillMode=mixed
+          TimeoutStopSec=5
+          LimitNOFILE=4096
+          ProtectSystem=full
+
+          [Install]
+          WantedBy=multi-user.target
+        dest: /etc/systemd/system/{{ project_name }}.service
+        mode: "a+r"
+      notify:
+        - restart app
+        - restart caddy
+
+    # Application | .env
+
+    - name: "Create/update .env file"
+      copy:
+        content: |
+          DJANGO_DEBUG=0
+          DJANGO_DEBUG_TOOLBAR=0
+          DJANGO_SECRET_KEY={{ django_secret_key }}
+          DJANGO_ALLOWED_HOSTS={{ domain_name }},{{ ansible_host }},localhost,127.0.0.1
+          DJANGO_SSL={{ django_ssl }}
+          DJANGO_MEDIA_ROOT=/var/www/{{ project_name }}/media/
+          DJANGO_STATIC_ROOT=/var/www/{{ project_name }}/static/
+          DJANGO_DEFAULT_FROM_EMAIL={{ django_default_from_email }}
+          DJANGO_SERVER_EMAIL={{ django_server_email }}
+          DJANGO_EMAIL_HOST={{ django_email_host }}
+          DJANGO_EMAIL_PORT={{ django_email_port }}
+          DJANGO_EMAIL_HOST_USER={{ django_email_host_user }}
+          DJANGO_EMAIL_HOST_PASSWORD={{ django_email_host_password }}
+          ALLAUTH_ACCOUNT_EMAIL_SUBJECT_PREFIX={{ allauth_account_email_subject_prefix }}
+          DJ_DATABASE_CONN_STRING=postgres:///{{ project_name }}
+        dest: "/srv/{{ project_name }}/.env"
+        owner: "{{ project_user }}"
+        mode: "u+r"
+      notify:
+        - restart app
+
+    # Application | install dependencies
+
+    - set_fact:
+        project_user: "{{ project_user }}"  # To be available for become_user
+
+    - name: "Run poetry install"
+      shell:
+        chdir: "/srv/{{ project_name }}/"
+        cmd: "poetry install --no-dev"
+      become_user: "{{ project_user }}"
+
+    # Application | copy static files
+
+    - name: "Collect static files"
+      shell: "poetry run ./manage.py collectstatic --noinput"
+      args:
+        chdir: /srv/{{ project_name }}/
+      become_user: "{{ project_user }}"
+
+    # Application | run Django migrations
+
+    - file:
+        name: /home/{{ project_user }}/.ansible/tmp  # To avoid ansible warning due become_user
+        state: directory
+        owner: '{{ project_user }}'
+        mode: 'u+rwx'
+
+    - name: "Run Django migration"
+      shell: "poetry run ./manage.py migrate --noinput"
+      args:
+        chdir: /srv/{{ project_name }}/
+      become_user: "{{ project_user }}"

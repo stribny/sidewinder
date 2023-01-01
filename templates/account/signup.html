@@ -1,0 +1,19 @@
+{% extends 'account/_base.html' %}
+{% load bulma_tags %}
+{% block title %}Create a new account{% endblock %}
+{% block content_auth_form %}
+<h2 class="subtitle colored is-4">Create a new account</h2>
+<form class="block" method="post">
+  {% csrf_token %}
+  {{ form|bulma }}
+  <div class="field">
+    <button type="submit" class="button is-primary">Sign up</button>
+  </div>
+</form>
+<p>
+  <a href="{% url 'terms' %}">Terms of Service</a>
+</p>
+<p>
+  <a href="{% url 'account_login' %}">Already have an account?</a>
+</p>
+{% endblock content_auth_form %}

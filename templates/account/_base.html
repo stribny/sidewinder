@@ -1,0 +1,23 @@
+{% extends '_base.html' %}
+{% load bulma_tags %}
+{% block content %}
+<section class="section">
+    <div class="container">
+      <div class="columns is-multiline">
+        <div class="column is-8 is-offset-2 register">
+          <div class="columns box">
+            <div class="column left column-auth">
+                {% block content_auth_info %}
+                <h1 class="title is-1">{{ PROJECT_NAME }}</h1>
+                {% endblock content_auth_info %}
+            </div>
+            <div class="column right column-auth">
+                {% block content_auth_form %}
+                {% endblock content_auth_form %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+{% endblock content %}

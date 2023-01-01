@@ -1,0 +1,31 @@
+{% extends 'account/_base.html' %}
+{% load bulma_tags %}
+{% load i18n %}
+{% load account %}
+{% block title %}{% trans "Confirm e-mail address" %}{% endblock %}
+{% block content_auth_form %}
+
+<h2 class="subtitle colored is-4">{% trans "Confirm e-mail address" %}</h2>
+
+{% if confirmation %}
+
+{% user_display confirmation.email_address.user as user_display %}
+
+<p>{% blocktrans with confirmation.email_address.email as email %}Please confirm that <a href="mailto:{{ email }}">{{ email }}</a> is your e-mail address.{% endblocktrans %}</p>
+
+<form method="post" action="{% url 'account_confirm_email' confirmation.key %}" class="block">
+{% csrf_token %}
+  <div class="field mt-5">
+    <button type="submit" class="button is-primary">{% trans 'Confirm' %}</button>
+  </div>
+</form>
+
+{% else %}
+
+{% url 'account_email' as email_url %}
+
+<p>{% blocktrans %}This e-mail confirmation link expired or is invalid. Please <a href="{{ email_url }}">issue a new e-mail confirmation request</a>.{% endblocktrans %}</p>
+
+{% endif %}
+
+{% endblock content_auth_form %}

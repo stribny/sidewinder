@@ -1,0 +1,19 @@
+{% extends 'account/_base.html' %}
+{% load bulma_tags %}
+{% block title %}Log in{% endblock %}
+{% block content_auth_form %}
+<h2 class="subtitle colored is-4">Log in</h2>
+<form class="block" method="post">
+  {% csrf_token %}
+  {{ form|bulma }}
+  <div class="field">
+    <button type="submit" class="button is-primary">Log in</button>
+  </div>
+</form>
+<p>
+  <a href="{% url 'account_signup' %}">Create a new account</a>
+</p>
+<p>
+  <a href="{% url 'account_reset_password' %}">Forgot password?</a>
+</p>
+{% endblock content_auth_form %}

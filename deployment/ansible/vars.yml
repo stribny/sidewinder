@@ -1,0 +1,18 @@
+---
+project_user: sidewinder
+project_name: sidewinder
+domain_name: X.X.X.X
+db_user: sidewinder
+db_password: sidewinder
+db_name: sidewinder
+git_url: git@github.com:stribny/sidewinder.git
+git_key_file: /path/to/.ssh/id_rsa
+django_secret_key: djangosecretkey
+django_ssl: 0
+django_default_from_email: sidewinder@example.com
+django_server_email: sidewinder@example.com
+django_email_host:
+django_email_port: 587
+django_email_host_user:
+django_email_host_password:
+allauth_account_email_subject_prefix:

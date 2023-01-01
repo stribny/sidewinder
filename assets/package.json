@@ -1,0 +1,15 @@
+{
+  "name": "assets",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "sass": "1.49.9"
+  },
+  "scripts": {
+    "build-bulma": "sass mybulma/mybulma.scss ../static/mybulma/mybulma.css"
+  },
+  "author": "",
+  "license": "MIT"
+}

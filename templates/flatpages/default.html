@@ -1,0 +1,17 @@
+{% extends '_base.html' %}
+{% load bulma_tags %}
+{% block title %}{{ flatpage.title }}{% endblock %}
+{% block content %}
+<section class="section">
+<div class="container">
+  <div class="columns is-multiline">
+    <div class="column is-8 is-offset-2">
+      <h1 class="title colored">{{ flatpage.title }}</h1>
+      <div>
+        {{ flatpage.content }}
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+</div>
+</section>

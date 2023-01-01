@@ -1,0 +1,71 @@
+# Sidewinder
+
+<figure markdown>
+  ![Sidewinder](sidewinder.png){ width="300" }
+  <figcaption></figcaption>
+</figure>
+
+**Sidewinder** is an open-source [Django](https://www.djangoproject.com/) starter kit that focuses on good defaults, developer experience, and deployment. Also, [a snake](https://en.wikipedia.org/wiki/Crotalus_cerastes).
+
+You can start a new Django project without worrying about the correct project structure, or what development and testing tools to install and how to configure them. You can also deploy your new project right away with provided Ansible playbook in a few minutes.
+
+!!! warning
+
+    Sidewinder is under development. Follow [@stribny](https://twitter.com/stribny) for updates.
+
+
+## Philosophy
+
+Sidewinder is opinionated to provide smooth experience from starting a new project to deploying it on a single Virtual Private Server (VPS). It is ideal for indie hackers, educators, students and the like.
+
+## Main features
+
+### Configuration
+
+- Good default project structure
+- Dependency management with [Poetry](https://python-poetry.org/) that makes it straightforward to manage virtual environments
+- Project configuration via environment variables thanks to [django-environ](https://django-environ.readthedocs.io/en/latest/)
+
+### Authentication
+
+- Custom `User` model to allow future extensibility
+- Configured [django-allauth](https://github.com/pennersr/django-allauth) for email login and easy extensibility
+
+### Frontend
+
+- Custom [Bulma](https://bulma.io/) build to completely customize with [Saas](https://sass-lang.com/)
+- Authentication-related pages styled for the use with `django-allauth`
+- Configured [htmx](https://htmx.org/) for smoother frontend interactions
+
+### HTTP APIs
+
+- [Django REST Framework](https://www.django-rest-framework.org/) for writing REST APIs with configured token authentication
+- [drf-spectacular](https://drf-spectacular.readthedocs.io/en/latest/) for HTTP API documentation
+
+### Testing
+
+- [pytest](https://docs.pytest.org) test runner via [pytest-django](https://github.com/pytest-dev/pytest-django)
+- [factoryboy](https://factoryboy.readthedocs.io/en/stable/) for defining fixtures
+- [Faker](https://faker.readthedocs.io/en/master/) for generating fake data
+- [Playwright](https://playwright.dev/) for end-to-end UI testing
+
+### Development Tools
+
+- [django-debug-toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/) for debugging
+- [django-silk](https://github.com/jazzband/django-silk) for profiling requests and db queries
+- [snoop](https://pypi.org/project/snoop/) for ad-hoc debugging
+- [Black](https://github.com/psf/black) for automatic code formatting
+- [flake8](https://flake8.pycqa.org/en/latest/) linter
+- [isort](https://pycqa.github.io/isort/) for sorting imports
+- [pre-commit](https://pre-commit.com/) hook configured with Black, Flake8, and isort
+- Logging with [structlog](https://www.structlog.org/en/stable/) via [django-structlog](https://django-structlog.readthedocs.io/en/latest/)
+
+### Deployment
+
+- Prepared deployment to a single Virtual Private Server (VPS) with reverse proxy and PostgreSQL database
+  - [Ansible](https://www.ansible.com/resources/get-started) playbook that deploys the project in one go
+  - [Fedora](https://getfedora.org/) as the compatible operating system
+  - [PostgreSQL](https://www.postgresql.org/) as the database
+  - [Caddy](https://caddyserver.com/) as the reverse proxy server
+  - [gunicorn](https://gunicorn.org/) as the WSGI HTTP Server 
+  - `systemd` service

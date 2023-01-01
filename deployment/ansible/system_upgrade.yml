@@ -1,0 +1,16 @@
+---
+- hosts: all
+  become: yes
+
+  vars:
+    ansible_ssh_pipelining: 1
+
+  vars_files:
+    - vars.yml
+
+  tasks:
+  - name: Upgrade all packages
+    raw: /usr/bin/dnf -y upgrade
+
+  - name: Reboot system
+    raw: /usr/sbin/reboot

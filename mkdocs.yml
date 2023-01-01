@@ -1,0 +1,26 @@
+site_name: Sidewinder
+theme:
+  name: material
+  icon:
+    repo: fontawesome/brands/github
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - attr_list
+  - md_in_html
+repo_url: https://github.com/stribny/sidewinder
+repo_name: stribny/sidewinder
+extra:
+  generator: false
+nav:
+    - Introduction: 'index.md'
+    - How To:
+      - Installation: 'howto/installation.md'
+      - Configuration: 'howto/configuration.md'
+      - Run the project: 'howto/run.md'
+      - Administration: 'howto/admin.md'
+      - Testing: 'howto/testing.md'
+      - Deployment: 'howto/deployment.md'
+    - Reference: 
+      - Commands: 'reference/commands.md'
