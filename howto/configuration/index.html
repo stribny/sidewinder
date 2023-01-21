@@ -683,6 +683,11 @@
 </code></pre></div>
 <h2 id="rename-app-folder">Rename app folder</h2>
 <p>The main application folder is called <code>appname</code>. To rename it, you will also need to find and replace references to <code>appname</code> in the repository.</p>
+<p>You can use these Bash commands in the root folder (replace <code>myapp</code> with your new name):</p>
+<div class="highlight"><pre><span></span><code>sed -i <span class="s1">&#39;s/appname\./myapp\./g&#39;</span> <span class="sb">`</span>grep <span class="s1">&#39;appname\.&#39;</span> -rl *<span class="sb">`</span>
+mv appname/ myapp/
+</code></pre></div>
+<p>Alternatively, find and replace <code>appname.</code> with <code>myapp.</code> in all project files in your editor of choice. Then rename the <code>appname</code> folder with <code>myapp</code>.</p>
 <h2 id="verify-that-everything-works">Verify that everything works</h2>
 <p>You can verify the configuration by <a href="../run/">running the project</a>.</p>
 
