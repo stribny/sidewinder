@@ -24,16 +24,18 @@ Sidewinder is opinionated to provide smooth experience from starting a new proje
 
 - Good default project structure
 - Dependency management with [Poetry](https://python-poetry.org/) that makes it straightforward to manage virtual environments
-- Project configuration via environment variables thanks to [django-environ](https://django-environ.readthedocs.io/en/latest/)
+- Project configuration via environment variables thanks to [django-environ](https://django-environ.readthedocs.io/en/latest/) and [dj-database-url](https://github.com/jazzband/dj-database-url)
 
 ### Authentication
 
 - Custom `User` model to allow future extensibility
 - Configured [django-allauth](https://github.com/pennersr/django-allauth) for email login and easy extensibility
+- Stronger password hashing with [argon2-cffi](https://github.com/hynek/argon2-cffi)
 
 ### Frontend
 
 - Custom [Bulma](https://bulma.io/) build to completely customize with [Saas](https://sass-lang.com/)
+- [django-bulma](https://pypi.org/project/django-bulma/) for styling Django forms automatically
 - Authentication-related pages styled for the use with `django-allauth`
 - Configured [htmx](https://htmx.org/) for smoother frontend interactions
 
@@ -42,15 +44,10 @@ Sidewinder is opinionated to provide smooth experience from starting a new proje
 - [Django REST Framework](https://www.django-rest-framework.org/) for writing REST APIs with configured token authentication
 - [drf-spectacular](https://drf-spectacular.readthedocs.io/en/latest/) for HTTP API documentation
 
-### Testing
-
-- [pytest](https://docs.pytest.org) test runner via [pytest-django](https://github.com/pytest-dev/pytest-django)
-- [factoryboy](https://factoryboy.readthedocs.io/en/stable/) for defining fixtures
-- [Faker](https://faker.readthedocs.io/en/master/) for generating fake data
-- [Playwright](https://playwright.dev/) for end-to-end UI testing
-
 ### Development Tools
 
+- [django-extensions](https://django-extensions.readthedocs.io/en/latest/) for additional Django commands like `shell_plus`
+- [django-browser-reload](https://github.com/adamchainz/django-browser-reload) and [pywatchman](https://github.com/facebook/watchman) for auto reloading
 - [django-debug-toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/) for debugging
 - [django-silk](https://github.com/jazzband/django-silk) for profiling requests and db queries
 - [snoop](https://pypi.org/project/snoop/) for ad-hoc debugging
@@ -58,7 +55,24 @@ Sidewinder is opinionated to provide smooth experience from starting a new proje
 - [flake8](https://flake8.pycqa.org/en/latest/) linter
 - [isort](https://pycqa.github.io/isort/) for sorting imports
 - [pre-commit](https://pre-commit.com/) hook configured with Black, Flake8, and isort
+- [bandit](https://github.com/PyCQA/bandit) for finding security issues
 - Logging with [structlog](https://www.structlog.org/en/stable/) via [django-structlog](https://django-structlog.readthedocs.io/en/latest/)
+
+### Testing
+
+- [pytest](https://docs.pytest.org) test runner via [pytest-django](https://github.com/pytest-dev/pytest-django)
+- Useful pytest plugins like `pytest-sugar`, `pytest-icdiff`, `pytest-randomly`, `pytest-cov`
+- [factoryboy](https://factoryboy.readthedocs.io/en/stable/) for defining fixtures
+- [Faker](https://faker.readthedocs.io/en/master/) for generating fake data
+- [Playwright](https://playwright.dev/) for end-to-end UI testing
+- [openapi-spec-validator](https://github.com/p1c2u/openapi-spec-validator) for validating the generated API specs
+
+### Useful libraries
+
+- [django-filter](https://github.com/carltongibson/django-filter) for filtering Django QuerySets based on user selections
+- [Pillow](https://pillow.readthedocs.io/en/stable/) for image manipulation
+- [Pendulum](https://pendulum.eustace.io/) for manipulating time
+- [Rich](https://github.com/Textualize/rich) for developing commands with nicer outputs
 
 ### Deployment
 
