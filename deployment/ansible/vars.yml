@@ -1,6 +1,7 @@
 ---
+project_name: Sidewinder
 project_user: sidewinder
-project_name: sidewinder
+app_name: sidewinder
 domain_name: X.X.X.X
 db_user: sidewinder
 db_password: sidewinder

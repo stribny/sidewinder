@@ -13,7 +13,7 @@
       service: name=postgresql state=restarted
 
     - name: restart app
-      systemd: "name={{ project_name }} state=restarted daemon_reload=yes"
+      systemd: "name={{ app_name }} state=restarted daemon_reload=yes"
 
   pre_tasks:
     - name: "Install system packages"
@@ -46,25 +46,25 @@
     - name: "Clean static directory"
       file:
         state: absent
-        path: "/var/www/{{ project_name }}/static/"
+        path: "/var/www/{{ app_name }}/static/"
 
     - name: "Create static dir"
       file: state=directory
-        path=/var/www/{{ project_name }}/static/
+        path=/var/www/{{ app_name }}/static/
         owner="{{ project_user }}"
         group="caddy"
         mode="u=rwx,g=rx"
 
     - name: "Create media dir"
       file: state=directory
-        path=/var/www/{{ project_name }}/media/
+        path=/var/www/{{ app_name }}/media/
         owner="{{ project_user }}"
         group="caddy"
         mode="u+rwx,g=rx"
 
     - name: "Create gunicorn logs dir"
       file: state=directory
-        path=/var/log/{{ project_name }}
+        path=/var/log/{{ app_name }}
         owner="{{ project_user }}"
         group="caddy"
         mode="u+rwx,g=rx"
@@ -78,7 +78,7 @@
 
     - name: "Create socket dir"
       file: state=directory
-        path=/var/run/{{ project_name }}
+        path=/var/run/{{ app_name }}
         owner="{{ project_user }}"
         group="caddy"
         mode="u+rwx,g=+rx"
@@ -129,13 +129,13 @@
             @excludeDirs {
               not path /static/* /media/*
             }
-            reverse_proxy @excludeDirs unix//var/run/{{ project_name }}/app.sock
+            reverse_proxy @excludeDirs unix//var/run/{{ app_name }}/app.sock
             file_server {
-              root /var/www/{{ project_name }}/
+              root /var/www/{{ app_name }}/
             }
           }
         mode: "a+r"
-        dest: "/etc/caddy/{{ project_name }}.caddy"
+        dest: "/etc/caddy/{{ app_name }}.caddy"
       when: django_ssl == 1
       notify:
         - restart caddy
@@ -157,13 +157,13 @@
             @excludeDirs {
               not path /static/* /media/*
             }
-            reverse_proxy @excludeDirs unix//var/run/{{ project_name }}/app.sock
+            reverse_proxy @excludeDirs unix//var/run/{{ app_name }}/app.sock
             file_server {
-              root /var/www/{{ project_name }}/
+              root /var/www/{{ app_name }}/
             }
           }
         mode: "a+r"
-        dest: "/etc/caddy/{{ project_name }}.caddy"
+        dest: "/etc/caddy/{{ app_name }}.caddy"
       when: django_ssl == 0
       notify:
         - restart caddy
@@ -226,12 +226,12 @@
     - name: "Clean sources directory"
       file:
         state: absent
-        path: "/srv/{{ project_name }}/"
+        path: "/srv/{{ app_name }}/"
 
     - name: "Copy sources to server"
       synchronize:
         src: ./tmp-repo/
-        dest: "/srv/{{ project_name }}/"
+        dest: "/srv/{{ app_name }}/"
         delete: true
         use_ssh_args: true
         rsync_opts:
@@ -249,16 +249,16 @@
       copy:
         content: |
           [Unit]
-          Description={{ project_name }} daemon
+          Description={{ app_name }} daemon
           After=network.target
 
           [Service]
           Type=notify
           User={{ project_user }}
           Group=caddy
-          WorkingDirectory=/srv/{{ project_name }}
+          WorkingDirectory=/srv/{{ app_name }}
           ExecReload=/bin/kill -HUP $MAINPID
-          ExecStart=/usr/local/bin/poetry run gunicorn appname.wsgi:application --workers 2 --bind unix:/var/run/{{ project_name }}/app.sock --access-logfile /var/log/{{ project_name }}/gunicorn_access_log.txt --error-logfile /var/log/{{ project_name }}/gunicorn_error_log.txt
+          ExecStart=/usr/local/bin/poetry run gunicorn appname.wsgi:application --workers 2 --bind unix:/var/run/{{ app_name }}/app.sock --access-logfile /var/log/{{ app_name }}/gunicorn_access_log.txt --error-logfile /var/log/{{ app_name }}/gunicorn_error_log.txt
           #Restart=on-failure
           #RestartSec=5s
           KillMode=mixed
@@ -268,7 +268,7 @@
 
           [Install]
           WantedBy=multi-user.target
-        dest: /etc/systemd/system/{{ project_name }}.service
+        dest: /etc/systemd/system/{{ app_name }}.service
         mode: "a+r"
       notify:
         - restart app
@@ -279,13 +279,14 @@
     - name: "Create/update .env file"
       copy:
         content: |
+          PROJECT_NAME={{ project_name }}
           DJANGO_DEBUG=0
           DJANGO_DEBUG_TOOLBAR=0
           DJANGO_SECRET_KEY={{ django_secret_key }}
           DJANGO_ALLOWED_HOSTS={{ domain_name }},{{ ansible_host }},localhost,127.0.0.1
           DJANGO_SSL={{ django_ssl }}
-          DJANGO_MEDIA_ROOT=/var/www/{{ project_name }}/media/
-          DJANGO_STATIC_ROOT=/var/www/{{ project_name }}/static/
+          DJANGO_MEDIA_ROOT=/var/www/{{ app_name }}/media/
+          DJANGO_STATIC_ROOT=/var/www/{{ app_name }}/static/
           DJANGO_DEFAULT_FROM_EMAIL={{ django_default_from_email }}
           DJANGO_SERVER_EMAIL={{ django_server_email }}
           DJANGO_EMAIL_HOST={{ django_email_host }}
@@ -293,8 +294,8 @@
           DJANGO_EMAIL_HOST_USER={{ django_email_host_user }}
           DJANGO_EMAIL_HOST_PASSWORD={{ django_email_host_password }}
           ALLAUTH_ACCOUNT_EMAIL_SUBJECT_PREFIX={{ allauth_account_email_subject_prefix }}
-          DJ_DATABASE_CONN_STRING=postgres:///{{ project_name }}
-        dest: "/srv/{{ project_name }}/.env"
+          DJ_DATABASE_CONN_STRING=postgres:///{{ app_name }}
+        dest: "/srv/{{ app_name }}/.env"
         owner: "{{ project_user }}"
         mode: "u+r"
       notify:
@@ -307,7 +308,7 @@
 
     - name: "Run poetry install"
       shell:
-        chdir: "/srv/{{ project_name }}/"
+        chdir: "/srv/{{ app_name }}/"
         cmd: "poetry install --no-dev"
       become_user: "{{ project_user }}"
 
@@ -316,7 +317,7 @@
     - name: "Collect static files"
       shell: "poetry run ./manage.py collectstatic --noinput"
       args:
-        chdir: /srv/{{ project_name }}/
+        chdir: /srv/{{ app_name }}/
       become_user: "{{ project_user }}"
 
     # Application | run Django migrations
@@ -330,5 +331,5 @@
     - name: "Run Django migration"
       shell: "poetry run ./manage.py migrate --noinput"
       args:
-        chdir: /srv/{{ project_name }}/
+        chdir: /srv/{{ app_name }}/
       become_user: "{{ project_user }}"

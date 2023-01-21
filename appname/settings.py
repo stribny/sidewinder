@@ -5,12 +5,13 @@ import dj_database_url
 import environ
 import structlog
 
-PROJECT_NAME = "Sidewinder"
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env()
 env.read_env(os.path.join(BASE_DIR, ".env"))
+
+PROJECT_NAME = env.str("PROJECT_NAME", default="Sidewinder")
 
 DEBUG = env.bool("DJANGO_DEBUG")
 
