@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {
-    "sass": "1.49.9"
+    "sass": "1.57.1"
   },
   "scripts": {
     "build-bulma": "sass mybulma/mybulma.scss ../static/mybulma/mybulma.css"
