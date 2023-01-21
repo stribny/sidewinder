@@ -94,6 +94,15 @@ DJ_DATABASE_CONN_STRING=postgres://postgres:postgres@localhost:5432/sidewinder
 
 The main application folder is called `appname`. To rename it, you will also need to find and replace references to `appname` in the repository.
 
+You can use these Bash commands in the root folder (replace `myapp` with your new name):
+
+```bash
+sed -i 's/appname\./myapp\./g' `grep 'appname\.' -rl *`
+mv appname/ myapp/
+```
+
+Alternatively, find and replace `appname.` with `myapp.` in all project files in your editor of choice. Then rename the `appname` folder with `myapp`.
+
 ## Verify that everything works
 
 You can verify the configuration by [running the project](run.md).
