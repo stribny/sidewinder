@@ -20,6 +20,7 @@ nav:
       - Configuration: 'howto/configuration.md'
       - Run the project: 'howto/run.md'
       - Administration: 'howto/admin.md'
+      - Frontend: 'howto/frontend.md'
       - Testing: 'howto/testing.md'
       - Deployment: 'howto/deployment.md'
     - Reference: 
