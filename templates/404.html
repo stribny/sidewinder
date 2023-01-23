@@ -1,11 +1,12 @@
 {% extends '_base.html' %}
-{% block title %}Page not found{% endblock title %}
+{% load i18n %}
+{% block title %}{% translate "Page not found" %}{% endblock title %}
 {% block content %}
 <section class="section">
     <div class="container content">
-        <h1 class="title is-1">Page not found</h1>
-        <p>The requested page doesn't exist on the server.</p>
-        <p><a href="{% url 'index' %}">Continue to home page</a></p>
+        <h1 class="title is-1">{% translate "Page not found" %}</h1>
+        <p>{% translate "The requested page doesn't exist on the server." %}</p>
+        <p><a href="{% url 'index' %}">{% translate "Continue to home page" %}</a></p>
     </div>
 </section>
 {% endblock content %}

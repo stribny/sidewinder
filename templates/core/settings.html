@@ -1,6 +1,7 @@
 {% extends '_base.html' %}
+{% load i18n %}
 {% load bulma_tags %}
-{% block title %}Settings{% endblock title %}
+{% block title %}{% translate "Settings" %}{% endblock title %}
 {% block content %}
 <section class="section">
 <div class="container">
@@ -10,16 +11,16 @@
         </aside>
     </div>
     <div class="column">
-      <h2 class="subtitle colored is-4">Account</h2>
+      <h2 class="subtitle colored is-4">{% translate "Account" %}</h2>
       
       <form id="form_logout" class="block" method="post" action="{% url 'account_logout' %}">
         {% csrf_token %}
         <div class="field">
-          <button type="submit" class="button is-primary">Log out</button>
+          <button type="submit" class="button is-primary">{% translate "Log out" %}</button>
         </div>
       </form>
       
-      <h2 class="subtitle colored is-4">Settings</h2>
+      <h2 class="subtitle colored is-4">{% translate "Settings" %}</h2>
 
       {% include "includes/messages.html" %}
 
@@ -35,16 +36,16 @@
           {{ form.avatar }}
         </div>
         <div class="field">
-            <button type="submit" class="button is-primary">Update</button>
+            <button type="submit" class="button is-primary">{% translate "Update" %}</button>
         </div>
       </form>
 
-      <h2 class="subtitle colored is-4">Delete account</h2>
+      <h2 class="subtitle colored is-4">{% translate "Delete account" %}</h2>
       
       <form id="form_delete_account" class="block" method="post" action="{% url 'delete-account' %}">
         {% csrf_token %}
         <div class="field">
-          <button type="submit" class="button is-primary">Permanently delete</button>
+          <button type="submit" class="button is-primary">{% translate "Permanently delete" %}</button>
         </div>
       </form>
     </div>

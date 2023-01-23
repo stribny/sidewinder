@@ -1,12 +1,13 @@
 {% extends 'account/_base.html' %}
+{% load i18n %}
 {% load bulma_tags %}
-{% block title %}Log out{% endblock %}
+{% block title %}{% translate "Log out" %}{% endblock %}
 {% block content_auth_form %}
-<h2 class="subtitle colored is-4">Log out</h2>
+<h2 class="subtitle colored is-4">{% translate "Log out" %}</h2>
 <form class="block" method="post" action="{% url 'account_logout' %}">
   {% csrf_token %}
   <div class="field">
-    <button type="submit" class="button is-primary">Log out</button>
+    <button type="submit" class="button is-primary">{% translate "Log out" %}</button>
   </div>
 </form>
 {% endblock content_auth_form %}

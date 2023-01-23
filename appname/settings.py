@@ -5,7 +5,6 @@ import dj_database_url
 import environ
 import structlog
 
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env()

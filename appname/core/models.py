@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class BaseModel(models.Model):
@@ -14,7 +15,7 @@ class BaseModel(models.Model):
 class User(AbstractUser):
     terms_accepted_at = models.DateTimeField(blank=True, null=True)
     marketing_list_accepted_at = models.DateTimeField(blank=True, null=True)
-    avatar = models.ImageField(blank=True, null=True, upload_to="avatars/")
+    avatar = models.ImageField(_("avatar"), blank=True, null=True, upload_to="avatars/")
 
     @property
     def marketing_list_accepted(self) -> bool:
@@ -26,8 +27,8 @@ class User(AbstractUser):
 
 class UserFeedback(BaseModel):
     user = models.ForeignKey(get_user_model(), null=True, on_delete=models.CASCADE)
-    email = models.EmailField(blank=True)
-    text = models.TextField()
+    email = models.EmailField(_("email"), blank=True)
+    text = models.TextField(_("text"))
 
     def __str__(self):
         return self.text

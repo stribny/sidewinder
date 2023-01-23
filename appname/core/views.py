@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.template.response import TemplateResponse
+from django.utils.translation import gettext as _
 
 from .forms import UpdateAccountForm, UserFeedbackForm
 
@@ -25,7 +26,7 @@ def feedback(request):
             model.user = request.user if request.user.is_authenticated else None
             model.save()
             form = UserFeedbackForm()
-            messages.success(request, "Feedback has been submitted. Thank you!")
+            messages.success(request, _("Feedback has been submitted. Thank you!"))
 
     return TemplateResponse(request, "core/feedback.html", {"form": form})
 
@@ -38,7 +39,7 @@ def settings(request):
         form = UpdateAccountForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
-            messages.success(request, "Account details have been updated!")
+            messages.success(request, _("Account details have been updated!"))
 
     return TemplateResponse(request, "core/settings.html", {"form": form})
 

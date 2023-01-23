@@ -2,6 +2,8 @@ import pendulum
 from allauth.account.forms import SignupForm
 from django import forms
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
+from django.utils.translation import gettext
+from django.utils.translation import gettext_lazy as _
 
 from .models import User, UserFeedback
 
@@ -20,10 +22,10 @@ class CustomUserChangeForm(UserChangeForm):
 
 class AcceptTermsSignupForm(SignupForm):
     terms_accepted = forms.BooleanField(
-        required=False, initial=False, label="I accept the Terms of Service"
+        required=False, initial=False, label=_("I accept the Terms of Service")
     )
     marketing_list_accepted = forms.BooleanField(
-        required=False, initial=False, label="I want to receive product updates"
+        required=False, initial=False, label=_("I want to receive product updates")
     )
 
     def __init__(self, *args, **kwargs):
@@ -36,7 +38,7 @@ class AcceptTermsSignupForm(SignupForm):
         terms_accepted = data.get("terms_accepted")
 
         if not terms_accepted:
-            msg = "The ToS has to be accepted."
+            msg = gettext("The ToS has to be accepted.")
             self.add_error("terms_accepted", msg)
 
         return data

@@ -1,10 +1,11 @@
 {% extends '_base.html' %}
-{% block title %}Forbidden{% endblock title %}
+{% load i18n %}
+{% block title %}{% translate "Forbidden" %}{% endblock title %}
 {% block content %}
 <section class="section">
     <div class="container content">
-        <h1 class="title is-1">Forbidden</h1>
-        <p>CSRF verification failed. Request aborted.</p>
+        <h1 class="title is-1">{% translate "Forbidden" %}</h1>
+        <p>{% translate "CSRF verification failed. Request aborted." %}</p>
     </div>
 </section>
 {% endblock content %}

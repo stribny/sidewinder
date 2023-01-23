@@ -1,6 +1,7 @@
 {% extends '_base.html' %}
+{% load i18n %}
 {% load bulma_tags %}
-{% block title %}Leave feedback{% endblock %}
+{% block title %}{% translate "Leave feedback" %}{% endblock %}
 {% block content %}
 <section class="section">
 <div class="container">
@@ -8,7 +9,7 @@
         <div class="column is-8 is-offset-2">
           <div class="columns box">
             <div class="column left column-auth">
-                <h1 class="title colored">Leave feedback</h1>
+                <h1 class="title colored">{% translate "Leave feedback" %}</h1>
             </div>
             <div class="column right column-auth">
                 {% include "includes/messages.html" %}
@@ -16,7 +17,7 @@
                 {% csrf_token %}
                 {{ form|bulma }}
                 <div class="field">
-                    <button type="submit" class="button is-primary">Submit</button>
+                    <button type="submit" class="button is-primary">{% translate "Submit" %}</button>
                 </div>
                 </form>
             </div>
