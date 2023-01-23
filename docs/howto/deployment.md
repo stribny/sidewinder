@@ -7,7 +7,11 @@
 
 ## Get a VPS
 
-The first step is to get your own virtual private server. You can get one on <a href="https://www.digitalocean.com/">Digital Ocean</a> which can prepare a VPS with your public SSH key in place, so that you don't have to worry much about SSH configuration besides getting a public/private key pair. As the operating system, choose Fedora.
+The first step is to get your own virtual private server. You can get one on Digital Ocean which can prepare a VPS with your public SSH key in place, so that you don't have to worry much about SSH configuration besides getting a public/private key pair. As the operating system, choose Fedora.
+
+You can support Sidewinder by signing up with the affiliate link below (you will get $200 credit you can use in 60 days):
+
+[![DigitalOcean Referral Badge](https://web-platforms.sfo2.digitaloceanspaces.com/WWW/Badge%203.svg)](https://www.digitalocean.com/?refcode=04e320071eab&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge)
 
 Sidewinder is prepared to be deployed to a VPS that has a static IP address, but also to a custom domain with https. In that case, you will also need to register a domain and point it your VPS.
 
