@@ -309,7 +309,7 @@
     - name: "Run poetry install"
       shell:
         chdir: "/srv/{{ app_name }}/"
-        cmd: "poetry install --no-dev"
+        cmd: "poetry install --only main"
       become_user: "{{ project_user }}"
 
     # Application | copy static files

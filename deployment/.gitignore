@@ -1,1 +1,3 @@
 ansible/tmp-repo/
+ansible/myvars.yml
+ansible/myhosts.ini
