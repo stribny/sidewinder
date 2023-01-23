@@ -341,9 +341,82 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Deployment
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         Deployment
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#get-a-vps" class="md-nav__link">
+    Get a VPS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-ansible" class="md-nav__link">
+    Install Ansible
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-hostsini" class="md-nav__link">
+    Configure hosts.ini
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-varsyml" class="md-nav__link">
+    Configure vars.yml
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#run-ansible-playbook" class="md-nav__link">
+    Run Ansible playbook
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-superuser" class="md-nav__link">
+    Create a superuser
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#final-steps" class="md-nav__link">
+    Final steps
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -424,6 +497,63 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#get-a-vps" class="md-nav__link">
+    Get a VPS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-ansible" class="md-nav__link">
+    Install Ansible
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-hostsini" class="md-nav__link">
+    Configure hosts.ini
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-varsyml" class="md-nav__link">
+    Configure vars.yml
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#run-ansible-playbook" class="md-nav__link">
+    Run Ansible playbook
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-superuser" class="md-nav__link">
+    Create a superuser
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#final-steps" class="md-nav__link">
+    Final steps
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -445,8 +575,65 @@
 <h1 id="deployment">Deployment</h1>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Deployment documentation is not ready yet, but feel free to check the <code>deployment</code> folder for the Ansible playbooks.</p>
+<p>Deployment documentation is in progress.</p>
 </div>
+<h2 id="get-a-vps">Get a VPS</h2>
+<p>The first step is to get your own virtual private server. You can get one on <a href="https://www.digitalocean.com/">Digital Ocean</a> which can prepare a VPS with your public SSH key in place, so that you don't have to worry much about SSH configuration besides getting a public/private key pair. As the operating system, choose Fedora.</p>
+<p>Sidewinder is prepared to be deployed to a VPS that has a static IP address, but also to a custom domain with https. In that case, you will also need to register a domain and point it your VPS.</p>
+<p>Before proceeding, make sure that you have a running private virtual server that you can access with <code>SSH</code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Sidewinder is prepared to be run on Fedora operating system. When creating your VPS, make sure you choose Fedora Linux distribution as your OS.</p>
+</div>
+<h2 id="install-ansible">Install Ansible</h2>
+<p>The next step is to install <a href="https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html">Ansible</a>.</p>
+<h2 id="configure-hostsini">Configure hosts.ini</h2>
+<p>Copy <code>deployment/ansible/hosts.ini</code> to  <code>deployment/ansible/myhosts.ini</code> and set <code>ansible_user</code> to be the name of your server account (like <code>root</code>) and set <code>ansible_host</code> to the IP address of your server.</p>
+<h2 id="configure-varsyml">Configure vars.yml</h2>
+<p>Now it's time to configure your server settings. Copy <code>deployment/ansible/vars.yml</code> to <code>deployment/ansible/myvars.yml</code>. You will eventually want to configure each property in the file for your production server. </p>
+<p>At the minimum to run a successful test deployment you will need to change:</p>
+<ul>
+<li><code>project_name</code> to be the name of your application, website or app</li>
+<li><code>domain_name</code> to point to the server's IP address or your domain</li>
+<li><code>git_url</code> to your repository fork of Sidewinder</li>
+<li><code>git_key_file</code> to point to your private SSH key file</li>
+<li><code>django_ssl</code> set to <code>1</code> if you are using a domain (<code>0</code> otherwise)</li>
+</ul>
+<p>You should also change all passwords:</p>
+<ul>
+<li><code>db_password</code></li>
+<li><code>django_secret_key</code></li>
+</ul>
+<p>And set email server settings:</p>
+<ul>
+<li><code>django_default_from_email</code></li>
+<li><code>django_server_email</code></li>
+<li><code>django_email_host</code></li>
+<li><code>django_email_port</code></li>
+<li><code>django_email_host_user</code></li>
+<li><code>django_email_host_password</code></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>It is important to point <code>git_url</code> to your repository and to commit and push all application changes you have made to the repository. That's because our deployment Ansible playbook will download and deploy the exact version of the application that will be at the <code>git_url</code>.</p>
+</div>
+<h2 id="run-ansible-playbook">Run Ansible playbook</h2>
+<p>The provided Ansible playbook will download a copy of your Git repository and deploy the last committed version to the specified server.</p>
+<div class="highlight"><pre><span></span><code>cd deployment/ansible 
+ansible-playbook provision.yml -i myhosts.ini --extra-vars &quot;@myvars.yml&quot;
+</code></pre></div>
+<p>Wait until the deployment is finished.</p>
+<h2 id="create-a-superuser">Create a superuser</h2>
+<p>SSH to your server (replace <code>X.X.X.X</code> with the server's IP address):</p>
+<div class="highlight"><pre><span></span><code>ssh root@X.X.X.X
+</code></pre></div>
+<p>and run:</p>
+<div class="highlight"><pre><span></span><code>cd /srv/sidewinder
+su sidewinder
+poetry run ./manage.py createsuperuser
+</code></pre></div>
+<h2 id="final-steps">Final steps</h2>
+<p>Log in to your Django admin at <code>ipaddress-or-domain/dj-admin/</code> and create a flat page for URL <code>/terms/</code>.</p>
 
 
 
