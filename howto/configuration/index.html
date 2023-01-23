@@ -632,60 +632,60 @@
 <h2 id="env-file-config">.env file config</h2>
 <h3 id="secret-key">Secret key</h3>
 <p>In production, make sure to set a unique secret key (doesn't matter for development):</p>
-<div class="highlight"><pre><span></span><code><span class="na">DJANGO_SECRET_KEY</span><span class="o">=</span><span class="s">secretkey</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="na">DJANGO_SECRET_KEY</span><span class="o">=</span><span class="s">secretkey</span>
 </code></pre></div>
 <h3 id="debug-mode">Debug mode</h3>
-<div class="highlight"><pre><span></span><code><span class="na">DJANGO_DEBUG</span><span class="o">=</span><span class="s">1</span><span class="w"></span>
-<span class="na">DJANGO_DEBUG_TOOLBAR</span><span class="o">=</span><span class="s">1</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="na">DJANGO_DEBUG</span><span class="o">=</span><span class="s">1</span>
+<span class="na">DJANGO_DEBUG_TOOLBAR</span><span class="o">=</span><span class="s">1</span>
 </code></pre></div>
 <p>Set to <code>0</code> to disable debug mode.</p>
 <h3 id="allowed-hosts">Allowed hosts</h3>
-<div class="highlight"><pre><span></span><code><span class="na">DJANGO_ALLOWED_HOSTS</span><span class="o">=</span><span class="s">localhost,127.0.0.1</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="na">DJANGO_ALLOWED_HOSTS</span><span class="o">=</span><span class="s">localhost,127.0.0.1</span>
 </code></pre></div>
 <p>Add additional hosts as needed in production.</p>
 <h3 id="ssl">SSL</h3>
-<div class="highlight"><pre><span></span><code><span class="na">DJANGO_SSL</span><span class="o">=</span><span class="s">0</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="na">DJANGO_SSL</span><span class="o">=</span><span class="s">0</span>
 </code></pre></div>
 <p>Set to <code>1</code> in production to configure https.</p>
 <h3 id="emails">Emails</h3>
 <p>Replace values according to your email server:</p>
-<div class="highlight"><pre><span></span><code><span class="na">DJANGO_SERVER_EMAIL</span><span class="o">=</span><span class="s">sidewinder@example.com</span><span class="w"></span>
-<span class="na">DJANGO_EMAIL_HOST</span><span class="o">=</span><span class="s">example.emailprovider.com</span><span class="w"></span>
-<span class="na">DJANGO_EMAIL_PORT</span><span class="o">=</span><span class="s">587</span><span class="w"></span>
-<span class="na">DJANGO_EMAIL_HOST_USER</span><span class="o">=</span><span class="w"></span>
-<span class="na">DJANGO_EMAIL_HOST_PASSWORD</span><span class="o">=</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="na">DJANGO_SERVER_EMAIL</span><span class="o">=</span><span class="s">sidewinder@example.com</span>
+<span class="na">DJANGO_EMAIL_HOST</span><span class="o">=</span><span class="s">example.emailprovider.com</span>
+<span class="na">DJANGO_EMAIL_PORT</span><span class="o">=</span><span class="s">587</span>
+<span class="na">DJANGO_EMAIL_HOST_USER</span><span class="o">=</span>
+<span class="na">DJANGO_EMAIL_HOST_PASSWORD</span><span class="o">=</span>
 </code></pre></div>
 <p>Replace to set default email prefix and origin address:</p>
-<div class="highlight"><pre><span></span><code><span class="na">DJANGO_DEFAULT_FROM_EMAIL</span><span class="o">=</span><span class="s">sidewinder@example.com</span><span class="w"></span>
-<span class="na">ALLAUTH_ACCOUNT_EMAIL_SUBJECT_PREFIX</span><span class="o">=</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="na">DJANGO_DEFAULT_FROM_EMAIL</span><span class="o">=</span><span class="s">sidewinder@example.com</span>
+<span class="na">ALLAUTH_ACCOUNT_EMAIL_SUBJECT_PREFIX</span><span class="o">=</span>
 </code></pre></div>
 <h3 id="database">Database</h3>
 <p>Set a connection string to SQLite or PostgreSQL database:</p>
-<div class="highlight"><pre><span></span><code><span class="na">DJ_DATABASE_CONN_STRING</span><span class="o">=</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="na">DJ_DATABASE_CONN_STRING</span><span class="o">=</span>
 </code></pre></div>
 <p>Alternatively, create a <code>sidewinder</code> PostgreSQL database on the port <code>5432</code> with <code>postgres</code> user and <code>postgres</code> password, and make sure that the database is available for connections. Then use this example connection string:</p>
 <div class="highlight"><pre><span></span><code>DJ_DATABASE_CONN_STRING=postgres://postgres:postgres@localhost:5432/sidewinder
 </code></pre></div>
 <h3 id="complete-configuration">Complete configuration</h3>
-<div class="highlight"><pre><span></span><code><span class="na">DJANGO_SECRET_KEY</span><span class="o">=</span><span class="s">secretkey</span><span class="w"></span>
-<span class="na">DJANGO_DEBUG</span><span class="o">=</span><span class="s">1</span><span class="w"></span>
-<span class="na">DJANGO_DEBUG_TOOLBAR</span><span class="o">=</span><span class="s">1</span><span class="w"></span>
-<span class="na">DJANGO_ALLOWED_HOSTS</span><span class="o">=</span><span class="s">localhost,127.0.0.1</span><span class="w"></span>
-<span class="na">DJANGO_SSL</span><span class="o">=</span><span class="s">0</span><span class="w"></span>
-<span class="na">DJANGO_SERVER_EMAIL</span><span class="o">=</span><span class="s">sidewinder@example.com</span><span class="w"></span>
-<span class="na">DJANGO_EMAIL_HOST</span><span class="o">=</span><span class="s">example.emailprovider.com</span><span class="w"></span>
-<span class="na">DJANGO_EMAIL_PORT</span><span class="o">=</span><span class="s">587</span><span class="w"></span>
-<span class="na">DJANGO_EMAIL_HOST_USER</span><span class="o">=</span><span class="w"></span>
-<span class="na">DJANGO_EMAIL_HOST_PASSWORD</span><span class="o">=</span><span class="w"></span>
-<span class="na">DJANGO_DEFAULT_FROM_EMAIL</span><span class="o">=</span><span class="s">sidewinder@example.com</span><span class="w"></span>
-<span class="na">ALLAUTH_ACCOUNT_EMAIL_SUBJECT_PREFIX</span><span class="o">=</span><span class="w"></span>
-<span class="na">DJ_DATABASE_CONN_STRING</span><span class="o">=</span><span class="s">postgres://postgres:postgres@localhost:5432/sidewinder</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="na">DJANGO_SECRET_KEY</span><span class="o">=</span><span class="s">secretkey</span>
+<span class="na">DJANGO_DEBUG</span><span class="o">=</span><span class="s">1</span>
+<span class="na">DJANGO_DEBUG_TOOLBAR</span><span class="o">=</span><span class="s">1</span>
+<span class="na">DJANGO_ALLOWED_HOSTS</span><span class="o">=</span><span class="s">localhost,127.0.0.1</span>
+<span class="na">DJANGO_SSL</span><span class="o">=</span><span class="s">0</span>
+<span class="na">DJANGO_SERVER_EMAIL</span><span class="o">=</span><span class="s">sidewinder@example.com</span>
+<span class="na">DJANGO_EMAIL_HOST</span><span class="o">=</span><span class="s">example.emailprovider.com</span>
+<span class="na">DJANGO_EMAIL_PORT</span><span class="o">=</span><span class="s">587</span>
+<span class="na">DJANGO_EMAIL_HOST_USER</span><span class="o">=</span>
+<span class="na">DJANGO_EMAIL_HOST_PASSWORD</span><span class="o">=</span>
+<span class="na">DJANGO_DEFAULT_FROM_EMAIL</span><span class="o">=</span><span class="s">sidewinder@example.com</span>
+<span class="na">ALLAUTH_ACCOUNT_EMAIL_SUBJECT_PREFIX</span><span class="o">=</span>
+<span class="na">DJ_DATABASE_CONN_STRING</span><span class="o">=</span><span class="s">postgres://postgres:postgres@localhost:5432/sidewinder</span>
 </code></pre></div>
 <h2 id="rename-app-folder">Rename app folder</h2>
 <p>The main application folder is called <code>appname</code>. To rename it, you will also need to find and replace references to <code>appname</code> in the repository.</p>
 <p>You can use these Bash commands in the root folder (replace <code>myapp</code> with your new name):</p>
-<div class="highlight"><pre><span></span><code>sed -i <span class="s1">&#39;s/appname\./myapp\./g&#39;</span> <span class="sb">`</span>grep <span class="s1">&#39;appname\.&#39;</span> -rl *<span class="sb">`</span>
-mv appname/ myapp/
+<div class="highlight"><pre><span></span><code>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/appname\./myapp\./g&#39;</span><span class="w"> </span><span class="sb">`</span>grep<span class="w"> </span><span class="s1">&#39;appname\.&#39;</span><span class="w"> </span>-rl<span class="w"> </span>*<span class="sb">`</span>
+mv<span class="w"> </span>appname/<span class="w"> </span>myapp/
 </code></pre></div>
 <p>Alternatively, find and replace <code>appname.</code> with <code>myapp.</code> in all project files in your editor of choice. Then rename the <code>appname</code> folder with <code>myapp</code>.</p>
 <h2 id="verify-that-everything-works">Verify that everything works</h2>
