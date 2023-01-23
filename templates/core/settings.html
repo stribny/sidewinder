@@ -22,16 +22,25 @@
       <h2 class="subtitle colored is-4">Settings</h2>
 
       {% include "includes/messages.html" %}
-      <form class="block" method="post">
+
+      {% if user.avatar %}
+        <img src="{{ user.avatar.url }}" width="50" height="50">
+      {% endif %}
+
+      <form class="block" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form|bulma }}
+        {{ form.first_name|bulma }}
+        {{ form.last_name|bulma }}
+        <div class="field">
+          {{ form.avatar }}
+        </div>
         <div class="field">
             <button type="submit" class="button is-primary">Update</button>
         </div>
       </form>
 
       <h2 class="subtitle colored is-4">Delete account</h2>
-
+      
       <form id="form_delete_account" class="block" method="post" action="{% url 'delete-account' %}">
         {% csrf_token %}
         <div class="field">

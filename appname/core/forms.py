@@ -55,7 +55,7 @@ class AcceptTermsSignupForm(SignupForm):
 class UpdateAccountForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ("first_name", "last_name")
+        fields = ("first_name", "last_name", "avatar")
 
 
 class UserFeedbackForm(forms.ModelForm):

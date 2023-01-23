@@ -35,7 +35,7 @@ def settings(request):
     form = UpdateAccountForm(instance=request.user)
 
     if request.method == "POST":
-        form = UpdateAccountForm(request.POST, instance=request.user)
+        form = UpdateAccountForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
             messages.success(request, "Account details have been updated!")

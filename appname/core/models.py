@@ -14,7 +14,7 @@ class BaseModel(models.Model):
 class User(AbstractUser):
     terms_accepted_at = models.DateTimeField(blank=True, null=True)
     marketing_list_accepted_at = models.DateTimeField(blank=True, null=True)
-    avatar = models.ImageField(null=True, upload_to="avatars/")
+    avatar = models.ImageField(blank=True, null=True, upload_to="avatars/")
 
     @property
     def marketing_list_accepted(self) -> bool:
