@@ -2,6 +2,27 @@
 {% load i18n %}
 {% block full_title %}{{ PROJECT_NAME }}{% endblock full_title %}
 {% block content %}
+<script>
+    const websocket = new WebSocket(
+        'ws://'
+        + window.location.host
+        + '/ws/hello/'
+    )
+    console.log('ws://'
+        + window.location.host
+        + '/ws/hello/')
+    websocket.onopen = function(e) {
+        websocket.send('Sending message from front-end to back-end')
+    }
+
+    websocket.onmessage = function(e) {
+        alert(e.data)
+    };
+
+    websocket.onclose = function(e) {
+        console.error('Chat socket closed unexpectedly')
+    }
+</script>
 <section class="section">
     <div class="container">
         {% include "includes/messages.html" %}

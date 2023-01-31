@@ -21,6 +21,7 @@ ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS")
 # Application definition
 
 INSTALLED_APPS = [
+    "daphne",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -30,6 +31,7 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "django.contrib.flatpages",
     "django_extensions",
+    "channels",
     "allauth",
     "allauth.account",
     "rest_framework",
@@ -62,15 +64,15 @@ MIDDLEWARE = [
 ]
 
 if DEBUG:
-    MIDDLEWARE += [
-        "silk.middleware.SilkyMiddleware",
-        "django_browser_reload.middleware.BrowserReloadMiddleware",
-    ]
     DJANGO_DEBUG_TOOLBAR = env.bool("DJANGO_DEBUG_TOOLBAR")
     if DJANGO_DEBUG_TOOLBAR:
         MIDDLEWARE += [
             "debug_toolbar.middleware.DebugToolbarMiddleware",
         ]
+    MIDDLEWARE += [
+        "silk.middleware.SilkyMiddleware",
+        # "django_browser_reload.middleware.BrowserReloadMiddleware",
+    ]
     SILKY_ANALYZE_QUERIES = True
 
 ROOT_URLCONF = "appname.urls"
@@ -93,6 +95,9 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "appname.wsgi.application"
+ASGI_APPLICATION = "appname.asgi.application"
+
+CHANNEL_LAYERS = {"default": {"BACKEND": "channels.layers.InMemoryChannelLayer"}}
 
 # Database
 
@@ -308,7 +313,7 @@ if DEBUG:
     }
     LOGGING["loggers"]["django_structlog"]["handlers"] = ["flat_line_file"]
     LOGGING["loggers"]["django"] = {
-        "handlers": ["rich_console", "flat_line_file"],
+        "handlers": ["flat_line_file"],
         "level": "INFO",
     }
     # LOGGING["loggers"]["django.db.backends"] = {
