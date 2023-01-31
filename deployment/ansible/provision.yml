@@ -258,7 +258,7 @@
           Group=caddy
           WorkingDirectory=/srv/{{ app_name }}
           ExecReload=/bin/kill -HUP $MAINPID
-          ExecStart=/usr/local/bin/poetry run gunicorn appname.wsgi:application --workers 2 --bind unix:/var/run/{{ app_name }}/app.sock --access-logfile /var/log/{{ app_name }}/gunicorn_access_log.txt --error-logfile /var/log/{{ app_name }}/gunicorn_error_log.txt
+          ExecStart=/usr/local/bin/poetry run gunicorn appname.asgi:application -k uvicorn.workers.UvicornWorker --workers 2 --bind unix:/var/run/{{ app_name }}/app.sock --access-logfile /var/log/{{ app_name }}/gunicorn_access_log.txt --error-logfile /var/log/{{ app_name }}/gunicorn_error_log.txt
           #Restart=on-failure
           #RestartSec=5s
           KillMode=mixed
