@@ -625,6 +625,10 @@
 ansible-playbook provision.yml -i myhosts.ini --extra-vars &quot;@myvars.yml&quot;
 </code></pre></div>
 <p>Wait until the deployment is finished.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Consider using <a href="https://mitogen.networkgenomics.com/ansible_detailed.html">Mitogen for Ansible</a> to make Ansible faster.</p>
+</div>
 <h2 id="create-a-superuser">Create a superuser</h2>
 <p>SSH to your server (replace <code>X.X.X.X</code> with the server's IP address):</p>
 <div class="highlight"><pre><span></span><code>ssh root@X.X.X.X
