@@ -71,7 +71,9 @@ if DEBUG:
         MIDDLEWARE += [
             "debug_toolbar.middleware.DebugToolbarMiddleware",
         ]
-    SILKY_ANALYZE_QUERIES = True
+    # Set to True only when analyzing queries
+    # as it can have unexpected behavior
+    SILKY_ANALYZE_QUERIES = False
 
 ROOT_URLCONF = "appname.urls"
 

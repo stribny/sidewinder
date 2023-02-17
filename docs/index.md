@@ -34,7 +34,7 @@ Sidewinder is opinionated to provide smooth experience from starting a new proje
 
 ### Frontend
 
-- Custom [Bulma](https://bulma.io/) build to completely customize with [Saas](https://sass-lang.com/)
+- Custom [Bulma](https://bulma.io/) build to completely customize with [Sass](https://sass-lang.com/)
 - [django-bulma](https://pypi.org/project/django-bulma/) for styling Django forms automatically
 - Authentication-related pages styled for the use with `django-allauth`
 - Configured [htmx](https://htmx.org/) for smoother frontend interactions
@@ -69,8 +69,6 @@ Sidewinder is opinionated to provide smooth experience from starting a new proje
 
 ### Useful libraries
 
-- [django-filter](https://github.com/carltongibson/django-filter) for filtering Django QuerySets based on user selections
-- [Pillow](https://pillow.readthedocs.io/en/stable/) for image manipulation
 - [Pendulum](https://pendulum.eustace.io/) for manipulating time
 - [Rich](https://github.com/Textualize/rich) for developing commands with nicer outputs
 
