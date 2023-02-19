@@ -443,11 +443,12 @@
 
 
 <h1 id="start-sidewinder">Start Sidewinder</h1>
-<p>You can run the development server inside the Poetry's virtual environment:</p>
+<p>You can run the development server inside the Poetry's virtual environment. If this is the first time, don't forget to run Django's <code>migrate</code> management command before that.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># inside project root</span>
 poetry<span class="w"> </span>shell
 
 <span class="c1"># inside virtual environment</span>
+./manage.py<span class="w"> </span>migrate<span class="w"> </span><span class="c1"># first time</span>
 ./manage.py<span class="w"> </span>runserver
 </code></pre></div>
 
