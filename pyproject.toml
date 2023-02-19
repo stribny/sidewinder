@@ -19,10 +19,10 @@ drf-spectacular = "0.25.1"
 drf-spectacular-sidecar = "2022.12.1"
 pendulum = "2.1.2"
 django-environ = "0.9.0"
-dj-database-url = "1.2.0"
 gunicorn = "20.1.0"
 psycopg2-binary = "2.9.5"
 django-structlog = "4.0.1"
+pillow = "9.4.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "7.2.1"

@@ -24,7 +24,7 @@ Sidewinder is opinionated to provide smooth experience from starting a new proje
 
 - Good default project structure
 - Dependency management with [Poetry](https://python-poetry.org/) that makes it straightforward to manage virtual environments
-- Project configuration via environment variables thanks to [django-environ](https://django-environ.readthedocs.io/en/latest/) and [dj-database-url](https://github.com/jazzband/dj-database-url)
+- Project configuration via environment variables thanks to [django-environ](https://django-environ.readthedocs.io/en/latest/)
 
 ### Authentication
 

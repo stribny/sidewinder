@@ -1,7 +1,6 @@
 import os
 from pathlib import Path
 
-import dj_database_url
 import environ
 import structlog
 
@@ -98,12 +97,7 @@ WSGI_APPLICATION = "appname.wsgi.application"
 
 # Database
 
-DJ_DATABASE_CONN_STRING = env.str("DJ_DATABASE_CONN_STRING")
-if DJ_DATABASE_CONN_STRING == "":
-    DJ_DATABASE_CONN_STRING = f'sqlite:///{BASE_DIR / "db.sqlite3"}'
-
-DATABASES = {"default": dj_database_url.config(default=DJ_DATABASE_CONN_STRING)}
-
+DATABASES = {"default": env.db_url('DJ_DATABASE_CONN_STRING', default=f'sqlite:///{BASE_DIR / "db.sqlite3"}')}
 CONN_MAX_AGE = None
 CONN_HEALTH_CHECKS = True
 
