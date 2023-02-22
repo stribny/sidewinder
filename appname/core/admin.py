@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import gettext
@@ -30,3 +31,7 @@ CustomUserAdmin.fieldsets += (
 
 admin.site.register(User, CustomUserAdmin)
 admin.site.register(UserFeedback)
+
+admin_name = f"{settings.PROJECT_NAME} {_('Administration')}"
+admin.site.site_title = admin_name
+admin.site.site_header = admin_name
