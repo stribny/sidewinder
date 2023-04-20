@@ -746,6 +746,25 @@ structlog = ">=21.4.0"
 celery = ["celery (>=5.1)"]
 
 [[package]]
+name = "django-tiptap"
+version = "0.0.18"
+description = "TipTap Editor in Django 🚀"
+category = "main"
+optional = false
+python-versions = ">=3.5"
+files = [
+    {file = "django_tiptap-0.0.18-py3-none-any.whl", hash = "sha256:938ad991ea55ce5fe35ab4827a2c10ed5289e5857644c340cd1d252519c7abdc"},
+    {file = "django_tiptap-0.0.18.tar.gz", hash = "sha256:da8a10ad3fbc93cc053488002c587df9f1d9468038ce1728416740ef337c837f"},
+]
+
+[package.dependencies]
+Django = ">=2.2"
+
+[package.extras]
+dev = ["black", "isort", "pre-commit"]
+test = ["pytest"]
+
+[[package]]
 name = "djangorestframework"
 version = "3.14.0"
 description = "Web APIs for Django, made easy."
@@ -2605,4 +2624,4 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "35792a8c07edb488a64e953dc09fe958b1265355270a8af4cfcc29fc580ac84e"
+content-hash = "5512c4a5778c90fa81b300a4c692a81e54be48a9ff2566634b198731fc1d4ac4"

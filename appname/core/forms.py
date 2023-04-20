@@ -2,8 +2,10 @@ import pendulum
 from allauth.account.forms import SignupForm
 from django import forms
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
+from django.contrib.flatpages.models import FlatPage
 from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
+from django_tiptap.widgets import TipTapWidget
 
 from .models import User, UserFeedback
 
@@ -64,3 +66,11 @@ class UserFeedbackForm(forms.ModelForm):
     class Meta:
         model = UserFeedback
         fields = ["email", "text"]
+
+
+class CustomFlatPageForm(forms.ModelForm):
+    content = forms.CharField(widget=TipTapWidget())
+
+    class Meta:
+        model = FlatPage
+        fields = ("url", "title", "content", "sites")

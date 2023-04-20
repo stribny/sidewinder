@@ -1,10 +1,11 @@
 from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from django.utils.translation import gettext
+from django.contrib.flatpages.admin import FlatPageAdmin
+from django.contrib.flatpages.models import FlatPage
 from django.utils.translation import gettext_lazy as _
 
-from .forms import UserChangeForm, UserCreationForm
+from .forms import CustomFlatPageForm, UserChangeForm, UserCreationForm
 from .models import User, UserFeedback
 
 
@@ -29,8 +30,16 @@ CustomUserAdmin.fieldsets += (
     ("Avatar", {"fields": ("avatar",)}),
 )
 
+
+class CustomFlatPageAdmin(FlatPageAdmin):
+    form = CustomFlatPageForm
+
+
 admin.site.register(User, CustomUserAdmin)
 admin.site.register(UserFeedback)
+
+admin.site.unregister(FlatPage)
+admin.site.register(FlatPage, CustomFlatPageAdmin)
 
 admin_name = f"{settings.PROJECT_NAME} {_('Administration')}"
 admin.site.site_title = admin_name

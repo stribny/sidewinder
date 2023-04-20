@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "drf_spectacular_sidecar",
     "bulma",
     "django_htmx",
+    "django_tiptap",
     "appname.core",
 ]
 
@@ -97,7 +98,11 @@ WSGI_APPLICATION = "appname.wsgi.application"
 
 # Database
 
-DATABASES = {"default": env.db_url('DJ_DATABASE_CONN_STRING', default=f'sqlite:///{BASE_DIR / "db.sqlite3"}')}
+DATABASES = {
+    "default": env.db_url(
+        "DJ_DATABASE_CONN_STRING", default=f'sqlite:///{BASE_DIR / "db.sqlite3"}'
+    )
+}
 CONN_MAX_AGE = None
 CONN_HEALTH_CHECKS = True
 
@@ -232,6 +237,34 @@ SPECTACULAR_SETTINGS = {
     "SWAGGER_UI_DIST": "SIDECAR",
     "SWAGGER_UI_FAVICON_HREF": "SIDECAR",
     "REDOC_DIST": "SIDECAR",
+}
+
+# Tiptap WYSIWYG editor
+
+DJANGO_TIPTAP_CONFIG = {
+    "width": "500px",
+    "height": "500px",
+    "extensions": [
+        "bold",
+        "italic",
+        "underline",
+        "strikethrough",
+        "h2",
+        "h3",
+        "h4",
+        "textAlign",
+        "indent",
+        "table",
+        "bulletList",
+        "orderedList",
+        "typography",
+        "clearFormat",
+    ],
+    "placeholderText": None,
+    "unsavedChangesWarningText": None,
+    "lang": "EN",
+    "custom_extensions": [],
+    "tiptapOutputFormat": "html",
 }
 
 # Logging
