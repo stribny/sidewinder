@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "drf_spectacular",
     "drf_spectacular_sidecar",
+    "drf_standardized_errors",
     "bulma",
     "django_htmx",
     "appname.core",
@@ -97,7 +98,11 @@ WSGI_APPLICATION = "appname.wsgi.application"
 
 # Database
 
-DATABASES = {"default": env.db_url('DJ_DATABASE_CONN_STRING', default=f'sqlite:///{BASE_DIR / "db.sqlite3"}')}
+DATABASES = {
+    "default": env.db_url(
+        "DJ_DATABASE_CONN_STRING", default=f'sqlite:///{BASE_DIR / "db.sqlite3"}'
+    )
+}
 CONN_MAX_AGE = None
 CONN_HEALTH_CHECKS = True
 
@@ -216,12 +221,16 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
     ],
-    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_SCHEMA_CLASS": "drf_standardized_errors.openapi.AutoSchema",
     "DEFAULT_RENDERER_CLASSES": [
         "rest_framework.renderers.JSONRenderer",
         "rest_framework.renderers.BrowsableAPIRenderer",
     ],
+    "EXCEPTION_HANDLER": "drf_standardized_errors.handler.exception_handler",
 }
+# Enable for seeing standard errors for unhandled exceptions if DEBUG=True
+# DRF_STANDARDIZED_ERRORS = {"ENABLE_IN_DEBUG_FOR_UNHANDLED_EXCEPTIONS": True}
+
 
 # drf-spectacular
 
@@ -232,6 +241,22 @@ SPECTACULAR_SETTINGS = {
     "SWAGGER_UI_DIST": "SIDECAR",
     "SWAGGER_UI_FAVICON_HREF": "SIDECAR",
     "REDOC_DIST": "SIDECAR",
+    "ENUM_NAME_OVERRIDES": {
+        "ValidationErrorEnum": "drf_standardized_errors.openapi_serializers.ValidationErrorEnum.values",
+        "ClientErrorEnum": "drf_standardized_errors.openapi_serializers.ClientErrorEnum.values",
+        "ServerErrorEnum": "drf_standardized_errors.openapi_serializers.ServerErrorEnum.values",
+        "ErrorCode401Enum": "drf_standardized_errors.openapi_serializers.ErrorCode401Enum.values",
+        "ErrorCode403Enum": "drf_standardized_errors.openapi_serializers.ErrorCode403Enum.values",
+        "ErrorCode404Enum": "drf_standardized_errors.openapi_serializers.ErrorCode404Enum.values",
+        "ErrorCode405Enum": "drf_standardized_errors.openapi_serializers.ErrorCode405Enum.values",
+        "ErrorCode406Enum": "drf_standardized_errors.openapi_serializers.ErrorCode406Enum.values",
+        "ErrorCode415Enum": "drf_standardized_errors.openapi_serializers.ErrorCode415Enum.values",
+        "ErrorCode429Enum": "drf_standardized_errors.openapi_serializers.ErrorCode429Enum.values",
+        "ErrorCode500Enum": "drf_standardized_errors.openapi_serializers.ErrorCode500Enum.values",
+    },
+    "POSTPROCESSING_HOOKS": [
+        "drf_standardized_errors.openapi_hooks.postprocess_schema_enums"
+    ],
 }
 
 # Logging

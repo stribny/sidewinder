@@ -23,6 +23,7 @@ gunicorn = "20.1.0"
 psycopg2-binary = "2.9.5"
 django-structlog = "4.0.1"
 pillow = "9.4.0"
+drf-standardized-errors = {extras = ["openapi"], version = "0.12.5"}
 
 [tool.poetry.dev-dependencies]
 pytest = "7.2.1"
