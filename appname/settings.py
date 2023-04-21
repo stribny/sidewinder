@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "drf_spectacular",
     "drf_spectacular_sidecar",
     "drf_standardized_errors",
+    "corsheaders",
     "bulma",
     "django_htmx",
     "appname.core",
@@ -49,6 +50,7 @@ if DEBUG:
     ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -258,6 +260,11 @@ SPECTACULAR_SETTINGS = {
         "drf_standardized_errors.openapi_hooks.postprocess_schema_enums"
     ],
 }
+
+# CORS
+
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_URLS_REGEX = r"^/api/.*$"
 
 # Logging
 

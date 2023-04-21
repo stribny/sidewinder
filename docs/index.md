@@ -44,6 +44,7 @@ Sidewinder is opinionated to provide smooth experience from starting a new proje
 - [Django REST Framework](https://www.django-rest-framework.org/) for writing REST APIs with configured token authentication
 - [drf-spectacular](https://drf-spectacular.readthedocs.io/en/latest/) for HTTP API documentation
 - [drf-standardized-errors](https://drf-standardized-errors.readthedocs.io) for standardized API responses, including configuration for drf-spectacular
+- [django-cors-headers](https://github.com/adamchainz/django-cors-headers) to allow cross-origin requests (restricted to HTTP API endpoints)
 
 ### Development Tools
 
