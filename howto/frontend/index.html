@@ -338,29 +338,16 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#using-bulma" class="md-nav__link">
-    Using Bulma
-  </a>
-  
-    <nav class="md-nav" aria-label="Using Bulma">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#custom-bulma" class="md-nav__link">
-    Custom Bulma
+  <a href="#basic-stylesheets-and-templates" class="md-nav__link">
+    Basic stylesheets and templates
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#dont-want-to-use-bulma-for-css" class="md-nav__link">
-    Don't want to use Bulma for CSS?
+      
+        <li class="md-nav__item">
+  <a href="#htmx" class="md-nav__link">
+    HTMX
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -482,29 +469,16 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#using-bulma" class="md-nav__link">
-    Using Bulma
-  </a>
-  
-    <nav class="md-nav" aria-label="Using Bulma">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#custom-bulma" class="md-nav__link">
-    Custom Bulma
+  <a href="#basic-stylesheets-and-templates" class="md-nav__link">
+    Basic stylesheets and templates
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#dont-want-to-use-bulma-for-css" class="md-nav__link">
-    Don't want to use Bulma for CSS?
+      
+        <li class="md-nav__item">
+  <a href="#htmx" class="md-nav__link">
+    HTMX
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -529,18 +503,12 @@
 
 
 <h1 id="frontend">Frontend</h1>
-<h2 id="using-bulma">Using Bulma</h2>
-<p>Sidewinder comes with a simple workflow that allows you to use CSS framework <a href="https://bulma.io/">Bulma</a> and customize it with <a href="https://sass-lang.com/">Saas</a>. By default, there is already Bulma CSS file ready to be used in the <code>static</code> folder (<code>static/mybulma/mybulma.css</code>), so when you are just starting out, there is no need to build it first. In this case, you might just start editing the main Sidewinder CSS file in <code>static/styles.css</code>.</p>
-<h3 id="custom-bulma">Custom Bulma</h3>
-<p>The simple asset pipeline is an <code>npm</code> project found in the <code>assets</code> directory, modeled after the article <a href="https://stribny.name/blog/bulma-build/">Creating a custom Bulma build</a>.</p>
-<ol>
-<li>Modify <code>assets/mybulma/mybulma.scss</code> to your needs</li>
-<li>Run <code>npm run build-bulma</code> in the <code>assets</code> folder</li>
-</ol>
-<p>The command <code>build-bulma</code> will build a new custom Bulma and copy it to <code>static</code> folder for consumption in Django.</p>
-<h3 id="dont-want-to-use-bulma-for-css">Don't want to use Bulma for CSS?</h3>
-<p>In case Bulma is not your thing, go ahead and delete <code>assets</code> and <code>static/mybulma</code> folders. Also, you will probably want to remove <code>django-bulma</code> package from your Python dependencies with <code>poetry remove django-bulma</code>.</p>
-<p>You will then need to modify and restyle all the Django templates found in the <code>templates</code> directory.</p>
+<h2 id="basic-stylesheets-and-templates">Basic stylesheets and templates</h2>
+<p>By default, there is a basic CSS file (<code>static/css/base.css</code>) that styles a few existing pages, mainly the <code>django-allauth</code> authentication pages.</p>
+<p>You can build upon this CSS file or replace it. There is no CSS framework included in Sidewinder.</p>
+<p><code>django-allauth</code> templates are provided in the <code>templates</code> folder for customization, together with a custom form rendering templates (<code>templates/forms</code> via <code>CustomFormRenderer</code>) so that checkboxes are rendered with labels displayed after them.</p>
+<h2 id="htmx">HTMX</h2>
+<p>HTMX is loaded in the <code>_base.html</code> template together with configured CSRF token (<code>&lt;body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'&gt;</code>).</p>
 
 
 
