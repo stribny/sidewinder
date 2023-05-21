@@ -628,10 +628,19 @@ install it for your system. </p>
 <p>On Fedora, use <code>dnf</code>:</p>
 <div class="highlight"><pre><span></span><code>dnf install graphviz graphviz-devel
 </code></pre></div>
-<p>You can also skip this step if you don't plan to use this feature. To do so, ignore the <code>--all-extras</code> in the following step.</p>
+<p>If you plan to use this feature, install dependencies in the next step with <code>--with graphviz</code>.</p>
+<p>You can also skip this step if you don't plan to use this feature. </p>
 <h2 id="install-sidewinder">Install Sidewinder</h2>
 <p>You can now install Sidewinder from the project's root:</p>
-<div class="highlight"><pre><span></span><code>poetry<span class="w"> </span>install<span class="w"> </span>--all-extras
+<div class="highlight"><pre><span></span><code>poetry<span class="w"> </span>install
+
+<span class="c1"># or with mkdocs</span>
+
+poetry<span class="w"> </span>install<span class="w"> </span>--with<span class="w"> </span>docs
+
+<span class="c1"># or with graphviz</span>
+
+poetry<span class="w"> </span>install<span class="w"> </span>--with<span class="w"> </span>graphviz
 
 <span class="c1"># install pre-commit hooks</span>
 poetry<span class="w"> </span>run<span class="w"> </span>pre-commit<span class="w"> </span>install
