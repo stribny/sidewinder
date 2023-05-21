@@ -1,8 +1,8 @@
-import pendulum
 from allauth.account.forms import SignupForm
 from django import forms
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.forms.renderers import TemplatesSetting
+from django.utils import timezone
 from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
 
@@ -58,10 +58,10 @@ class AcceptTermsSignupForm(SignupForm):
 
     def save(self, request):
         user = super(AcceptTermsSignupForm, self).save(request)
-        user.terms_accepted_at = pendulum.now()
+        user.terms_accepted_at = timezone.now()
 
         if self.cleaned_data["marketing_list_accepted"]:
-            user.marketing_list_accepted_at = pendulum.now()
+            user.marketing_list_accepted_at = timezone.now()
 
         user.save()
         return user

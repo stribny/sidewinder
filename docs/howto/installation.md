@@ -47,14 +47,24 @@ On Fedora, use `dnf`:
 dnf install graphviz graphviz-devel
 ```
 
-You can also skip this step if you don't plan to use this feature. To do so, ignore the `--all-extras` in the following step.
+If you plan to use this feature, install dependencies in the next step with `--with graphviz`.
+
+You can also skip this step if you don't plan to use this feature. 
 
 ## Install Sidewinder
 
 You can now install Sidewinder from the project's root:
 
 ```bash
-poetry install --all-extras
+poetry install
+
+# or with mkdocs
+
+poetry install --with docs
+
+# or with graphviz
+
+poetry install --with graphviz
 
 # install pre-commit hooks
 poetry run pre-commit install

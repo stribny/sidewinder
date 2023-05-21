@@ -68,11 +68,6 @@ Sidewinder is opinionated to provide smooth experience from starting a new proje
 - [Playwright](https://playwright.dev/) for end-to-end UI testing
 - [openapi-spec-validator](https://github.com/p1c2u/openapi-spec-validator) for validating the generated API specs
 
-### Useful libraries
-
-- [Pendulum](https://pendulum.eustace.io/) for manipulating time
-- [Rich](https://github.com/Textualize/rich) for developing commands with nicer outputs
-
 ### Deployment
 
 - Prepared deployment to a single Virtual Private Server (VPS) with reverse proxy and PostgreSQL database

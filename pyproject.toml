@@ -9,14 +9,12 @@ python = "^3.9"
 Django = "4.1.5"
 djangorestframework = "3.14.0"
 django-extensions = "3.2.1"
-rich = "13.2.0"
 Faker = "16.6.0"
 django-allauth = "0.52.0"
 argon2-cffi = "21.3.0"
 django-htmx = "1.13.0"
 drf-spectacular = "0.25.1"
 drf-spectacular-sidecar = "2022.12.1"
-pendulum = "2.1.2"
 django-environ = "0.9.0"
 gunicorn = "20.1.0"
 psycopg2-binary = "2.9.5"
@@ -24,37 +22,44 @@ django-structlog = "4.0.1"
 pillow = "9.4.0"
 drf-standardized-errors = {extras = ["openapi"], version = "0.12.5"}
 django-cors-headers = "3.14.0"
+rich = "^13.3.5"
 
-[tool.poetry.dev-dependencies]
-pytest = "7.2.1"
+[tool.poetry.group.dev.dependencies]
 django-browser-reload = "1.6.0"
 django-debug-toolbar = "3.8.1"
-pytest-django = "4.5.2"
-pytest-icdiff = "0.6"
-pytest-randomly = "3.12.0"
-pytest-cov = "4.0.0"
 pywatchman = "1.4.1"
-pytest-sugar = "0.9.6"
 bandit = "1.7.4"
 black = "22.12.0"
 flake8 = "6.0.0"
 snoop = "0.4.3"
 pre-commit = "2.21.0"
-playwright = "1.29.1"
-openapi-spec-validator = "^0.4.0"
-poethepoet = "0.18.1"
 django-silk = "5.0.3"
-pytest-factoryboy = "2.5.1"
-mkdocs = "1.4.2"
-mkdocs-material = "8.5.11"
-pydotplus = {version = "^2.0.2", optional = true}
-pygraphviz = {version = "^1.10", optional = true}
-
-[tool.poetry.group.dev.dependencies]
 isort = "5.12.0"
 
-[tool.poe.tasks]
-ma = "./manage.py"
+[tool.poetry.group.test.dependencies]
+pytest = "7.2.1"
+pytest-django = "4.5.2"
+pytest-icdiff = "0.6"
+pytest-randomly = "3.12.0"
+pytest-cov = "4.0.0"
+pytest-sugar = "0.9.6"
+pytest-factoryboy = "2.5.1"
+openapi-spec-validator = "^0.4.0"
+playwright = "1.29.1"
+
+[tool.poetry.group.graphviz]
+optional = true
+
+[tool.poetry.group.graphviz.dependencies]
+pydotplus = "^2.0.2"
+pygraphviz = "^1.10"
+
+[tool.poetry.group.docs]
+optional = true
+
+[tool.poetry.group.docs.dependencies]
+mkdocs = "1.4.2"
+mkdocs-material = "8.5.11"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
