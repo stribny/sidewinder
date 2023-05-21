@@ -73,12 +73,4 @@ poetry shell
 playwright install
 ```
 
-## Install Bulma
-
-```
-cd assets
-npm i
-npm run build-bulma
-```
-
 Now, [configure the project](configuration.md).

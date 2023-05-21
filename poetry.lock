@@ -618,21 +618,6 @@ files = [
 Django = ">=3.2"
 
 [[package]]
-name = "django-bulma"
-version = "0.8.3"
-description = "Bulma CSS Framework for Django projects"
-category = "main"
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "django-bulma-0.8.3.tar.gz", hash = "sha256:b794b4e64f482de77f376451f7cd8b3c8448eb68e5a24c51b9190625a08b0b30"},
-    {file = "django_bulma-0.8.3-py3-none-any.whl", hash = "sha256:0ef6e5c171c2a32010e724a8be61ba6cd0e55ebbd242cf6780560518483c4d00"},
-]
-
-[package.dependencies]
-django = ">=2.2"
-
-[[package]]
 name = "django-cors-headers"
 version = "3.14.0"
 description = "django-cors-headers is a Django application for handling the server headers required for Cross-Origin Resource Sharing (CORS)."
@@ -2645,4 +2630,4 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "d2a22774966c8e9eacf15a3faab1263de61b1f8a17bb70bc3db6e7c50a4d13a2"
+content-hash = "55b6752a798ac6528ccf31f7c6690817241ac52ebf14ca49365cae0888a072af"

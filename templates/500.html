@@ -2,10 +2,8 @@
 {% load i18n %}
 {% block title %}{% translate "Server Error" %}{% endblock title %}
 {% block content %}
-<section class="section">
-    <div class="container content">
-        <h1 class="title is-1">{% translate "Server Error" %}</h1>
-        <p>{% translate "There has been an error on the server. Please try again later." %}</p>
-    </div>
+<section class="page">
+    <h1>{% translate "Server Error" %}</h1>
+    <p>{% translate "There has been an error on the server. Please try again later." %}</p>
 </section>
 {% endblock content %}

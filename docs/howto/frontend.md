@@ -1,20 +1,13 @@
 # Frontend
 
-## Using Bulma
+## Basic stylesheets and templates
 
-Sidewinder comes with a simple workflow that allows you to use CSS framework [Bulma](https://bulma.io/) and customize it with [Saas](https://sass-lang.com/). By default, there is already Bulma CSS file ready to be used in the `static` folder (`static/mybulma/mybulma.css`), so when you are just starting out, there is no need to build it first. In this case, you might just start editing the main Sidewinder CSS file in `static/styles.css`.
+By default, there is a basic CSS file (`static/css/base.css`) that styles a few existing pages, mainly the `django-allauth` authentication pages.
 
-### Custom Bulma
+You can build upon this CSS file or replace it. There is no CSS framework included in Sidewinder.
 
-The simple asset pipeline is an `npm` project found in the `assets` directory, modeled after the article [Creating a custom Bulma build](https://stribny.name/blog/bulma-build/).
+`django-allauth` templates are provided in the `templates` folder for customization, together with a custom form rendering templates (`templates/forms` via `CustomFormRenderer`) so that checkboxes are rendered with labels displayed after them.
 
-1. Modify `assets/mybulma/mybulma.scss` to your needs
-2. Run `npm run build-bulma` in the `assets` folder
+## HTMX
 
-The command `build-bulma` will build a new custom Bulma and copy it to `static` folder for consumption in Django.
-
-### Don't want to use Bulma for CSS?
-
-In case Bulma is not your thing, go ahead and delete `assets` and `static/mybulma` folders. Also, you will probably want to remove `django-bulma` package from your Python dependencies with `poetry remove django-bulma`.
-
-You will then need to modify and restyle all the Django templates found in the `templates` directory.
+HTMX is loaded in the `_base.html` template together with configured CSRF token (`<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>`).

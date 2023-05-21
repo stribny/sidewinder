@@ -1,12 +1,10 @@
 {% extends 'account/_base.html' %}
 {% load i18n %}
-{% load bulma_tags %}
-{% load i18n %}
 {% load account %}
 {% block title %}{% trans "Confirm e-mail address" %}{% endblock %}
 {% block content_auth_form %}
 
-<h2 class="subtitle colored is-4">{% trans "Confirm e-mail address" %}</h2>
+<h1>{% trans "Confirm e-mail address" %}</h1>
 
 {% if confirmation %}
 
@@ -14,11 +12,9 @@
 
 <p>{% blocktrans with confirmation.email_address.email as email %}Please confirm that <a href="mailto:{{ email }}">{{ email }}</a> is your e-mail address.{% endblocktrans %}</p>
 
-<form method="post" action="{% url 'account_confirm_email' confirmation.key %}" class="block">
-{% csrf_token %}
-  <div class="field mt-5">
-    <button type="submit" class="button is-primary">{% trans 'Confirm' %}</button>
-  </div>
+<form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
+  {% csrf_token %}
+  <button type="submit">{% trans 'Confirm' %}</button>
 </form>
 
 {% else %}

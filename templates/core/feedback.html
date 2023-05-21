@@ -1,29 +1,14 @@
 {% extends '_base.html' %}
 {% load i18n %}
-{% load bulma_tags %}
 {% block title %}{% translate "Leave feedback" %}{% endblock %}
 {% block content %}
-<section class="section">
-<div class="container">
-    <div class="columns is-multiline">
-        <div class="column is-8 is-offset-2">
-          <div class="columns box">
-            <div class="column left column-auth">
-                <h1 class="title colored">{% translate "Leave feedback" %}</h1>
-            </div>
-            <div class="column right column-auth">
-                {% include "includes/messages.html" %}
-                <form class="block" method="post">
-                {% csrf_token %}
-                {{ form|bulma }}
-                <div class="field">
-                    <button type="submit" class="button is-primary">{% translate "Submit" %}</button>
-                </div>
-                </form>
-            </div>
-          </div>
-        </div>
-      </div>
-{% endblock content %}
-</div>
+<section class="page page--wide">
+  {% include "includes/messages.html" %}
+  <h1>{% translate "Leave feedback" %}</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">{% translate "Submit" %}</button>
+  </form>
 </section>
+{% endblock content %}

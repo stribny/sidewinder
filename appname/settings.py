@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.sites",
     "django.contrib.flatpages",
+    "django.forms",
     "django_extensions",
     "allauth",
     "allauth.account",
@@ -37,7 +38,6 @@ INSTALLED_APPS = [
     "drf_spectacular_sidecar",
     "drf_standardized_errors",
     "corsheaders",
-    "bulma",
     "django_htmx",
     "appname.core",
 ]
@@ -159,6 +159,8 @@ USE_TZ = True
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "core.User"
+
+FORM_RENDERER = "appname.core.forms.CustomFormRenderer"
 
 # Static files
 

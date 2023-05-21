@@ -1,15 +1,12 @@
 {% extends 'account/_base.html' %}
 {% load i18n %}
-{% load bulma_tags %}
 {% block title %}{% trans "Log in" %}{% endblock %}
 {% block content_auth_form %}
-<h2 class="subtitle colored is-4">{% trans "Log in" %}</h2>
-<form class="block" method="post">
+<h1>{% trans "Log in" %}</h1>
+<form method="post">
   {% csrf_token %}
-  {{ form|bulma }}
-  <div class="field">
-    <button type="submit" class="button is-primary">{% trans "Log in" %}</button>
-  </div>
+  {{ form }}
+  <button type="submit">{% trans "Log in" %}</button>
 </form>
 <p>
   <a href="{% url 'account_signup' %}">{% trans "Create a new account" %}</a>

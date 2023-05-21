@@ -1,0 +1,334 @@
+/* 
+Colors and other variables
+*/
+
+:root {
+  --font-family: Arial, sans-serif;
+  --font-family-headline: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --color-text: rgb(29, 29, 29);
+  --color-primary: rgb(52, 54, 158);
+  --color-background: rgb(247, 247, 247);
+  --color-link: rgb(52, 54, 158);
+  --color-success: rgb(214, 250, 214);
+  --color-info: rgb(243, 238, 194);
+  --color-warning: rgb(243, 199, 77);
+  --color-danger: rgb(236, 143, 143);
+  --color-required-label: red;
+  --color-tr-background: white;
+  --color-tr-alternate-background: rgb(248, 247, 247);
+  --margin-bottom: 1rem;
+  --margin-bottom-small: 0.3rem;
+  --border-radius: 5px;
+  --border: 1px solid rgb(209, 209, 209);
+  --padding-base: 10px;
+  --outline-input: 2px solid rgb(89, 0, 255);
+}
+
+/*
+Font scale from Utopia
+@link https://utopia.fyi/type/calculator?c=320,18,1.2,1240,21,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12
+*/
+
+/* @link https://utopia.fyi/type/calculator?c=320,17,1.2,1240,20,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+
+:root {
+  /* Step -2: 11.81px → 12.80px */
+  --step--2: clamp(0.74rem, calc(0.72rem + 0.11vw), 0.80rem);
+
+  /* Step -1: 14.17px → 16.00px */
+  --step--1: clamp(0.89rem, calc(0.85rem + 0.20vw), 1.00rem);
+
+  /* Step 0: 17.00px → 20.00px */
+  --step-0: clamp(1.06rem, calc(1.00rem + 0.33vw), 1.25rem);
+
+  /* Step 1: 20.40px → 25.00px */
+  --step-1: clamp(1.28rem, calc(1.18rem + 0.50vw), 1.56rem);
+
+  /* Step 2: 24.48px → 31.25px */
+  --step-2: clamp(1.53rem, calc(1.38rem + 0.74vw), 1.95rem);
+
+  /* Step 3: 29.38px → 39.06px */
+  --step-3: clamp(1.84rem, calc(1.63rem + 1.05vw), 2.44rem);
+
+  /* Step 4: 35.25px → 48.83px */
+  --step-4: clamp(2.20rem, calc(1.91rem + 1.48vw), 3.05rem);
+
+  /* Step 5: 42.30px → 61.04px */
+  --step-5: clamp(2.64rem, calc(2.24rem + 2.04vw), 3.82rem);
+}
+
+/* 
+Minimal CSS reset
+https://www.joshwcomeau.com/css/custom-css-reset/ 
+*/
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+#root, #__next {
+  isolation: isolate;
+}
+
+/*
+Base styles
+*/
+
+html {
+  background-color: var(--color-background);
+  font-family: var(--font-family);
+  font-size: var(--step-0);
+  color: var(--color-text);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-headline);
+  font-weight: 700;
+}
+
+h1 {
+  font-size: var(--step-4);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: var(--step-3);
+  margin-top: 2rem;
+  margin-bottom: 0.8rem;
+}
+
+h3 {
+  font-size: var(--step-2);
+  margin-top: 2rem;
+  margin-bottom: var(--margin-bottom);
+}
+
+h4 {
+  font-size: var(--step-1);
+  margin-bottom: var(--margin-bottom);
+}
+
+h5 {
+  font-size: var(--step-0);
+  margin-bottom: var(--margin-bottom);
+}
+
+h6 {
+  font-size: var(--step-0);
+  margin-bottom: var(--margin-bottom);
+}
+
+a, a:visited {
+  color: var(--color-link);
+}
+
+/* Forms */
+
+input, textarea, button {
+  border-radius: var(--border-radius);
+  -moz-border-radius: var(--border-radius);
+  -webkit-border-radius: var(--border-radius);
+  border: var(--border);
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: var(--outline-input);
+}
+
+input, textarea {
+  padding: 0.3rem 0.75rem 0.3rem 0.75rem;
+}
+
+label, button[type=submit] {
+  display: block;
+}
+
+label {
+  margin-bottom: var(--margin-bottom-small);
+}
+
+.required label:after {
+  content:" *";
+  color: var(--color-required-label);
+}
+
+input, textarea, button[type=submit] {
+  margin-bottom: var(--margin-bottom);
+}
+
+form ul.errorlist {
+  list-style-type: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+form ul.errorlist li {
+  color: red;
+  margin-left: 0;
+  margin-bottom: var(--margin-bottom-small);
+}
+
+form ul.errorlist.nonfield li {
+  margin-bottom: var(--margin-bottom);
+}
+
+button {
+  padding: 0.3rem 0.75rem 0.3rem 0.75rem;
+  cursor: pointer;
+  color: white;
+  background-color: var(--color-primary);
+  border: 0;
+}
+
+button:hover {
+  background-image: linear-gradient(rgb(0 0 0/50%) 0 0);
+}
+
+input[type="checkbox"] {
+  display: inline-block;
+  width: 1.15em;
+  height: 1.15em;
+  border-radius: var(--border-radius);
+  -moz-border-radius: var(--border-radius);
+  -webkit-border-radius: var(--border-radius);
+  accent-color: var(--color-primary);
+  margin-bottom: var(--margin-bottom-small);
+}
+
+input[type="checkbox"]:focus {
+  outline: 0px;
+}
+
+input[type="checkbox"] + label {
+  display: inline-block;
+  cursor: pointer;
+  margin-bottom: var(--margin-bottom);
+}
+
+/* Tables */
+
+table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+  border: var(--border);
+  margin-bottom: var(--margin-bottom);
+}
+
+th,
+td {
+  padding: var(--padding-base);
+}
+
+tr {
+  background-color: var(--color-tr-background);
+}
+
+tr:nth-child(even) td {
+  background-color: var(--color-tr-alternate-background);
+}
+
+thead tr {
+  border-bottom: 1px dotted var(--color-primary);
+}
+
+/* Components */
+
+.project-name {
+  font-size: var(--step--1);
+  text-align: right;
+  color: rgb(126, 126, 126);
+  margin-top: 0;
+}
+
+.project-name a {
+  color: rgb(212, 212, 212);
+  text-decoration: none;
+}
+
+.notification {
+  display: block;
+  margin-bottom: var(--margin-bottom);
+}
+
+.notification__message {
+  display: inline-block;
+  padding: var(--padding-base);
+  border-radius: var(--border-radius);
+  -moz-border-radius: var(--border-radius);
+  -webkit-border-radius: var(--border-radius);
+}
+
+.notification__message.info {
+  background-color: var(--color-info);
+}
+
+.notification__message.success {
+  background-color: var(--color-success);
+}
+
+.notification__message.warning {
+  background-color: var(--color-warning);
+}
+
+.notification__message.error {
+  background-color: var(--color-danger);
+}
+
+.notification__message.debug {
+  background-color: var(--color-danger);
+}
+
+.page {
+  min-width: 270px;
+  max-width: 600px;
+  width: calc(100%-20px);
+  margin-top: clamp(0px, 5%, 40px);
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 40px;
+  padding-right: clamp(10px, 5%, 60px);
+  padding-left: clamp(10px, 5%, 60px);
+  padding-top: clamp(10px, 5%, 60px);
+  padding-bottom: 2rem;
+  background-color: white;
+  border-radius: var(--border-radius);
+  -moz-border-radius: var(--border-radius);
+  -webkit-border-radius: var(--border-radius);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.page--wide {
+  max-width: 800px;
+}
+
+.avatar {
+  width: 200px;
+  margin-bottom: var(--margin-bottom);
+}

@@ -34,9 +34,8 @@ Sidewinder is opinionated to provide smooth experience from starting a new proje
 
 ### Frontend
 
-- Custom [Bulma](https://bulma.io/) build to completely customize with [Sass](https://sass-lang.com/)
-- [django-bulma](https://pypi.org/project/django-bulma/) for styling Django forms automatically
-- Authentication-related pages styled for the use with `django-allauth`
+- It is expected that you bring your own CSS/CSS framework
+- Basic one-file CSS to style authentication-related and example pages
 - Configured [htmx](https://htmx.org/) for smoother frontend interactions
 
 ### HTTP APIs

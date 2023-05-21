@@ -2,10 +2,15 @@ import pendulum
 from allauth.account.forms import SignupForm
 from django import forms
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
+from django.forms.renderers import TemplatesSetting
 from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
 
 from .models import User, UserFeedback
+
+
+class CustomFormRenderer(TemplatesSetting):
+    form_template_name = "forms/custom.html"
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -21,11 +26,19 @@ class CustomUserChangeForm(UserChangeForm):
 
 
 class AcceptTermsSignupForm(SignupForm):
+    required_css_class = "required"
+
     terms_accepted = forms.BooleanField(
-        required=False, initial=False, label=_("I accept the Terms of Service")
+        required=True,
+        initial=False,
+        label=_("I accept the Terms of Service"),
+        label_suffix="",
     )
     marketing_list_accepted = forms.BooleanField(
-        required=False, initial=False, label=_("I want to receive product updates")
+        required=False,
+        initial=False,
+        label=_("I want to receive product updates"),
+        label_suffix="",
     )
 
     def __init__(self, *args, **kwargs):
@@ -55,12 +68,16 @@ class AcceptTermsSignupForm(SignupForm):
 
 
 class UpdateAccountForm(forms.ModelForm):
+    required_css_class = "required"
+
     class Meta:
         model = User
         fields = ("first_name", "last_name", "avatar")
 
 
 class UserFeedbackForm(forms.ModelForm):
+    required_css_class = "required"
+
     class Meta:
         model = UserFeedback
         fields = ["email", "text"]
