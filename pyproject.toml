@@ -6,7 +6,7 @@ authors = ["Petr Stribny <petr@stribny.name>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-Django = "4.1.5"
+Django = "4.2.2"
 djangorestframework = "3.14.0"
 django-extensions = "3.2.1"
 Faker = "16.6.0"
