@@ -15,6 +15,10 @@ def terms(request):
     return TemplateResponse(request, "core/terms.html", {})
 
 
+def websocket(request):
+    return TemplateResponse(request, "core/websocket.html", {})
+
+
 def feedback(request):
     form = UserFeedbackForm()
 

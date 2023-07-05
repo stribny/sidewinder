@@ -23,9 +23,12 @@ pillow = "9.4.0"
 drf-standardized-errors = {extras = ["openapi"], version = "0.12.5"}
 django-cors-headers = "3.14.0"
 rich = "^13.3.5"
+channels = "4.0.0"
+daphne = "4.0.0"
+uvicorn = {extras = ["standard"], version = "^0.22.0"}
 
 [tool.poetry.group.dev.dependencies]
-django-browser-reload = "1.6.0"
+django-browser-reload = "1.10.0"
 django-debug-toolbar = "3.8.1"
 pywatchman = "1.4.1"
 bandit = "1.7.4"

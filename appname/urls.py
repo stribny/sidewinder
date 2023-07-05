@@ -25,6 +25,7 @@ urlpatterns = [
     path("", views.index, name="index"),
     path("terms/", views.terms, name="terms"),
     path("feedback/", views.feedback, name="feedback"),
+    path("websocket/", views.websocket, name="websocket"),
 ]
 
 if settings.DEBUG:

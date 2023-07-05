@@ -1,0 +1,34 @@
+{% extends '_base.html' %}
+{% load i18n %}
+{% block full_title %}{{ PROJECT_NAME }}{% endblock full_title %}
+{% block content %}
+<section class="page page--wide">
+  <h1>
+    Websockets demo
+  </h1>
+  <p>
+    If websocket connection is successful you should see an alert with a message.
+  </p>
+</section>
+<script>
+    const websocket = new WebSocket(
+        'ws://'
+        + window.location.host
+        + '/ws/hello/'
+    )
+    console.log('ws://'
+        + window.location.host
+        + '/ws/hello/')
+    websocket.onopen = function(e) {
+        websocket.send('Sending message from the browser')
+    }
+
+    websocket.onmessage = function(e) {
+        alert(e.data)
+    }
+
+    websocket.onclose = function(e) {
+        console.error('Websocket connection closed')
+    }
+</script>
+{% endblock content %}
