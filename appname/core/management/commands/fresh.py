@@ -18,5 +18,6 @@ class Command(BaseCommand):
             is_staff=True,
         )
         superuser.set_password("superuser")
+        superuser.save()
 
         self.stdout.write(self.style.SUCCESS("Fresh environment is ready!"))
