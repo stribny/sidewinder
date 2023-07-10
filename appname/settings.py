@@ -268,6 +268,14 @@ SPECTACULAR_SETTINGS = {
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_URLS_REGEX = r"^/api/.*$"
 
+# Shell plus from django-extensions
+
+SHELL_PLUS = "ipython"
+SHELL_PLUS_PRINT_SQL = True
+SHELL_PLUS_IMPORTS = [
+    "from appname.core.services.email import EmailService",
+]
+
 # Logging
 
 LOGGING = {
