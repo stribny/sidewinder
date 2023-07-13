@@ -15,12 +15,13 @@ urlpatterns = [
     # api
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path("api/redoc/", SpectacularRedocView.as_view(url_name="schema"), name="redoc"),
-    path("api/token-auth/", api.AuthTokenView.as_view(), name="token-auth"),
+    path("api/token-auth/", api.AuthTokenView.as_view(), name="token_auth"),
     path("api/protected/", api.ProtectedView.as_view(), name="protected"),
     # accounts
+    path("accounts/login/", views.LoginView.as_view(), name="account_login"),
     path("accounts/", include("allauth.urls")),
-    path("accounts/settings/", views.settings, name="settings"),
-    path("accounts/delete-account/", views.delete_account, name="delete-account"),
+    path("accounts/settings/", views.user_settings, name="settings"),
+    path("accounts/delete-account/", views.delete_account, name="delete_account"),
     # core
     path("", views.index, name="index"),
     path("terms/", views.terms, name="terms"),
@@ -39,4 +40,5 @@ if settings.DEBUG:
             serve,
             {"document_root": settings.MEDIA_ROOT, "show_indexes": True},
         ),
+        path("login-as-user/", views.login_as_user, name="login_as_user"),
     ] + urlpatterns

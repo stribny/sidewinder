@@ -27,7 +27,7 @@
 
   <h2>{% translate "Delete account" %}</h2>
   
-  <form id="form_delete_account" method="post" action="{% url 'delete-account' %}">
+  <form id="form_delete_account" method="post" action="{% url 'delete_account' %}">
     {% csrf_token %}
     <button type="submit">{% translate "Permanently delete" %}</button>
   </form>

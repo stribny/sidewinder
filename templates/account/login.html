@@ -14,4 +14,18 @@
 <p>
   <a href="{% url 'account_reset_password' %}">{% trans "Forgot password?" %}</a>
 </p>
+{% if debug %}
+<section class="section-development-only">
+  <form method="post" action="{% url 'login_as_user' %}">
+    {% csrf_token %}
+    <label for="select_user">{% trans "Log in as:" %}</label>
+    <select id="select_user" name="select_user" onchange="this.form.submit()" >
+      <option>{% trans "Select user" %}</option>
+      {% for user in all_users %}
+      <option value="{{ user.id }}">{{ user.email }}</option>
+      {% endfor %}
+    </select>
+  </form>
+</section>
+{% endif %}
 {% endblock content_auth_form %}

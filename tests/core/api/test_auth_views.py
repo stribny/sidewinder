@@ -15,7 +15,7 @@ def test_auth_token_view(client, user_factory):
     user = user_factory()
 
     response = client.post(
-        reverse("token-auth"), {"email": user.email, "password": DEFAULT_PASSWORD}
+        reverse("token_auth"), {"email": user.email, "password": DEFAULT_PASSWORD}
     )
 
     assert response.status_code == status.HTTP_200_OK
@@ -31,7 +31,7 @@ def test_auth_token_view_invalid_password(client, user_factory):
     user = user_factory()
 
     response = client.post(
-        reverse("token-auth"), {"email": user.email, "password": "invalid password"}
+        reverse("token_auth"), {"email": user.email, "password": "invalid password"}
     )
 
     assert response.status_code == status.HTTP_401_UNAUTHORIZED

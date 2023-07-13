@@ -332,3 +332,12 @@ thead tr {
   width: 200px;
   margin-bottom: var(--margin-bottom);
 }
+
+.section-development-only {
+  margin-top: var(--margin-bottom);
+  border: 1px solid var(--color-danger);
+  border-radius: var(--border-radius);
+  -moz-border-radius: var(--border-radius);
+  -webkit-border-radius: var(--border-radius);
+  padding: var(--padding-base);
+}
