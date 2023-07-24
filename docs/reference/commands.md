@@ -9,6 +9,7 @@ All commands here should be run inside the Poetry's virtual environment.
 ## Backend
 
 * `./manage.py runserver` - Start Django development server
+* `./manage.py run_huey` = Starts Huey consumers
 
 ## Documentation
 
