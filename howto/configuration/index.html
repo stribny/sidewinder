@@ -346,6 +346,27 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#huey" class="md-nav__link">
+    Huey
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#redis" class="md-nav__link">
+    Redis
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#admin-email-address" class="md-nav__link">
+    Admin email address
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#complete-configuration" class="md-nav__link">
     Complete configuration
   </a>
@@ -581,6 +602,27 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#huey" class="md-nav__link">
+    Huey
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#redis" class="md-nav__link">
+    Redis
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#admin-email-address" class="md-nav__link">
+    Admin email address
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#complete-configuration" class="md-nav__link">
     Complete configuration
   </a>
@@ -666,6 +708,20 @@
 <p>Alternatively, create a <code>sidewinder</code> PostgreSQL database on the port <code>5432</code> with <code>postgres</code> user and <code>postgres</code> password, and make sure that the database is available for connections. Then use this example connection string:</p>
 <div class="highlight"><pre><span></span><code>DJ_DATABASE_CONN_STRING=postgres://postgres:postgres@localhost:5432/sidewinder
 </code></pre></div>
+<h3 id="huey">Huey</h3>
+<p>The task queue Huey can work without Redis in development. Set <code>HUEY_DEV=1</code> (default) to not use Redis in debug mode and <code>HUEY_DEV=0</code> otherwise.</p>
+<p>Note that when <code>HUEY_DEV</code> is <code>0</code>, it is necessary to have Redis running and configured on a local machine.</p>
+<h3 id="redis">Redis</h3>
+<p>Sidewinder uses Redis for background tasks in production and optionally during development.</p>
+<p>To configure Redis URL, use <code>REDIS_URL</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="na">REDIS_URL</span><span class="o">=</span><span class="s">redis://127.0.0.1:6379</span>
+</code></pre></div>
+<p>This setting is optional if your Redis instance runs at <code>redis://127.0.0.1:6379</code>.</p>
+<h3 id="admin-email-address">Admin email address</h3>
+<p>Sidewinder can send some example email reports when <code>ADMIN_EMAIL</code> is set. This setting is optional, but it can be used to test
+that periodic tasks execute correctly after deployment.</p>
+<div class="highlight"><pre><span></span><code><span class="na">ADMIN_EMAIL</span><span class="o">=</span><span class="s">youremail@example.com</span>
+</code></pre></div>
 <h3 id="complete-configuration">Complete configuration</h3>
 <div class="highlight"><pre><span></span><code><span class="na">DJANGO_SECRET_KEY</span><span class="o">=</span><span class="s">secretkey</span>
 <span class="na">DJANGO_DEBUG</span><span class="o">=</span><span class="s">1</span>
@@ -680,6 +736,9 @@
 <span class="na">DJANGO_DEFAULT_FROM_EMAIL</span><span class="o">=</span><span class="s">sidewinder@example.com</span>
 <span class="na">ALLAUTH_ACCOUNT_EMAIL_SUBJECT_PREFIX</span><span class="o">=</span>
 <span class="na">DJ_DATABASE_CONN_STRING</span><span class="o">=</span><span class="s">postgres://postgres:postgres@localhost:5432/sidewinder</span>
+<span class="na">REDIS_URL</span><span class="o">=</span><span class="s">redis://127.0.0.1:6379</span>
+<span class="na">ADMIN_EMAIL</span><span class="o">=</span><span class="s">youremail@example.com</span>
+<span class="na">HUEY_DEV</span><span class="o">=</span><span class="s">1</span>
 </code></pre></div>
 <h2 id="rename-app-folder">Rename app folder</h2>
 <p>The main application folder is called <code>appname</code>. To rename it, you will also need to find and replace references to <code>appname</code> in the repository.</p>
