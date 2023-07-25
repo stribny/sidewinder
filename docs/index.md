@@ -45,6 +45,10 @@ Sidewinder is opinionated to provide smooth experience from starting a new proje
 - [drf-standardized-errors](https://drf-standardized-errors.readthedocs.io) for standardized API responses, including configuration for drf-spectacular
 - [django-cors-headers](https://github.com/adamchainz/django-cors-headers) to allow cross-origin requests (restricted to HTTP API endpoints)
 
+### Task queue
+
+- [huey](https://github.com/coleifer/huey) for executing background and periodic tasks
+
 ### Development Tools
 
 - [django-extensions](https://django-extensions.readthedocs.io/en/latest/) for additional Django commands like `shell_plus`

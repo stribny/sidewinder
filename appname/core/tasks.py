@@ -12,7 +12,7 @@ from appname.core.services.email import EmailService
 
 
 @huey.db_task()
-@huey.periodic_task(crontab(hour="0", minute="10"))
+@huey.periodic_task(crontab(hour="0", minute="1"))
 @huey.lock_task("send_users_report")
 def send_users_report():
     if settings.ADMIN_EMAIL:

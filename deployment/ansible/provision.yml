@@ -12,8 +12,14 @@
     - name: restart postgres
       service: name=postgresql state=restarted
 
+    - name: restart redis
+      service: name=redis state=restarted
+
     - name: restart app
       systemd: "name={{ app_name }} state=restarted daemon_reload=yes"
+
+    - name: restart queue
+      systemd: "name={{ app_name }}_queue state=restarted daemon_reload=yes"
 
   pre_tasks:
     - name: "Install system packages"
@@ -23,6 +29,7 @@
         - caddy
         - postgresql
         - postgresql-server
+        - redis
         - rsync
 
     - name: "Install Python packages"
@@ -61,6 +68,8 @@
         owner="{{ project_user }}"
         group="caddy"
         mode="u+rwx,g=rx"
+
+    # System | Log directories
 
     - name: "Create gunicorn logs dir"
       file: state=directory
@@ -209,6 +218,13 @@
       become: yes
       become_user: postgres
 
+    # Redis
+
+    - name: "Start and enable services"
+      service: "name={{ item }} state=started enabled=yes"
+      with_items:
+        - redis
+
     # Application
 
     - name: "Check out app from git"
@@ -274,6 +290,25 @@
         - restart app
         - restart caddy
 
+    - name: "Setup queue service"
+      copy:
+        content: |
+          [Unit]
+          Description={{ app_name }} task queue
+          After=network.target
+
+          [Service]
+          User={{ project_user }}
+          Group=caddy
+          WorkingDirectory=/srv/{{ app_name }}
+          ExecStart=/usr/local/bin/poetry run ./manage.py run_huey -w 2
+          Restart=always
+
+          [Install]
+          WantedBy=multi-user.target
+        dest: /etc/systemd/system/{{ app_name }}_queue.service
+        mode: "a+r"
+
     # Application | .env
 
     - name: "Create/update .env file"
@@ -295,11 +330,13 @@
           DJANGO_EMAIL_HOST_PASSWORD={{ django_email_host_password }}
           ALLAUTH_ACCOUNT_EMAIL_SUBJECT_PREFIX={{ allauth_account_email_subject_prefix }}
           DJ_DATABASE_CONN_STRING=postgres:///{{ app_name }}
+          ADMIN_EMAIL={{ admin_email }}
         dest: "/srv/{{ app_name }}/.env"
         owner: "{{ project_user }}"
         mode: "u+r"
       notify:
         - restart app
+        - restart queue
 
     # Application | install dependencies
 

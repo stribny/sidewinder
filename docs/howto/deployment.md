@@ -54,6 +54,7 @@ And set email server settings:
 - `django_email_port`
 - `django_email_host_user`
 - `django_email_host_password`
+- `admin_email`
 
 !!! warning
 

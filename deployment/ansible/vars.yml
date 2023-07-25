@@ -17,3 +17,4 @@ django_email_port: 587
 django_email_host_user:
 django_email_host_password:
 allauth_account_email_subject_prefix:
+admin_email:

@@ -279,7 +279,7 @@ HUEY = {
 
 # Set to True to bypass redis in development
 HUEY_DEV = env.bool("HUEY_DEV", default=True)
-if not HUEY_DEV:
+if not HUEY_DEV and DEBUG:
     HUEY["immediate_use_memory"] = False
     HUEY["immediate"] = False
 

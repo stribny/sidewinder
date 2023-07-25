@@ -72,6 +72,33 @@ Alternatively, create a `sidewinder` PostgreSQL database on the port `5432` with
 DJ_DATABASE_CONN_STRING=postgres://postgres:postgres@localhost:5432/sidewinder
 ```
 
+### Huey
+
+The task queue Huey can work without Redis in development. Set `HUEY_DEV=1` (default) to not use Redis in debug mode and `HUEY_DEV=0` otherwise.
+
+Note that when `HUEY_DEV` is `0`, it is necessary to have Redis running and configured on a local machine.
+
+### Redis
+
+Sidewinder uses Redis for background tasks in production and optionally during development.
+
+To configure Redis URL, use `REDIS_URL`:
+
+```ini
+REDIS_URL=redis://127.0.0.1:6379
+```
+
+This setting is optional if your Redis instance runs at `redis://127.0.0.1:6379`.
+
+### Admin email address
+
+Sidewinder can send some example email reports when `ADMIN_EMAIL` is set. This setting is optional, but it can be used to test
+that periodic tasks execute correctly after deployment.
+
+```ini
+ADMIN_EMAIL=youremail@example.com
+```
+
 ### Complete configuration
 
 ```ini
@@ -88,6 +115,9 @@ DJANGO_EMAIL_HOST_PASSWORD=
 DJANGO_DEFAULT_FROM_EMAIL=sidewinder@example.com
 ALLAUTH_ACCOUNT_EMAIL_SUBJECT_PREFIX=
 DJ_DATABASE_CONN_STRING=postgres://postgres:postgres@localhost:5432/sidewinder
+REDIS_URL=redis://127.0.0.1:6379
+ADMIN_EMAIL=youremail@example.com
+HUEY_DEV=1
 ```
 
 ## Rename app folder
