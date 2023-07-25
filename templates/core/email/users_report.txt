@@ -1,0 +1,9 @@
+{% load i18n %}
+
+{% block content %}{% autoescape off %}{% blocktrans %}These users registered last day:{% endblocktrans %}
+
+{% for user in users %}
+- {{ user.email }}
+{% endfor %}
+
+{% endautoescape %}{% endblock %}

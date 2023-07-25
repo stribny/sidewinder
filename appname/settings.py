@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "drf_standardized_errors",
     "corsheaders",
     "django_htmx",
+    "huey.contrib.djhuey",
     "appname.core",
 ]
 
@@ -137,6 +138,7 @@ EMAIL_PORT = env.str("DJANGO_EMAIL_PORT")
 EMAIL_HOST_USER = env.str("DJANGO_EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env.str("DJANGO_EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
+ADMIN_EMAIL = env.str("ADMIN_EMAIL")
 
 if DEBUG:
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
@@ -268,6 +270,19 @@ SPECTACULAR_SETTINGS = {
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_URLS_REGEX = r"^/api/.*$"
 
+# HUEY
+
+HUEY = {
+    "huey_class": "huey.PriorityRedisExpireHuey",
+    "url": env.str("REDIS_URL", default="redis://127.0.0.1:6379?db=1"),
+}
+
+# Set to True to bypass redis in development
+HUEY_DEV = env.bool("HUEY_DEV", default=True)
+if not HUEY_DEV and DEBUG:
+    HUEY["immediate_use_memory"] = False
+    HUEY["immediate"] = False
+
 # Shell plus from django-extensions
 
 SHELL_PLUS = "ipython"
@@ -322,6 +337,10 @@ LOGGING = {
             "handlers": ["json_console"],
             "level": "INFO",
         },
+        "huey": {
+            "handlers": ["json_console"],
+            "level": "INFO",
+        },
         "core": {
             "handlers": ["json_console"],
             "level": "INFO",
@@ -349,6 +368,11 @@ if DEBUG:
         "handlers": ["rich_console", "flat_line_file"],
         "level": "INFO",
     }
+    LOGGING["loggers"]["huey"] = {
+        "handlers": ["rich_console", "flat_line_file"],
+        "level": "INFO",
+    }
+    # Uncomment to log SQL statements
     # LOGGING["loggers"]["django.db.backends"] = {
     #     "handlers": ["sql_line_file"],
     #     "level": "DEBUG"
