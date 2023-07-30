@@ -7,19 +7,25 @@
 
   handlers:
     - name: restart caddy
-      service: name=caddy state=restarted
+      service: name=caddy state=restarted enabled=true
 
     - name: restart postgres
-      service: name=postgresql state=restarted
+      service: name=postgresql state=restarted enabled=true
 
     - name: restart redis
-      service: name=redis state=restarted
+      service: name=redis state=restarted enabled=true
 
     - name: restart app
-      systemd: "name={{ app_name }} state=restarted daemon_reload=yes"
+      systemd: "name={{ app_name }} state=restarted enabled=true daemon_reload=yes"
+
+    - name: reload app
+      systemd: "name={{ app_name }} state=reloaded enabled=true"
 
     - name: restart queue
-      systemd: "name={{ app_name }}_queue state=restarted daemon_reload=yes"
+      systemd: "name={{ app_name }}_queue state=restarted enabled=true daemon_reload=yes"
+
+    - name: restart journal
+      service: name=systemd-journald state=restarted enabled=true
 
   pre_tasks:
     - name: "Install system packages"
@@ -31,12 +37,15 @@
         - postgresql-server
         - redis
         - rsync
+        - jq
+        - bat
 
     - name: "Install Python packages"
       pip: "name={{ item }}  state=present"
       with_items:
         - psycopg2-binary # Required by ansible to create pg db/user
         - poetry
+        - tiptop
 
   tasks:
     # System
@@ -69,14 +78,17 @@
         group="caddy"
         mode="u+rwx,g=rx"
 
-    # System | Log directories
+    # System | System logs configuration
 
-    - name: "Create gunicorn logs dir"
-      file: state=directory
-        path=/var/log/{{ app_name }}
-        owner="{{ project_user }}"
-        group="caddy"
-        mode="u+rwx,g=rx"
+    - name: Limit the total size of journald logs
+      lineinfile:
+        dest: /etc/systemd/journald.conf
+        regexp: ^SystemMaxUse=
+        line: SystemMaxUse=200M
+      notify:
+        - restart journal
+
+    # System | Directories
 
     - name: "Create caddy logs dir"
       file: state=directory
@@ -125,9 +137,12 @@
           }
           {{ domain_name }} {
             log {
-              output file /var/log/caddy/access.log
+              output file /var/log/caddy/access.log {
+                roll_size 50MiB
+                roll_keep 2
+              }
               format filter {
-                wrap console
+                wrap json
                 fields {
                   request>headers>Authorization delete
                 }
@@ -154,9 +169,12 @@
         content: |
           :80 {
             log {
-              output file /var/log/caddy/access.log
+              output file /var/log/caddy/access.log {
+                roll_size 50MiB
+                roll_keep 2
+              }
               format filter {
-                wrap console
+                wrap json
                 fields {
                   request>headers>Authorization delete
                 }
@@ -193,28 +211,18 @@
       with_items:
         - postgresql
 
+    - name: "Create db user"
+      postgresql_user:
+        state: present
+        name: "{{ project_user }}"
+      become: yes
+      become_user: postgres
+
     - name: "Create app database"
       postgresql_db:
         state: present
         name: "{{ db_name }}"
-      become: yes
-      become_user: postgres
-
-    - name: "Create db user"
-      postgresql_user:
-        state: present
-        name: "{{ db_user }}"
-        password: "{{ db_password }}"
-      become: yes
-      become_user: postgres
-
-    - name: "Grant db user access to app db"
-      postgresql_privs:
-        type: database
-        database: "{{ db_name }}"
-        roles: "{{ db_user }}"
-        grant_option: no
-        privs: all
+        owner: "{{ project_user }}"
       become: yes
       become_user: postgres
 
@@ -235,14 +243,20 @@
         force: yes
         recursive: no
         key_file: "{{ git_key_file }}"
+        single_branch: yes
+        version: "{{ app_version | default('master', true) }}"
       delegate_to: localhost
       become: no
       run_once: true
+      tags:
+        - deploy
 
     - name: "Clean sources directory"
       file:
         state: absent
         path: "/srv/{{ app_name }}/"
+      tags:
+        - deploy
 
     - name: "Copy sources to server"
       synchronize:
@@ -256,8 +270,8 @@
           - "--exclude=*.sqlite3"
           - "--exclude=node_modules/"
           - "--exclude=deployment/"
-      notify:
-        - restart app
+      tags:
+        - deploy
 
     # Application | systemd service
 
@@ -273,10 +287,8 @@
           User={{ project_user }}
           Group=caddy
           WorkingDirectory=/srv/{{ app_name }}
-          ExecReload=/bin/kill -HUP $MAINPID
-          ExecStart=/usr/local/bin/poetry run gunicorn appname.wsgi:application --workers 2 --bind unix:/var/run/{{ app_name }}/app.sock --access-logfile /var/log/{{ app_name }}/gunicorn_access_log.txt --error-logfile /var/log/{{ app_name }}/gunicorn_error_log.txt
-          #Restart=on-failure
-          #RestartSec=5s
+          ExecReload=/usr/local/bin/poetry run /bin/kill -s HUP $MAINPID
+          ExecStart=/usr/local/bin/poetry run gunicorn sidewinderdeploy.wsgi:application --workers 2 --bind unix:/var/run/{{ app_name }}/app.sock --capture-output
           KillMode=mixed
           TimeoutStopSec=5
           LimitNOFILE=4096
@@ -288,7 +300,6 @@
         mode: "a+r"
       notify:
         - restart app
-        - restart caddy
 
     - name: "Setup queue service"
       copy:
@@ -308,6 +319,8 @@
           WantedBy=multi-user.target
         dest: /etc/systemd/system/{{ app_name }}_queue.service
         mode: "a+r"
+      notify:
+        - restart queue
 
     # Application | .env
 
@@ -329,14 +342,13 @@
           DJANGO_EMAIL_HOST_USER={{ django_email_host_user }}
           DJANGO_EMAIL_HOST_PASSWORD={{ django_email_host_password }}
           ALLAUTH_ACCOUNT_EMAIL_SUBJECT_PREFIX={{ allauth_account_email_subject_prefix }}
-          DJ_DATABASE_CONN_STRING=postgres:///{{ app_name }}
+          DJ_DATABASE_CONN_STRING=postgres:///{{ db_name }}
           ADMIN_EMAIL={{ admin_email }}
         dest: "/srv/{{ app_name }}/.env"
         owner: "{{ project_user }}"
         mode: "u+r"
-      notify:
-        - restart app
-        - restart queue
+      tags:
+        - deploy
 
     # Application | install dependencies
 
@@ -348,6 +360,8 @@
         chdir: "/srv/{{ app_name }}/"
         cmd: "poetry install --only main"
       become_user: "{{ project_user }}"
+      tags:
+        - deploy
 
     # Application | copy static files
 
@@ -356,6 +370,8 @@
       args:
         chdir: /srv/{{ app_name }}/
       become_user: "{{ project_user }}"
+      tags:
+        - deploy
 
     # Application | run Django migrations
 
@@ -370,3 +386,8 @@
       args:
         chdir: /srv/{{ app_name }}/
       become_user: "{{ project_user }}"
+      tags:
+        - deploy
+      notify:
+        - reload app
+        - restart queue

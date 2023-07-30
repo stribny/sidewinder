@@ -3,8 +3,6 @@ project_name: Sidewinder
 project_user: sidewinder
 app_name: sidewinder
 domain_name: X.X.X.X
-db_user: sidewinder
-db_password: sidewinder
 db_name: sidewinder
 git_url: git@github.com:stribny/sidewinder.git
 git_key_file: /path/to/.ssh/id_rsa

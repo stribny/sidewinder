@@ -43,7 +43,6 @@ At the minimum to run a successful test deployment you will need to change:
 
 You should also change all passwords:
 
-- `db_password`
 - `django_secret_key`
 
 And set email server settings:
@@ -86,10 +85,12 @@ ssh root@X.X.X.X
 and run:
 
 ```
-cd /srv/sidewinder
-su sidewinder
+cd /srv/{{ app_name }}
+su {{ project_user }}
 poetry run ./manage.py createsuperuser
 ```
+
+Replace `{{ app_name }}` and `{{ project_user }}` with values that you have set in the `myvars.yml` file.
 
 ## Final steps
 
