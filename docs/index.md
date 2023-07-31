@@ -1,7 +1,7 @@
 # Sidewinder
 
 <figure markdown>
-  ![Sidewinder](sidewinder.png){ width="300" }
+  ![Sidewinder](sidewinder.png){ width="200" }
   <figcaption></figcaption>
 </figure>
 
