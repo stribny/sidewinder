@@ -2,7 +2,7 @@
 
 > Configured Django on your own server in 10 minutes.
 
-<p align="center"><img src='docs/sidewinder.png'/></p>
+<p align="center"><img width="200" src='docs/sidewinder.png'/></p>
 
 **Sidewinder** is an open-source [Django](https://www.djangoproject.com/) starter kit that focuses on good defaults, developer experience, and deployment. Also, [a snake](https://en.wikipedia.org/wiki/Crotalus_cerastes).
 
