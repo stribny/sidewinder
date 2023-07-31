@@ -1,6 +1,8 @@
 site_name: Sidewinder
 theme:
   name: material
+  palette:
+    primary: black
   icon:
     repo: fontawesome/brands/github
 markdown_extensions:
