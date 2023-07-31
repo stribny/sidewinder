@@ -9,11 +9,6 @@
 
 You can start a new Django project without worrying about the correct project structure, or what development and testing tools to install and how to configure them. You can also deploy your new project right away with provided Ansible playbook in a few minutes.
 
-!!! warning
-
-    Sidewinder is under development. Follow [@stribny](https://twitter.com/stribny) for updates.
-
-
 ## Philosophy
 
 Sidewinder is opinionated to provide smooth experience from starting a new project to deploying it on a single Virtual Private Server (VPS). It is ideal for indie hackers, educators, students and the like.
@@ -29,13 +24,13 @@ Sidewinder is opinionated to provide smooth experience from starting a new proje
 ### Authentication
 
 - Custom `User` model to allow future extensibility
-- Configured [django-allauth](https://github.com/pennersr/django-allauth) for email login and easy extensibility
+- Configured [django-allauth](https://github.com/pennersr/django-allauth) for email login and 3rd party authentication
 - Stronger password hashing with [argon2-cffi](https://github.com/hynek/argon2-cffi)
 
 ### Frontend
 
 - It is expected that you bring your own CSS/CSS framework
-- Basic one-file CSS to style authentication-related and example pages
+- Basic one-file CSS is included to style authentication-related and example pages
 - Configured [htmx](https://htmx.org/) for smoother frontend interactions
 
 ### HTTP APIs
