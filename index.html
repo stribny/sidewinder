@@ -440,8 +440,36 @@
   
   
     <li class="md-nav__item">
+      <a href="howto/provisioning/" class="md-nav__link">
+        Server provisioning
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="howto/deployment/" class="md-nav__link">
         Deployment
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="howto/server-management/" class="md-nav__link">
+        Server management
       </a>
     </li>
   
@@ -632,10 +660,6 @@
 </figure>
 <p><strong>Sidewinder</strong> is an open-source <a href="https://www.djangoproject.com/">Django</a> starter kit that focuses on good defaults, developer experience, and deployment. Also, <a href="https://en.wikipedia.org/wiki/Crotalus_cerastes">a snake</a>.</p>
 <p>You can start a new Django project without worrying about the correct project structure, or what development and testing tools to install and how to configure them. You can also deploy your new project right away with provided Ansible playbook in a few minutes.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Sidewinder is under development. Follow <a href="https://twitter.com/stribny">@stribny</a> for updates.</p>
-</div>
 <h2 id="philosophy">Philosophy</h2>
 <p>Sidewinder is opinionated to provide smooth experience from starting a new project to deploying it on a single Virtual Private Server (VPS). It is ideal for indie hackers, educators, students and the like.</p>
 <h2 id="main-features">Main features</h2>
@@ -648,13 +672,13 @@
 <h3 id="authentication">Authentication</h3>
 <ul>
 <li>Custom <code>User</code> model to allow future extensibility</li>
-<li>Configured <a href="https://github.com/pennersr/django-allauth">django-allauth</a> for email login and easy extensibility</li>
+<li>Configured <a href="https://github.com/pennersr/django-allauth">django-allauth</a> for email login and 3rd party authentication</li>
 <li>Stronger password hashing with <a href="https://github.com/hynek/argon2-cffi">argon2-cffi</a></li>
 </ul>
 <h3 id="frontend">Frontend</h3>
 <ul>
 <li>It is expected that you bring your own CSS/CSS framework</li>
-<li>Basic one-file CSS to style authentication-related and example pages</li>
+<li>Basic one-file CSS is included to style authentication-related and example pages</li>
 <li>Configured <a href="https://htmx.org/">htmx</a> for smoother frontend interactions</li>
 </ul>
 <h3 id="http-apis">HTTP APIs</h3>

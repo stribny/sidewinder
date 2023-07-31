@@ -62,7 +62,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#deployment" class="md-skip">
+        <a href="#application-deployment" class="md-skip">
           Skip to content
         </a>
       
@@ -330,6 +330,20 @@
               
   
   
+  
+    <li class="md-nav__item">
+      <a href="../provisioning/" class="md-nav__link">
+        Server provisioning
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
     
   
   
@@ -366,51 +380,29 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#get-a-vps" class="md-nav__link">
-    Get a VPS
+  <a href="#deploy-command" class="md-nav__link">
+    Deploy command
+  </a>
+  
+    <nav class="md-nav" aria-label="Deploy command">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deploying-a-specific-version" class="md-nav__link">
+    Deploying a specific version
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#install-ansible" class="md-nav__link">
-    Install Ansible
+        
+          <li class="md-nav__item">
+  <a href="#considerations" class="md-nav__link">
+    Considerations
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#configure-hostsini" class="md-nav__link">
-    Configure hosts.ini
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#configure-varsyml" class="md-nav__link">
-    Configure vars.yml
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#run-ansible-playbook" class="md-nav__link">
-    Run Ansible playbook
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#create-a-superuser" class="md-nav__link">
-    Create a superuser
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#final-steps" class="md-nav__link">
-    Final steps
-  </a>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -418,6 +410,20 @@
   
 </nav>
       
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../server-management/" class="md-nav__link">
+        Server management
+      </a>
     </li>
   
 
@@ -504,51 +510,29 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#get-a-vps" class="md-nav__link">
-    Get a VPS
+  <a href="#deploy-command" class="md-nav__link">
+    Deploy command
+  </a>
+  
+    <nav class="md-nav" aria-label="Deploy command">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deploying-a-specific-version" class="md-nav__link">
+    Deploying a specific version
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#install-ansible" class="md-nav__link">
-    Install Ansible
+        
+          <li class="md-nav__item">
+  <a href="#considerations" class="md-nav__link">
+    Considerations
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#configure-hostsini" class="md-nav__link">
-    Configure hosts.ini
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#configure-varsyml" class="md-nav__link">
-    Configure vars.yml
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#run-ansible-playbook" class="md-nav__link">
-    Run Ansible playbook
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#create-a-superuser" class="md-nav__link">
-    Create a superuser
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#final-steps" class="md-nav__link">
-    Final steps
-  </a>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -572,75 +556,25 @@
   </a>
 
 
-<h1 id="deployment">Deployment</h1>
+<h1 id="application-deployment">Application deployment</h1>
+<p>If you haven't, make sure to <a href="../provisioning/">provision the server</a> first.</p>
+<p>The server provisioning from the previous step already deployed our first version of the application. However, for future deployments we don't want to run the whole provisioning playbook  (although it should be safe to do so with a small time window when the server won't be available to serve requests). For this purpose there is a separate Make target called <code>deploy</code>.</p>
+<h2 id="deploy-command">Deploy command</h2>
+<p>To deploy a master branch when application has been updated:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>deployment/ansible
+make<span class="w"> </span>deploy
+</code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Deployment documentation is in progress.</p>
+<p>Any content you want to be deployed has to be pushed to the remote Git repository.</p>
 </div>
-<h2 id="get-a-vps">Get a VPS</h2>
-<p>The first step is to get your own virtual private server. You can get one on Digital Ocean which can prepare a VPS with your public SSH key in place, so that you don't have to worry much about SSH configuration besides getting a public/private key pair. As the operating system, choose Fedora.</p>
-<p>You can support Sidewinder by signing up with the affiliate link below (you will get $200 credit you can use in 60 days):</p>
-<p><a href="https://www.digitalocean.com/?refcode=04e320071eab&amp;utm_campaign=Referral_Invite&amp;utm_medium=Referral_Program&amp;utm_source=badge"><img alt="DigitalOcean Referral Badge" src="https://web-platforms.sfo2.digitaloceanspaces.com/WWW/Badge%203.svg" /></a></p>
-<p>Sidewinder is prepared to be deployed to a VPS that has a static IP address, but also to a custom domain with https. In that case, you will also need to register a domain and point it your VPS.</p>
-<p>Before proceeding, make sure that you have a running private virtual server that you can access with <code>SSH</code>.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Sidewinder is prepared to be run on Fedora operating system. When creating your VPS, make sure you choose Fedora Linux distribution as your OS.</p>
-</div>
-<h2 id="install-ansible">Install Ansible</h2>
-<p>The next step is to install <a href="https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html">Ansible</a>.</p>
-<h2 id="configure-hostsini">Configure hosts.ini</h2>
-<p>Copy <code>deployment/ansible/hosts.ini</code> to  <code>deployment/ansible/myhosts.ini</code> and set <code>ansible_user</code> to be the name of your server account (like <code>root</code>) and set <code>ansible_host</code> to the IP address of your server.</p>
-<h2 id="configure-varsyml">Configure vars.yml</h2>
-<p>Now it's time to configure your server settings. Copy <code>deployment/ansible/vars.yml</code> to <code>deployment/ansible/myvars.yml</code>. You will eventually want to configure each property in the file for your production server. </p>
-<p>At the minimum to run a successful test deployment you will need to change:</p>
-<ul>
-<li><code>project_name</code> to be the name of your application, website or app</li>
-<li><code>domain_name</code> to point to the server's IP address or your domain</li>
-<li><code>git_url</code> to your repository fork of Sidewinder</li>
-<li><code>git_key_file</code> to point to your private SSH key file</li>
-<li><code>django_ssl</code> set to <code>1</code> if you are using a domain (<code>0</code> otherwise)</li>
-</ul>
-<p>You should also change all passwords:</p>
-<ul>
-<li><code>db_password</code></li>
-<li><code>django_secret_key</code></li>
-</ul>
-<p>And set email server settings:</p>
-<ul>
-<li><code>django_default_from_email</code></li>
-<li><code>django_server_email</code></li>
-<li><code>django_email_host</code></li>
-<li><code>django_email_port</code></li>
-<li><code>django_email_host_user</code></li>
-<li><code>django_email_host_password</code></li>
-<li><code>admin_email</code></li>
-</ul>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>It is important to point <code>git_url</code> to your repository and to commit and push all application changes you have made to the repository. That's because our deployment Ansible playbook will download and deploy the exact version of the application that will be at the <code>git_url</code>.</p>
-</div>
-<h2 id="run-ansible-playbook">Run Ansible playbook</h2>
-<p>The provided Ansible playbook will download a copy of your Git repository and deploy the last committed version to the specified server.</p>
-<div class="highlight"><pre><span></span><code>cd deployment/ansible 
-ansible-playbook provision.yml -i myhosts.ini --extra-vars &quot;@myvars.yml&quot;
+<h3 id="deploying-a-specific-version">Deploying a specific version</h3>
+<p>We can identify a specific application version using a git branch (like <code>master</code>), git tag (like <code>v1.0</code>), commit hash, or any other valid identifier. To deploy such specific application version we can set an environment variable called <code>APP_VERSION</code> to such identifier:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># inside deployment/ansible </span>
+<span class="nv">APP_VERSION</span><span class="o">=</span><span class="s2">&quot;v1.0&quot;</span><span class="w"> </span>make<span class="w"> </span>deploy
 </code></pre></div>
-<p>Wait until the deployment is finished.</p>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>Consider using <a href="https://mitogen.networkgenomics.com/ansible_detailed.html">Mitogen for Ansible</a> to make Ansible faster.</p>
-</div>
-<h2 id="create-a-superuser">Create a superuser</h2>
-<p>SSH to your server (replace <code>X.X.X.X</code> with the server's IP address):</p>
-<div class="highlight"><pre><span></span><code>ssh root@X.X.X.X
-</code></pre></div>
-<p>and run:</p>
-<div class="highlight"><pre><span></span><code>cd /srv/sidewinder
-su sidewinder
-poetry run ./manage.py createsuperuser
-</code></pre></div>
-<h2 id="final-steps">Final steps</h2>
-<p>Log in to your Django admin at <code>ipaddress-or-domain/dj-admin/</code> and create a flat page for URL <code>/terms/</code>.</p>
+<h3 id="considerations">Considerations</h3>
+<p>Our Ansible playbook will push all new code to the server, run database migrations, and reloads or restarts services (see <code>deployment/ansible/provision.yml</code> for details). It is important that the new version of the application is compatible in the database schema and migration files with what is already in the database on the server. That means you shoudn't try to go back to previous versions and only move forward in your migrations.</p>
 
 
 
@@ -661,7 +595,7 @@ poetry run ./manage.py createsuperuser
     <nav class="md-footer__inner md-grid" aria-label="Footer" >
       
         
-        <a href="../testing/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Testing" rel="prev">
+        <a href="../provisioning/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Server provisioning" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -670,20 +604,20 @@ poetry run ./manage.py createsuperuser
               <span class="md-footer__direction">
                 Previous
               </span>
-              Testing
+              Server provisioning
             </div>
           </div>
         </a>
       
       
         
-        <a href="../../reference/commands/" class="md-footer__link md-footer__link--next" aria-label="Next: Commands" rel="next">
+        <a href="../server-management/" class="md-footer__link md-footer__link--next" aria-label="Next: Server management" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Commands
+              Server management
             </div>
           </div>
           <div class="md-footer__button md-icon">

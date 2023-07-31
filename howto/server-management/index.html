@@ -13,7 +13,7 @@
     
     
       
-        <title>Frontend - Sidewinder</title>
+        <title>Server management - Sidewinder</title>
       
     
     
@@ -62,7 +62,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#frontend" class="md-skip">
+        <a href="#server-management" class="md-skip">
           Skip to content
         </a>
       
@@ -95,7 +95,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Frontend
+              Server management
             
           </span>
         </div>
@@ -302,59 +302,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Frontend
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../frontend/" class="md-nav__link">
         Frontend
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#basic-stylesheets-and-templates" class="md-nav__link">
-    Basic stylesheets and templates
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#htmx" class="md-nav__link">
-    HTMX
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -406,11 +358,21 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../server-management/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Server management
       </a>
+      
     </li>
   
 
@@ -490,28 +452,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#basic-stylesheets-and-templates" class="md-nav__link">
-    Basic stylesheets and templates
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#htmx" class="md-nav__link">
-    HTMX
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -524,19 +464,31 @@
                 
                   
 
-  <a href="https://github.com/stribny/sidewinder/edit/master/docs/howto/frontend.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/stribny/sidewinder/edit/master/docs/howto/server-management.md" title="Edit this page" class="md-content__button md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
-<h1 id="frontend">Frontend</h1>
-<h2 id="basic-stylesheets-and-templates">Basic stylesheets and templates</h2>
-<p>By default, there is a basic CSS file (<code>static/css/base.css</code>) that styles a few existing pages, mainly the <code>django-allauth</code> authentication pages.</p>
-<p>You can build upon this CSS file or replace it. There is no CSS framework included in Sidewinder.</p>
-<p><code>django-allauth</code> templates are provided in the <code>templates</code> folder for customization, together with a custom form rendering templates (<code>templates/forms</code> via <code>CustomFormRenderer</code>) so that checkboxes are rendered with labels displayed after them.</p>
-<h2 id="htmx">HTMX</h2>
-<p>HTMX is loaded in the <code>_base.html</code> template together with configured CSRF token (<code>&lt;body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'&gt;</code>).</p>
+<h1 id="server-management">Server management</h1>
+<p>There are some neat commands in the provided <code>deployment/ansible/Makefile</code> that you can run to help you manage your new server:</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Make sure you configured everything first (see <a href="../provisioning/">server provisioning</a>).</p>
+</div>
+<ul>
+<li><code>make provision</code> - Provisions a VPS from scratch (use <code>APP_VERSION</code> env var for a specific version)</li>
+<li><code>make deploy</code> - Deploys a new application version (use <code>APP_VERSION</code> env var for a specific version)</li>
+<li><code>make login</code> - Gives you a remote SSH shell to your server</li>
+<li><code>make status</code> - Gives you status of all important services running (application, database, Redis, queue, webserver)</li>
+<li><code>make appservicelog</code> - Prints the last application service logs</li>
+<li><code>make queueservicelog</code>- Prints the last queue service logs</li>
+<li><code>make webserverservicelog</code>- Prints the last web server service logs</li>
+<li><code>make webserveraccesslog</code> - Prints the last web server access logs</li>
+<li><code>make monitor</code> - Starts a system monitor on the server (to check on system usage like memory, disk, CPU, etc.)</li>
+<li><code>make createsuperuser</code> - Creates a superuser on the server</li>
+<li><code>make upgrade</code> - Updates all operating system packages and restarts the server</li>
+</ul>
 
 
 
@@ -557,7 +509,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer" >
       
         
-        <a href="../admin/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Administration" rel="prev">
+        <a href="../deployment/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Deployment" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -566,20 +518,20 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              Administration
+              Deployment
             </div>
           </div>
         </a>
       
       
         
-        <a href="../testing/" class="md-footer__link md-footer__link--next" aria-label="Next: Testing" rel="next">
+        <a href="../../reference/commands/" class="md-footer__link md-footer__link--next" aria-label="Next: Commands" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Testing
+              Commands
             </div>
           </div>
           <div class="md-footer__button md-icon">
