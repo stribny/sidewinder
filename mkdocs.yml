@@ -22,6 +22,8 @@ nav:
       - Administration: 'howto/admin.md'
       - Frontend: 'howto/frontend.md'
       - Testing: 'howto/testing.md'
+      - Server provisioning: 'howto/provisioning.md'
       - Deployment: 'howto/deployment.md'
+      - Server management: 'howto/server-management.md'
     - Reference: 
       - Commands: 'reference/commands.md'
