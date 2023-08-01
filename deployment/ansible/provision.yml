@@ -288,7 +288,7 @@
           Group=caddy
           WorkingDirectory=/srv/{{ app_name }}
           ExecReload=/usr/local/bin/poetry run /bin/kill -s HUP $MAINPID
-          ExecStart=/usr/local/bin/poetry run gunicorn sidewinderdeploy.wsgi:application --workers 2 --bind unix:/var/run/{{ app_name }}/app.sock --capture-output
+          ExecStart=/usr/local/bin/poetry run gunicorn appname.wsgi:application --workers 2 --bind unix:/var/run/{{ app_name }}/app.sock --capture-output
           KillMode=mixed
           TimeoutStopSec=5
           LimitNOFILE=4096

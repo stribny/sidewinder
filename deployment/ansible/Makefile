@@ -19,8 +19,8 @@ deploy:
 	ansible-playbook provision.yml -i myhosts.ini --tags deploy --extra-vars "@myvars.yml" --extra-vars "app_version=$(APP_VERSION)"
 
 status:
-	ssh -t $(TARGET) "systemctl status sidewinder --no-pager"
-	ssh -t $(TARGET) "systemctl status sidewinder_queue --no-pager"
+	ssh -t $(TARGET) "systemctl status $(APP_NAME) --no-pager"
+	ssh -t $(TARGET) "systemctl status $(APP_NAME)_queue --no-pager"
 	ssh -t $(TARGET) "systemctl status postgresql --no-pager"
 	ssh -t $(TARGET) "systemctl status redis --no-pager"
 	ssh -t $(TARGET) "systemctl status caddy --no-pager"
