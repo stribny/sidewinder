@@ -446,8 +446,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#backend" class="md-nav__link">
-    Backend
+  <a href="#django" class="md-nav__link">
+    Django
   </a>
   
 </li>
@@ -501,8 +501,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#backend" class="md-nav__link">
-    Backend
+  <a href="#django" class="md-nav__link">
+    Django
   </a>
   
 </li>
@@ -535,15 +535,45 @@
 
 
 <h1 id="commands">Commands</h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>This page is under construction.</p>
-</div>
+<h2 id="django">Django</h2>
+<p>You can display all available commands from all Django apps using <code>./manage.py</code>. Refer
+to Django and each Django app documentation for more information. </p>
 <p>All commands here should be run inside the Poetry's virtual environment.</p>
-<h2 id="backend">Backend</h2>
+<p>Some useful commands:</p>
 <ul>
-<li><code>./manage.py runserver</code> - Start Django development server</li>
-<li><code>./manage.py run_huey</code> = Starts Huey consumers</li>
+<li><code>./manage.py runserver</code> - Starts Django development server</li>
+<li><code>./manage.py fresh</code> - Resets the database and creates a superuser (see <code>fresh.py</code>)</li>
+<li><code>./manage.py makemigrations</code> - Generates migrations based on model changes</li>
+<li><code>./manage.py migrate</code> - Runs unapplied migrations (syncs the database schema after generating new migration files)</li>
+<li><code>./manage.py sqlmigrate &lt;appname&gt; &lt;migrationfilename&gt;</code> - Examines a migration file by showing what the generated SQL looks like</li>
+<li><code>./manage.py sh</code> - Starts enhanced Python shell with auto-imported models and Django context (IPython is default in Sidewinder)</li>
+<li><code>./manage.py dbshell</code> - Starts db shell (like PostgreSQL's psql)</li>
+<li><code>./manage.py run_huey</code> - Starts Huey consumers (this way you can test huey consumers using Redis locally)</li>
+<li><code>./manage.py print_settings</code> - Prints all Django settings</li>
+<li><code>./manage.py diffsettings</code> - See all Django settings that differ from Django's defaults</li>
+<li><code>./manage.py show_urls</code> - Shows all urlpatterns</li>
+<li><code>./manage.py show_template_tags</code> - Displays template tags and filters available in the current project</li>
+<li><code>./manage.py list_signals</code> - Prints all defined Django signals</li>
+<li><code>./manage.py list_model_info</code> - Prints all models, their attributes and methods</li>
+<li><code>./manage.py notes</code> - Shows all annotations like TODO, FIXME, BUG, HACK, WARNING, NOTE or XXX in the py and HTML files</li>
+<li><code>./manage.py inspectdb</code> - Generates Django models from the database</li>
+<li><code>./manage.py spectacular</code> - Prints generated OpenAPI schema</li>
+<li><code>./manage.py startapp &lt;name&gt; &lt;projectname&gt;/&lt;name&gt;</code> - Creates a new Django app inside "projectname" folder (what you chose for renaming the project)</li>
+<li><code>./manage.py createsuperuser</code> - Creates a new super user</li>
+<li><code>./manage.py changepassword &lt;username&gt;</code> - Changes a password for a given user</li>
+<li><code>./manage.py generate_secret_key</code> - Generates Django secret key (useful when needing one for production)</li>
+<li><code>./manage.py admin_generator &lt;appname&gt;</code> - Generates the contents of admin.py for a given Django app</li>
+<li><code>./manage.py describe_form &lt;appname.ModelName&gt;</code> - Generates Django form based on a model</li>
+<li><code>./manage.py drf_create_token &lt;username&gt;</code> - Generates an API token for a given user</li>
+<li><code>./manage.py makemessages --locale=&lt;locale&gt;</code> (or <code>--all</code>) - Creates or updates messages files for translations</li>
+<li><code>./manage.py compilemessages</code> - Compiles .po files created by makemessages to .mo files</li>
+<li><code>./manage.py clear_cache</code> - Clears Django cache</li>
+<li><code>./manage.py clean_pyc</code> - Removes .pyc files from the project </li>
+<li><code>./manage.py check</code> - Runs Django check list</li>
+<li><code>./manage.py validate_templates</code> - Validates Django templates</li>
+<li><code>./manage.py unreferenced_files</code> - Lists media files that are not referenced anymore by file fields</li>
+<li><code>./manage.py sendtestemail &lt;email@address&gt;</code> - Sends a test email to the provided email address</li>
+<li><code>./manage.py raise_test_exception</code> - Raises a test exception. Useful for testing error reporters such as Sentry</li>
 </ul>
 <h2 id="documentation">Documentation</h2>
 <p>Feel free to modify Sidewinder's documentation site in the <code>docs</code> folder for your needs.</p>
