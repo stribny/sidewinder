@@ -24,6 +24,7 @@ nav:
       - Administration: 'howto/admin.md'
       - Frontend: 'howto/frontend.md'
       - Testing: 'howto/testing.md'
+      - Create a Django app: 'howto/create-app.md'
       - Server provisioning: 'howto/provisioning.md'
       - Deployment: 'howto/deployment.md'
       - Server management: 'howto/server-management.md'
