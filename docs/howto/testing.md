@@ -17,5 +17,5 @@ pytest
 ## Run UI tests
 
 ```bash
-pytest -k "ui"
+pytest -m ui
 ```
