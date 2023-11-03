@@ -51,11 +51,22 @@ DJANGO_EMAIL_HOST_USER=
 DJANGO_EMAIL_HOST_PASSWORD=
 ```
 
+!!! info
+
+    The default email server values from `.env-example` refer to the local [Mailhog](https://github.com/mailhog/MailHog) instance that you can use to check outgoing email in development environment. If you 
+    want to test emails with MailHog you will need to set `SMTP_DEV=1` as env var and start local Mailhog with `docker compose up`.
+
 Replace to set default email prefix and origin address:
 
 ```ini
 DJANGO_DEFAULT_FROM_EMAIL=sidewinder@example.com
 ALLAUTH_ACCOUNT_EMAIL_SUBJECT_PREFIX=
+```
+
+Replace to use SMTP backend instead of Django console email backend in development:
+
+```ini
+SMTP_DEV=1
 ```
 
 ### Database

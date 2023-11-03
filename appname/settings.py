@@ -138,9 +138,13 @@ EMAIL_PORT = env.str("DJANGO_EMAIL_PORT")
 EMAIL_HOST_USER = env.str("DJANGO_EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env.str("DJANGO_EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
+SMTP_DEV = env.bool("SMTP_DEV")
 ADMIN_EMAIL = env.str("ADMIN_EMAIL")
 
-if DEBUG:
+if DEBUG and SMTP_DEV:
+    EMAIL_USE_TLS = False
+
+if DEBUG and not SMTP_DEV:
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 if DEBUG:
