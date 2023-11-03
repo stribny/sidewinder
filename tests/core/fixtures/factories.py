@@ -13,7 +13,8 @@ class UserFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = User
 
-    email = "test@example.com"
+    email = factory.Faker("email")
+    username = email
     password = make_password(DEFAULT_PASSWORD)
 
 
