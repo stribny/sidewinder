@@ -2,17 +2,13 @@
 
 !!! info
 
-    There is currently no project generator. To start using Sidewinder, clone the [repository](https://github.com/stribny/sidewinder) and make configuration
-    changes in your local copy.
+    Sidewinder is set up as a template on GitHub which means you can easily create your own GitHub repository by clicking on the big green "Use this template" button on the repository homepage. This will ensure you have your own clean repository without previous commits and without any link to the original project.
 
-## Clone the repository
+## Clone the project locally
 
-!!! tip
+After you create your own GitHub repository from template or by [forking the repository](https://docs.github.com/en/get-started/quickstart/fork-a-repo), clone it locally from your repository URL.
 
-    Feel free to [fork the repository](https://docs.github.com/en/get-started/quickstart/fork-a-repo) first so that you don't have to
-    set up Git remotes later.
-
-You can clone Sidewinder from the official repository or your fork:
+Alternatively just clone the project directly from the main repo:
 
 ```
 git clone https://github.com/stribny/sidewinder
