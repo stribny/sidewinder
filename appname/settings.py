@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     "corsheaders",
     "django_htmx",
     "huey.contrib.djhuey",
+    "bx_django_utils",
+    "huey_monitor",
     "appname.core",
 ]
 

@@ -25,6 +25,7 @@ django-cors-headers = "4.2.0"
 rich = "13.5.2"
 huey = "2.4.5"
 redis = "4.6.0"
+django-huey-monitor = "^0.7.1"
 
 [tool.poetry.group.dev.dependencies]
 django-browser-reload = "1.11.0"

@@ -226,6 +226,33 @@ jupyter = ["ipython (>=7.8.0)", "tokenize-rt (>=3.2.0)"]
 uvloop = ["uvloop (>=0.15.2)"]
 
 [[package]]
+name = "bx-django-utils"
+version = "67"
+description = "Various Django utility functions"
+optional = false
+python-versions = ">=3.9,<4.0.0"
+files = [
+    {file = "bx_django_utils-67-py3-none-any.whl", hash = "sha256:8740fdaf98ed68a8ddb3af025d9b4f87c99101405898ddca86810b0c384b215a"},
+    {file = "bx_django_utils-67.tar.gz", hash = "sha256:aca0ae5c91a62e4f594172b8c43468c701516f99ae50d99412d5299ba375df03"},
+]
+
+[package.dependencies]
+bx_py_utils = ">=85"
+django = ">=3.2"
+python-stdnum = "*"
+
+[[package]]
+name = "bx-py-utils"
+version = "88"
+description = "Various Python utility functions"
+optional = false
+python-versions = ">=3.9,<4.0.0"
+files = [
+    {file = "bx_py_utils-88-py3-none-any.whl", hash = "sha256:3a6f4eeef6abcac834b2c1ea4c5211130fd930a064aa0baabddd7c2bd00e38ac"},
+    {file = "bx_py_utils-88.tar.gz", hash = "sha256:32fbc7e9ff3dfb0a817c80fb1d165ec559643dab59c0be549e646acbf8223b75"},
+]
+
+[[package]]
 name = "certifi"
 version = "2023.7.22"
 description = "Python package for providing Mozilla's CA Bundle."
@@ -722,6 +749,29 @@ files = [
 
 [package.dependencies]
 Django = ">=3.2"
+
+[[package]]
+name = "django-huey-monitor"
+version = "0.7.1"
+description = "Django based tool for monitoring huey task queue: https://github.com/coleifer/huey"
+optional = false
+python-versions = "<4,>=3.9"
+files = [
+    {file = "django-huey-monitor-0.7.1.tar.gz", hash = "sha256:c7d2a8c83467754ca32feb75f3af9c93cdbb13d3f332d70ab4132a06aee96ea1"},
+    {file = "django_huey_monitor-0.7.1-py3-none-any.whl", hash = "sha256:65a26c9d3f75c7a1bf95e023f2cb5c7eb88cf1fdc8c9cc0271f6ec0fc0776523"},
+]
+
+[package.dependencies]
+bx-django-utils = "*"
+bx-py-utils = "*"
+django = "*"
+huey = "*"
+
+[package.extras]
+dev = ["EditorConfig", "autopep8", "codespell", "colorlog", "coverage", "darker[color,flynt,isort]", "django-debug-toolbar", "django-redis", "flake8", "gunicorn", "manage-django-project (>=0.3.0)", "model-bakery", "mypy", "pip-tools", "psycopg2-binary", "pyflakes", "pyupgrade", "requests-mock", "safety", "tblib", "tomli", "tox", "twine"]
+django32 = ["django (>=3.2,<3.3)"]
+django41 = ["django (>=4.1,<4.2)"]
+django42 = ["django (>=4.2,<4.3)"]
 
 [[package]]
 name = "django-ipware"
@@ -2304,6 +2354,22 @@ files = [
 six = ">=1.5"
 
 [[package]]
+name = "python-stdnum"
+version = "1.19"
+description = "Python module to handle standardized numbers and codes"
+optional = false
+python-versions = "*"
+files = [
+    {file = "python-stdnum-1.19.tar.gz", hash = "sha256:133ec82f56390ea74c190569e98f2fb14b869808b1d54785708f22d0fead8b3f"},
+    {file = "python_stdnum-1.19-py2.py3-none-any.whl", hash = "sha256:1b5b401ad3f45b798b0317313b781a433f5d7a5ff2c9feb8054664f76f78644e"},
+]
+
+[package.extras]
+soap = ["zeep"]
+soap-alt = ["suds"]
+soap-fallback = ["PySimpleSOAP"]
+
+[[package]]
 name = "python3-openid"
 version = "3.2.0"
 description = "OpenID support for modern servers and consumers."
@@ -3025,4 +3091,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "ac0350a39cc79b088b9e930b14a4b35dceb175505100057e1329d99a8e109421"
+content-hash = "331f34f3b3008c276e053a5daed6d9d3f9f86a727712963682b0ae412e5b45e1"
