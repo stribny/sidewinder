@@ -43,6 +43,7 @@ Sidewinder is opinionated to provide smooth experience from starting a new proje
 ### Task queue
 
 - [huey](https://github.com/coleifer/huey) for executing background and periodic tasks
+- [django-huey-monitor](https://github.com/boxine/django-huey-monitor) for monitoring huey task queue in Django admin
 
 ### Development Tools
 
