@@ -743,9 +743,17 @@
 <span class="na">DJANGO_EMAIL_HOST_USER</span><span class="o">=</span>
 <span class="na">DJANGO_EMAIL_HOST_PASSWORD</span><span class="o">=</span>
 </code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>The default email server values from <code>.env-example</code> refer to the local <a href="https://github.com/mailhog/MailHog">Mailhog</a> instance that you can use to check outgoing email in development environment. If you 
+want to test emails with MailHog you will need to set <code>SMTP_DEV=1</code> as env var and start local Mailhog with <code>docker compose up</code>.</p>
+</div>
 <p>Replace to set default email prefix and origin address:</p>
 <div class="highlight"><pre><span></span><code><span class="na">DJANGO_DEFAULT_FROM_EMAIL</span><span class="o">=</span><span class="s">sidewinder@example.com</span>
 <span class="na">ALLAUTH_ACCOUNT_EMAIL_SUBJECT_PREFIX</span><span class="o">=</span>
+</code></pre></div>
+<p>Replace to use SMTP backend instead of Django console email backend in development:</p>
+<div class="highlight"><pre><span></span><code><span class="na">SMTP_DEV</span><span class="o">=</span><span class="s">1</span>
 </code></pre></div>
 <h3 id="database">Database</h3>
 <p>Set a connection string to SQLite or PostgreSQL database:</p>
