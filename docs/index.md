@@ -61,7 +61,7 @@ Sidewinder is opinionated to provide smooth experience from starting a new proje
 ### Testing
 
 - [pytest](https://docs.pytest.org) test runner via [pytest-django](https://github.com/pytest-dev/pytest-django)
-- Useful pytest plugins like `pytest-sugar`, `pytest-icdiff`, `pytest-randomly`, `pytest-cov`
+- Useful pytest plugins like `pytest-sugar`, `pytest-icdiff`, `pytest-randomly`, `pytest-xdist`, `pytest-cov`
 - [factoryboy](https://factoryboy.readthedocs.io/en/stable/) for defining fixtures
 - [Faker](https://faker.readthedocs.io/en/master/) for generating fake data
 - [Playwright](https://playwright.dev/) for end-to-end UI testing
