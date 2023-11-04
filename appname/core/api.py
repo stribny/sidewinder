@@ -39,6 +39,7 @@ class AuthTokenView(APIView):
 
 class ProtectedView(APIView):
     permission_classes = [IsAuthenticated]
+    serializer_class = serializers.ProtectedViewSerializer
 
     def get(self, request):
         context = {"message": "Hello, World!"}

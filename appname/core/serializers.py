@@ -8,3 +8,7 @@ class GetTokenSerializer(serializers.Serializer):
 
 class TokenSerializer(serializers.Serializer):
     token = serializers.CharField()
+
+
+class ProtectedViewSerializer(serializers.Serializer):
+    message = serializers.CharField()
