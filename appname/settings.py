@@ -299,25 +299,78 @@ SHELL_PLUS_IMPORTS = [
 
 # Logging
 
+
+def clean_dev_console_processor(logger, method_name, event_dict):
+    """
+    Custom structlog processor to remove unnecessary information
+    for development console to make the output cleaner.
+    """
+
+    event_dict.pop("request_id", None)
+    event_dict.pop("ip", None)
+    event_dict.pop("user_id", None)
+    event_dict.pop("user_agent", None)
+    return event_dict
+
+
+timestamper = structlog.processors.TimeStamper(fmt="iso")
+
+shared_structlog_processors = [
+    structlog.contextvars.merge_contextvars,
+    structlog.stdlib.add_log_level,
+    structlog.stdlib.add_logger_name,
+    timestamper,
+]
+conditional_processors = (
+    [clean_dev_console_processor] if DEBUG else [structlog.processors.format_exc_info]
+)
+shared_structlog_processors += conditional_processors
+
+structlog.configure(
+    processors=[
+        structlog.stdlib.filter_by_level,
+        structlog.stdlib.PositionalArgumentsFormatter(),
+        structlog.processors.StackInfoRenderer(),
+        structlog.processors.UnicodeDecoder(),
+    ]
+    + shared_structlog_processors
+    + [
+        structlog.stdlib.ProcessorFormatter.wrap_for_formatter,
+    ],
+    logger_factory=structlog.stdlib.LoggerFactory(),
+    cache_logger_on_first_use=True,
+)
+
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
     "formatters": {
-        "json_formatter": {
+        "json": {
             "()": structlog.stdlib.ProcessorFormatter,
-            "processor": structlog.processors.JSONRenderer(),
+            "processors": [
+                structlog.stdlib.ProcessorFormatter.remove_processors_meta,
+                structlog.processors.JSONRenderer(),
+            ],
+            "foreign_pre_chain": shared_structlog_processors,
         },
         "plain_console": {
             "()": structlog.stdlib.ProcessorFormatter,
-            "processor": structlog.dev.ConsoleRenderer(),
+            "processors": [
+                structlog.stdlib.ProcessorFormatter.remove_processors_meta,
+                structlog.dev.ConsoleRenderer(),
+            ],
+            "foreign_pre_chain": shared_structlog_processors,
         },
         "key_value": {
             "()": structlog.stdlib.ProcessorFormatter,
-            "processor": structlog.processors.KeyValueRenderer(
-                key_order=["timestamp", "level", "event", "logger"]
-            ),
+            "processors": [
+                structlog.stdlib.ProcessorFormatter.remove_processors_meta,
+                structlog.processors.KeyValueRenderer(
+                    key_order=["timestamp", "level", "event", "logger"]
+                ),
+            ],
+            "foreign_pre_chain": shared_structlog_processors,
         },
-        "rich": {"datefmt": "[%X]"},
     },
     "filters": {
         "require_debug_true": {
@@ -331,79 +384,64 @@ LOGGING = {
         },
         "json_console": {
             "class": "logging.StreamHandler",
-            "formatter": "json_formatter",
+            "formatter": "json",
+        },
+        "json_file": {
+            "class": "logging.handlers.WatchedFileHandler",
+            "formatter": "json",
+            "filename": "logs/json.log",
+        },
+        "flat_file": {
+            "class": "logging.handlers.WatchedFileHandler",
+            "formatter": "key_value",
+            "filename": "logs/flat_file.log",
         },
     },
     "loggers": {
-        "django_structlog": {
+        "root": {
             "handlers": ["json_console"],
+            "level": "INFO",
+        },
+        "django_structlog": {
             "level": "INFO",
         },
         "django": {
+            "level": "INFO",
+        },
+        "django.server": {
             "handlers": ["json_console"],
             "level": "INFO",
+            "propagate": False,
         },
         "huey": {
-            "handlers": ["json_console"],
             "level": "INFO",
         },
-        "core": {
-            "handlers": ["json_console"],
+        "appname": {
             "level": "INFO",
         },
     },
 }
 
 if DEBUG:
-    LOGGING["handlers"]["flat_line_file"] = {
-        "class": "logging.handlers.WatchedFileHandler",
-        "filename": "logs/flat_line.log",
-        "formatter": "key_value",
+    LOGGING["loggers"]["root"] = {
+        "handlers": ["console", "json_file", "flat_file"],
     }
-    LOGGING["handlers"]["sql_line_file"] = {
-        "class": "logging.handlers.WatchedFileHandler",
-        "filename": "logs/flat_line.log",
-        "filters": ["require_debug_true"],
+    LOGGING["loggers"]["django_structlog"] = {
+        "level": "CRITICAL",
     }
-    LOGGING["handlers"]["rich_console"] = {
-        "class": "rich.logging.RichHandler",
-        "formatter": "rich",
-    }
-    LOGGING["loggers"]["django_structlog"]["handlers"] = ["flat_line_file"]
-    LOGGING["loggers"]["django"] = {
-        "handlers": ["rich_console", "flat_line_file"],
+    LOGGING["loggers"]["django.server"] = {
+        "handlers": ["console"],
         "level": "INFO",
     }
-    LOGGING["loggers"]["huey"] = {
-        "handlers": ["rich_console", "flat_line_file"],
-        "level": "INFO",
-    }
-    # Uncomment to log SQL statements
-    # LOGGING["loggers"]["django.db.backends"] = {
-    #     "handlers": ["sql_line_file"],
-    #     "level": "DEBUG"
-    # }
-    LOGGING["loggers"]["core"] = {
-        "handlers": ["console", "flat_line_file"],
+    LOGGING["loggers"]["appname"] = {
         "level": "DEBUG",
     }
-
-structlog.configure(
-    processors=[
-        structlog.contextvars.merge_contextvars,
-        structlog.stdlib.filter_by_level,
-        structlog.processors.TimeStamper(fmt="iso"),
-        structlog.stdlib.add_logger_name,
-        structlog.stdlib.add_log_level,
-        structlog.stdlib.PositionalArgumentsFormatter(),
-        structlog.processors.StackInfoRenderer(),
-        structlog.processors.format_exc_info,
-        structlog.processors.UnicodeDecoder(),
-        structlog.stdlib.ProcessorFormatter.wrap_for_formatter,
-    ],
-    logger_factory=structlog.stdlib.LoggerFactory(),
-    cache_logger_on_first_use=True,
-)
+    # Uncomment to log SQL statements to console
+    # LOGGING["loggers"]["django.db.backends"] = {
+    #     "handlers": ["console"],
+    #     "level": "DEBUG",
+    #     "propagate": False,
+    # }
 
 # snoop
 
