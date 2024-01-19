@@ -1,4 +1,4 @@
-from allauth.account.forms import SignupForm
+from allauth.account.forms import LoginForm, SignupForm
 from django import forms
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.forms.renderers import TemplatesSetting
@@ -10,7 +10,7 @@ from .models import User, UserFeedback
 
 
 class CustomFormRenderer(TemplatesSetting):
-    form_template_name = "forms/custom.html"
+    field_template_name = "forms/field.html"
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -23,6 +23,13 @@ class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = User
         fields = ("email", "username")
+
+
+class CustomLoginForm(LoginForm):
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request", None)
+        super(CustomLoginForm, self).__init__(*args, **kwargs)
+        self.fields["password"].help_text = None
 
 
 class AcceptTermsSignupForm(SignupForm):

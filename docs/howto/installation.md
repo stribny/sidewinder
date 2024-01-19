@@ -16,9 +16,9 @@ git clone https://github.com/stribny/sidewinder
 
 ## Prerequisites
 
-### Install Python 3.9+
+### Install Python 3.10+
 
-Before installing Sidewinder, you will need Python 3.9 and [Poetry](https://python-poetry.org/) dependency manager.
+Before installing Sidewinder, you will need Python 3.10 and [Poetry](https://python-poetry.org/) dependency manager.
 
 ### Install Poetry
 

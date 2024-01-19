@@ -64,6 +64,7 @@ MIDDLEWARE = [
     "django_htmx.middleware.HtmxMiddleware",
     "django.contrib.flatpages.middleware.FlatpageFallbackMiddleware",
     "django_structlog.middlewares.RequestMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 if DEBUG:
@@ -210,7 +211,7 @@ ACCOUNT_EMAIL_VERIFICATION = "optional"
 ACCOUNT_EMAIL_SUBJECT_PREFIX = env.str("ALLAUTH_ACCOUNT_EMAIL_SUBJECT_PREFIX")
 
 ACCOUNT_FORMS = {
-    "login": "allauth.account.forms.LoginForm",
+    "login": "appname.core.forms.CustomLoginForm",
     "signup": "appname.core.forms.AcceptTermsSignupForm",
     "add_email": "allauth.account.forms.AddEmailForm",
     "change_password": "allauth.account.forms.ChangePasswordForm",
@@ -443,9 +444,6 @@ if DEBUG:
     #     "propagate": False,
     # }
 
-# snoop
-
-if DEBUG:
     import snoop
 
     snoop.install()
