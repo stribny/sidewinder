@@ -43,5 +43,8 @@ monitor:
 createsuperuser:
 	ssh -t $(TARGET) "cd /srv/$(APP_NAME) && sudo -u $(PROJECT_USER) poetry run ./manage.py createsuperuser"
 
+dbshell:
+	ssh -t $(TARGET) "cd /srv/$(APP_NAME) && sudo -u $(PROJECT_USER) poetry run ./manage.py dbshell"
+
 upgrade:
 	ansible-playbook system_upgrade.yml -i myhosts.ini --extra-vars "@myvars.yml"
