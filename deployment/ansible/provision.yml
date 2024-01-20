@@ -40,6 +40,7 @@
         - rsync
         - jq
         - bat
+        - python3-devel
 
     - name: "Install Python packages"
       pip: "name={{ item }}  state=present"
