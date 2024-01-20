@@ -35,6 +35,7 @@
         - caddy
         - postgresql
         - postgresql-server
+        - postgis
         - redis
         - rsync
         - jq
@@ -225,6 +226,15 @@
         owner: "{{ project_user }}"
       become: yes
       become_user: postgres
+
+    - name: "Install PostGIS extension"
+      community.postgresql.postgresql_ext:
+        name: postgis
+        db: "{{ db_name }}"
+      become: yes
+      become_user: postgres
+      notify:
+        - restart postgres
 
     # Redis
 
