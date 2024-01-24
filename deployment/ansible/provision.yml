@@ -41,6 +41,9 @@
         - jq
         - bat
         - python3-devel
+        - python3-cffi
+        - libffi-devel
+        - "@Development tools"
 
     - name: "Install Python packages"
       pip: "name={{ item }}  state=present"
