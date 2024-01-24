@@ -208,7 +208,7 @@
       register: postgres_data
 
     - name: "Initialize PostgreSQL"
-      shell: "postgresql-setup initdb"
+      shell: "postgresql-setup initdb --locale=en-x-icu"
       when: not postgres_data.stat.exists
  
     - name: "Start and enable services"
@@ -228,6 +228,9 @@
         state: present
         name: "{{ db_name }}"
         owner: "{{ project_user }}"
+        lc_collate: "en-x-icu"
+        lc_ctype: "en-x-icu"
+        template: template0
       become: yes
       become_user: postgres
 
