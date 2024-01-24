@@ -10,7 +10,7 @@
 
   tasks:
   - name: Upgrade all packages
-    raw: /usr/bin/dnf -y upgrade
+    raw: /usr/bin/dnf -y upgrade --refresh
 
   - name: Reboot system
     raw: /usr/sbin/reboot
