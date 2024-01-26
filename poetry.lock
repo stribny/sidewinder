@@ -677,6 +677,21 @@ asgiref = ">=3.6"
 Django = ">=3.2"
 
 [[package]]
+name = "django-dbbackup"
+version = "4.1.0"
+description = "Management commands to help backup and restore a project database and media."
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "django-dbbackup-4.1.0.tar.gz", hash = "sha256:c411d38d0f8e60ab3254017278c14ebd75d4001b5634fc73be7fbe8a5260583b"},
+    {file = "django_dbbackup-4.1.0-py3-none-any.whl", hash = "sha256:c539b5246b429a22a8efadbab3719ee6b8eda45c66c4ff6592056c590d51c782"},
+]
+
+[package.dependencies]
+django = ">=2.2"
+pytz = "*"
+
+[[package]]
 name = "django-debug-toolbar"
 version = "4.2.0"
 description = "A configurable set of panels that display various debug information about the current request/response."
@@ -3131,4 +3146,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "92cea51ac0afde84e083fb675abfd49973a9d4979f3ff5916da502cd3e9bd9fb"
+content-hash = "a18fa474299400db496c962f94b9f598cb90e637e2c4139ad2378c8cb0f94986"

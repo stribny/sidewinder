@@ -26,6 +26,7 @@ rich = "13.7.0"
 huey = "2.5.0"
 redis = "5.0.1"
 django-huey-monitor = "0.9.0"
+django-dbbackup = "4.1.0"
 
 [tool.poetry.group.dev.dependencies]
 django-browser-reload = "1.12.1"

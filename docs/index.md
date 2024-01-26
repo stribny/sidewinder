@@ -77,3 +77,4 @@ Sidewinder is opinionated to provide smooth experience from starting a new proje
   - [Caddy](https://caddyserver.com/) as the reverse proxy server
   - [gunicorn](https://gunicorn.org/) as the WSGI HTTP Server 
   - `systemd` service
+  - Backup and restore commands
