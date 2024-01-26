@@ -109,6 +109,12 @@
         group="caddy"
         mode="u+rwx,g=+rx"
 
+    - name: "Create backup dir"
+      file: state=directory
+        path=/home/{{ project_user }}/backup
+        owner="{{ project_user }}"
+        mode="u+rwx,g=+rx"
+
     # Caddy
 
     - name: "Setup caddyfile with SSL"
@@ -349,6 +355,8 @@
           DJANGO_SSL={{ django_ssl }}
           DJANGO_MEDIA_ROOT=/var/www/{{ app_name }}/media/
           DJANGO_STATIC_ROOT=/var/www/{{ app_name }}/static/
+          DJANGO_BACKUP_ROOT=/home/{{ project_user }}/backup/
+          DBBACKUP_HOSTNAME={{ domain_name }}
           DJANGO_DEFAULT_FROM_EMAIL={{ django_default_from_email }}
           DJANGO_SERVER_EMAIL={{ django_server_email }}
           DJANGO_EMAIL_HOST={{ django_email_host }}

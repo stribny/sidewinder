@@ -29,6 +29,7 @@ With Sidewinder you will:
 * Write test fixtures efficiently using factoryboy and Faker
 * End-to-end test your frontend using Playwright
 * Deploy to your own VPS in the "It just works" style using Ansible
+* Have commands for backups and restores on your VPS
 * Not be limited in customization as all important files are exposed and ready to be changed
 
 ### Documentation

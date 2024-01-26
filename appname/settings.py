@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "huey.contrib.djhuey",
     "bx_django_utils",
     "huey_monitor",
+    "dbbackup",
     "appname.core",
 ]
 
@@ -183,6 +184,13 @@ STATIC_ROOT = env.str("DJANGO_STATIC_ROOT", str(BASE_DIR.joinpath("staticfiles")
 
 MEDIA_URL = "media/"
 MEDIA_ROOT = env.str("DJANGO_MEDIA_ROOT", str(BASE_DIR.joinpath("media")))
+
+# Backups
+
+DBBACKUP_STORAGE = "django.core.files.storage.FileSystemStorage"
+DBBACKUP_STORAGE_OPTIONS = {
+    "location": env.str("DJANGO_BACKUP_ROOT", str(BASE_DIR.joinpath("backup")))
+}
 
 # HTTPS settings
 

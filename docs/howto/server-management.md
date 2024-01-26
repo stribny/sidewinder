@@ -18,3 +18,8 @@ There are some neat commands in the provided `deployment/ansible/Makefile` that 
 - `make monitor` - Starts a system monitor on the server (to check on system usage like memory, disk, CPU, etc.)
 - `make createsuperuser` - Creates a superuser on the server
 - `make upgrade` - Updates all operating system packages and restarts the server
+- `make dbbackup` - Creates a new db backup
+- `make dbrestore` - Restores the last db backup
+- `make mediabackup` - Creates a new media backup
+- `make mediarestore` - Restores the last media backup
+- `make listbackups` - Lists available backups
