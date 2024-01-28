@@ -16,6 +16,7 @@ Sidewinder is opinionated to provide smooth experience from starting a new proje
 
 With Sidewinder you will:
 
+* Use all Django features like GeoDjango
 * Use a modern Python dependency manager Poetry to manage your application's virtual environment
 * Use environment variables instead of juggling multiple configuration files
 * Use HTMX for modern frontends

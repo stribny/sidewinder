@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.sites",
     "django.contrib.flatpages",
+    "django.contrib.gis",
     "django.forms",
     "django_extensions",
     "allauth",
@@ -110,6 +111,11 @@ DATABASES = {
         "DJ_DATABASE_CONN_STRING", default=f'sqlite:///{BASE_DIR / "db.sqlite3"}'
     )
 }
+
+database_engine = env.str("DJANGO_DATABASE_BACKEND", None)
+if database_engine:
+    DATABASES["default"]["ENGINE"] = database_engine
+
 CONN_MAX_AGE = None
 CONN_HEALTH_CHECKS = True
 

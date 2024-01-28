@@ -37,6 +37,10 @@
         - postgresql-server
         - postgis
         - redis
+        - gdal
+        - geos
+        - proj
+        - binutils
         - rsync
         - jq
         - bat
@@ -365,6 +369,7 @@
           DJANGO_EMAIL_HOST_PASSWORD={{ django_email_host_password }}
           ALLAUTH_ACCOUNT_EMAIL_SUBJECT_PREFIX={{ allauth_account_email_subject_prefix }}
           DJ_DATABASE_CONN_STRING=postgres:///{{ db_name }}
+          DJANGO_DATABASE_BACKEND=django.contrib.gis.db.backends.postgis
           ADMIN_EMAIL={{ admin_email }}
         dest: "/srv/{{ app_name }}/.env"
         owner: "{{ project_user }}"
