@@ -83,6 +83,14 @@ Alternatively, create a `sidewinder` PostgreSQL database on the port `5432` with
 DJ_DATABASE_CONN_STRING=postgres://postgres:postgres@localhost:5432/sidewinder
 ```
 
+If you want to use GeoDjango, specify GeoDjango database backend:
+
+```ini
+DJANGO_DATABASE_BACKEND=django.contrib.gis.db.backends.postgis
+```
+
+Make sure that you have PostGIS installed and enabled in the database (`CREATE EXTENSION postgis;`).
+
 ### Huey
 
 The task queue Huey can work without Redis in development. Set `HUEY_DEV=1` (default) to not use Redis in debug mode and `HUEY_DEV=0` otherwise.
