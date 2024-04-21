@@ -51,6 +51,7 @@ if DEBUG:
     INSTALLED_APPS += [
         "silk",
         "django_browser_reload",
+        "django_watchfiles",
         "debug_toolbar",
     ]
 

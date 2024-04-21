@@ -28,14 +28,10 @@ You can install Poetry with `pip`:
 pip install poetry
 ```
 
-### Install watchman
-
-For fast hot-reloading, make sure to install [watchman](https://facebook.github.io/watchman/docs/install.html).
-
 ### Install graphviz (optional)
 
 Graphviz is needed by [django-extensions](https://django-extensions.readthedocs.io) for generating model diagrams. You will need to figure out how to
-install it for your system. 
+install it for your system.
 
 On Fedora, use `dnf`:
 
@@ -45,7 +41,7 @@ dnf install graphviz graphviz-devel
 
 If you plan to use this feature, install dependencies in the next step with `--with graphviz`.
 
-You can also skip this step if you don't plan to use this feature. 
+You can also skip this step if you don't plan to use this feature.
 
 ## Install Sidewinder
 

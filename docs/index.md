@@ -49,7 +49,7 @@ Sidewinder is opinionated to provide smooth experience from starting a new proje
 ### Development Tools
 
 - [django-extensions](https://django-extensions.readthedocs.io/en/latest/) for additional Django commands like `shell_plus`
-- [django-browser-reload](https://github.com/adamchainz/django-browser-reload) and [pywatchman](https://github.com/facebook/watchman) for auto reloading
+- [django-browser-reload](https://github.com/adamchainz/django-browser-reload) and [django-watchfiles](https://github.com/adamchainz/django-watchfiles) for auto reloading
 - [django-debug-toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/) for debugging
 - [django-silk](https://github.com/jazzband/django-silk) for profiling requests and db queries
 - [snoop](https://pypi.org/project/snoop/) for ad-hoc debugging
@@ -76,6 +76,6 @@ Sidewinder is opinionated to provide smooth experience from starting a new proje
   - [Fedora](https://getfedora.org/) as the compatible operating system
   - [PostgreSQL](https://www.postgresql.org/) as the database
   - [Caddy](https://caddyserver.com/) as the reverse proxy server
-  - [gunicorn](https://gunicorn.org/) as the WSGI HTTP Server 
+  - [gunicorn](https://gunicorn.org/) as the WSGI HTTP Server
   - `systemd` service
   - Backup and restore commands
