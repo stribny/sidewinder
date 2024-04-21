@@ -48,15 +48,13 @@ Sidewinder is opinionated to provide smooth experience from starting a new proje
 
 ### Development Tools
 
+- [ruff](https://docs.astral.sh/ruff/) for automatic code formatting, linting, and import sorting
 - [django-extensions](https://django-extensions.readthedocs.io/en/latest/) for additional Django commands like `shell_plus`
 - [django-browser-reload](https://github.com/adamchainz/django-browser-reload) and [django-watchfiles](https://github.com/adamchainz/django-watchfiles) for auto reloading
 - [django-debug-toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/) for debugging
 - [django-silk](https://github.com/jazzband/django-silk) for profiling requests and db queries
 - [snoop](https://pypi.org/project/snoop/) for ad-hoc debugging
-- [Black](https://github.com/psf/black) for automatic code formatting
-- [flake8](https://flake8.pycqa.org/en/latest/) linter
-- [isort](https://pycqa.github.io/isort/) for sorting imports
-- [pre-commit](https://pre-commit.com/) hook configured with Black, Flake8, and isort
+- [pre-commit](https://pre-commit.com/) hook
 - [bandit](https://github.com/PyCQA/bandit) for finding security issues
 - Logging with [structlog](https://www.structlog.org/en/stable/) via [django-structlog](https://django-structlog.readthedocs.io/en/latest/)
 
