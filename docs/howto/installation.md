@@ -10,69 +10,28 @@ After you create your own GitHub repository from template or by [forking the rep
 
 Alternatively just clone the project directly from the main repo:
 
-```
+```bash
 git clone https://github.com/stribny/sidewinder
 ```
 
 ## Prerequisites
 
-### Install Python 3.10+
+Before installing Sidewinder, you will need the dependency manager [uv](https://docs.astral.sh/uv/) to be installed in order to invoke the `uv` command.
 
-Before installing Sidewinder, you will need Python 3.10 and [Poetry](https://python-poetry.org/) dependency manager.
+## Installing developer tooling
 
-### Install Poetry
+`uv` will automatically install all dependencies when `uv run` is executed. However, some development
+dependencies require specific installation instructions.
 
-You can install Poetry with `pip`:
-
-```
-pip install poetry
-```
-
-### Install graphviz (optional)
-
-Graphviz is needed by [django-extensions](https://django-extensions.readthedocs.io) for generating model diagrams. You will need to figure out how to
-install it for your system.
-
-On Fedora, use `dnf`:
-
-```
-dnf install graphviz graphviz-devel
-```
-
-If you plan to use this feature, install dependencies in the next step with `--with graphviz`.
-
-You can also skip this step if you don't plan to use this feature.
-
-## Install Sidewinder
-
-You can now install Sidewinder from the project's root:
+Run the following commands in the project's root directory:
 
 ```bash
-poetry install
+# Install pre-commit hooks
+uv run -- pre-commit install
 
-# or with mkdocs
+# Install Playwright
 
-poetry install --with docs
-
-# or with graphviz
-
-poetry install --with graphviz
-
-# install pre-commit hooks
-poetry run pre-commit install
-```
-
-From this point onwards, all commands should be run inside the created virtual environment. You can switch to the virtual environment with:
-
-```
-poetry shell
-```
-
-## Install Playwright
-
-```bash
-# inside virtual environment
-playwright install
+uv run -- playwright install
 ```
 
 Now, [configure the project](configuration.md).

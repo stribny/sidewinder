@@ -1,12 +1,14 @@
 # Start Sidewinder
 
-You can run the development server inside the Poetry's virtual environment. If this is the first time, don't forget to run Django's `migrate` management command before that.
+If this is the first time, don't forget to run Django's `migrate` management command before starting
+the server:
 
 ```bash
-# inside project root
-poetry shell
+uv run -- manage.py migrate
+```
 
-# inside virtual environment
-./manage.py migrate # first time
-./manage.py runserver
+You can then start the development web server:
+
+```bash
+uv run -- manage.py runserver
 ```

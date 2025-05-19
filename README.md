@@ -17,9 +17,9 @@ Sidewinder is opinionated to provide smooth experience from starting a new proje
 With Sidewinder you will:
 
 * Use all Django features like GeoDjango
-* Use a modern Python dependency manager Poetry to manage your application's virtual environment
+* Use a modern Python dependency manager uv
 * Use environment variables instead of juggling multiple configuration files
-* Use django-allauth to provide email-based and 3rd party authentication.
+* Use django-allauth to provide email-based and 3rd party authentication
 * Have a custom User model for ultimate flexibility
 * Have Django REST Framework at your disposal right from the start, including modern API docs, standardized error responses, and CORS configuration
 * Have a Huey task queue for background and periodic tasks

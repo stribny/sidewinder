@@ -18,7 +18,7 @@ Sidewinder is opinionated to provide smooth experience from starting a new proje
 ### Configuration
 
 - Good default project structure
-- Dependency management with [Poetry](https://python-poetry.org/) that makes it straightforward to manage virtual environments
+- Dependency management with [uv](https://docs.astral.sh/uv/)
 - Project configuration via environment variables thanks to [django-environ](https://django-environ.readthedocs.io/en/latest/)
 - Pre-configured for GeoDjango
 
