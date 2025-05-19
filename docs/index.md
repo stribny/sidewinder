@@ -32,7 +32,6 @@ Sidewinder is opinionated to provide smooth experience from starting a new proje
 
 - It is expected that you bring your own CSS/CSS framework
 - Basic one-file CSS is included to style authentication-related and example pages
-- Configured [htmx](https://htmx.org/) for smoother frontend interactions
 
 ### HTTP APIs
 
