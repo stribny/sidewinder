@@ -41,25 +41,25 @@ monitor:
 	ssh -t $(TARGET) "tiptop"
 
 createsuperuser:
-	ssh -t $(TARGET) "cd /srv/$(APP_NAME) && sudo -u $(PROJECT_USER) poetry run ./manage.py createsuperuser"
+	ssh -t $(TARGET) "cd /srv/$(APP_NAME) && sudo -u $(PROJECT_USER) uv run -- manage.py run ./manage.py createsuperuser"
 
 dbshell:
-	ssh -t $(TARGET) "cd /srv/$(APP_NAME) && sudo -u $(PROJECT_USER) poetry run ./manage.py dbshell"
+	ssh -t $(TARGET) "cd /srv/$(APP_NAME) && sudo -u $(PROJECT_USER) uv run -- manage.py run ./manage.py dbshell"
 
 dbbackup:
-	ssh -t $(TARGET) "cd /srv/$(APP_NAME) && sudo -u $(PROJECT_USER) poetry run ./manage.py dbbackup"
+	ssh -t $(TARGET) "cd /srv/$(APP_NAME) && sudo -u $(PROJECT_USER) uv run -- manage.py run ./manage.py dbbackup"
 
 dbrestore:
-	ssh -t $(TARGET) "cd /srv/$(APP_NAME) && sudo -u $(PROJECT_USER) poetry run ./manage.py dbrestore"
+	ssh -t $(TARGET) "cd /srv/$(APP_NAME) && sudo -u $(PROJECT_USER) uv run -- manage.py run ./manage.py dbrestore"
 
 mediabackup:
-	ssh -t $(TARGET) "cd /srv/$(APP_NAME) && sudo -u $(PROJECT_USER) poetry run ./manage.py mediabackup"
+	ssh -t $(TARGET) "cd /srv/$(APP_NAME) && sudo -u $(PROJECT_USER) uv run -- manage.py run ./manage.py mediabackup"
 
 mediarestore:
-	ssh -t $(TARGET) "cd /srv/$(APP_NAME) && sudo -u $(PROJECT_USER) poetry run ./manage.py mediarestore"
+	ssh -t $(TARGET) "cd /srv/$(APP_NAME) && sudo -u $(PROJECT_USER) uv run -- manage.py run ./manage.py mediarestore"
 
 listbackups:
-	ssh -t $(TARGET) "cd /srv/$(APP_NAME) && sudo -u $(PROJECT_USER) poetry run ./manage.py listbackups"
+	ssh -t $(TARGET) "cd /srv/$(APP_NAME) && sudo -u $(PROJECT_USER) uv run -- manage.py run ./manage.py listbackups"
 
 upgrade:
 	ansible-playbook system_upgrade.yml -i myhosts.ini --extra-vars "@myvars.yml"

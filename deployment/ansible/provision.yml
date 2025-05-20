@@ -53,7 +53,7 @@
       pip: "name={{ item }}  state=present"
       with_items:
         - psycopg2-binary # Required by ansible to create pg db/user
-        - poetry
+        - uv
         - tiptop
 
   tasks:
@@ -220,7 +220,7 @@
     - name: "Initialize PostgreSQL"
       shell: "postgresql-setup initdb"
       when: not postgres_data.stat.exists
- 
+
     - name: "Start and enable services"
       service: "name={{ item }} state=started enabled=yes"
       with_items:
@@ -299,6 +299,9 @@
 
     # Application | systemd service
 
+    # FIXME:
+    # ExecReload=
+
     - name: "Setup application service"
       copy:
         content: |
@@ -311,8 +314,7 @@
           User={{ project_user }}
           Group=caddy
           WorkingDirectory=/srv/{{ app_name }}
-          ExecReload=/usr/local/bin/poetry run /bin/kill -s HUP $MAINPID
-          ExecStart=/usr/local/bin/poetry run gunicorn appname.wsgi:application --workers 2 --bind unix:/var/run/{{ app_name }}/app.sock --capture-output
+          ExecStart=/usr/local/bin/uv run -- gunicorn appname.wsgi:application --workers 2 --bind unix:/var/run/{{ app_name }}/app.sock --capture-output
           KillMode=mixed
           TimeoutStopSec=5
           LimitNOFILE=4096
@@ -336,7 +338,7 @@
           User={{ project_user }}
           Group=caddy
           WorkingDirectory=/srv/{{ app_name }}
-          ExecStart=/usr/local/bin/poetry run ./manage.py run_huey -w 2
+          ExecStart=/usr/local/bin/uv run -- manage.py run_huey -w 2
           Restart=always
 
           [Install]
@@ -377,23 +379,15 @@
       tags:
         - deploy
 
-    # Application | install dependencies
+    # Application | set project user
 
     - set_fact:
         project_user: "{{ project_user }}"  # To be available for become_user
 
-    - name: "Run poetry install"
-      shell:
-        chdir: "/srv/{{ app_name }}/"
-        cmd: "poetry install --only main"
-      become_user: "{{ project_user }}"
-      tags:
-        - deploy
-
     # Application | copy static files
 
     - name: "Collect static files"
-      shell: "poetry run ./manage.py collectstatic --noinput"
+      shell: "uv run -- manage.py collectstatic --noinput"
       args:
         chdir: /srv/{{ app_name }}/
       become_user: "{{ project_user }}"
@@ -409,7 +403,7 @@
         mode: 'u+rwx'
 
     - name: "Run Django migration"
-      shell: "poetry run ./manage.py migrate --noinput"
+      shell: "uv run -- manage.py migrate --noinput"
       args:
         chdir: /srv/{{ app_name }}/
       become_user: "{{ project_user }}"
