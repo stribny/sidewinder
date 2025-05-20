@@ -107,7 +107,7 @@ WSGI_APPLICATION = "appname.wsgi.application"
 
 DATABASES = {
     "default": env.db_url(
-        "DJ_DATABASE_CONN_STRING", default=f'sqlite:///{BASE_DIR / "db.sqlite3"}'
+        "DJ_DATABASE_CONN_STRING", default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}"
     )
 }
 
