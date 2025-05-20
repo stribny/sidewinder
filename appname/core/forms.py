@@ -6,7 +6,7 @@ from django.utils import timezone
 from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
 
-from .models import User, UserFeedback
+from .models import User, UserFeedback, UserProfile
 
 
 class CustomFormRenderer(TemplatesSetting):
@@ -27,7 +27,6 @@ class CustomUserChangeForm(UserChangeForm):
 
 class CustomLoginForm(LoginForm):
     def __init__(self, *args, **kwargs):
-        self.request = kwargs.pop("request", None)
         super(CustomLoginForm, self).__init__(*args, **kwargs)
         self.fields["password"].help_text = None
 
@@ -65,12 +64,14 @@ class AcceptTermsSignupForm(SignupForm):
 
     def save(self, request):
         user = super(AcceptTermsSignupForm, self).save(request)
-        user.terms_accepted_at = timezone.now()
+        profile = UserProfile.objects.create(user=user)
+        profile.terms_accepted_at = timezone.now()
 
         if self.cleaned_data["marketing_list_accepted"]:
-            user.marketing_list_accepted_at = timezone.now()
+            profile.marketing_list_accepted_at = timezone.now()
 
-        user.save()
+        profile.save()
+        user.refresh_from_db()
         return user
 
 
@@ -79,7 +80,7 @@ class UpdateAccountForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ("first_name", "last_name", "avatar")
+        fields = ("first_name", "last_name")
 
 
 class UserFeedbackForm(forms.ModelForm):

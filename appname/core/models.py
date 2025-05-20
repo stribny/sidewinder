@@ -13,6 +13,12 @@ class BaseModel(models.Model):
 
 
 class User(AbstractUser):
+    def __str__(self):
+        return self.email
+
+
+class UserProfile(BaseModel):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
     terms_accepted_at = models.DateTimeField(blank=True, null=True)
     marketing_list_accepted_at = models.DateTimeField(blank=True, null=True)
     avatar = models.ImageField(_("avatar"), blank=True, null=True, upload_to="avatars/")
@@ -20,9 +26,6 @@ class User(AbstractUser):
     @property
     def marketing_list_accepted(self) -> bool:
         return bool(self.marketing_list_accepted_at)
-
-    def __str__(self):
-        return self.email
 
 
 class UserFeedback(BaseModel):

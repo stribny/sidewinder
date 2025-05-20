@@ -11,7 +11,12 @@ class CustomUserAdmin(UserAdmin):
     add_form = UserCreationForm
     form = UserChangeForm
     model = User
-    list_display = ["email", "username", "terms_accepted_at", "marketing_list_accepted"]
+    list_display = [
+        "email",
+        "username",
+        "terms_accepted_at",
+        "marketing_list_accepted_at",
+    ]
     readonly_fields = [
         "terms_accepted_at",
         "marketing_list_accepted_at",
@@ -19,13 +24,18 @@ class CustomUserAdmin(UserAdmin):
         "last_login",
     ]
 
+    def terms_accepted_at(self, obj):
+        return obj.profile.terms_accepted_at
+
+    def marketing_list_accepted_at(self, obj):
+        return obj.profile.marketing_list_accepted_at
+
 
 CustomUserAdmin.fieldsets += (
     (
         "Sign up details",
         {"fields": ("terms_accepted_at", "marketing_list_accepted_at")},
     ),
-    ("Avatar", {"fields": ("avatar",)}),
 )
 
 admin.site.register(User, CustomUserAdmin)
