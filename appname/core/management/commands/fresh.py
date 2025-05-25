@@ -1,7 +1,7 @@
 from django.core import management
 from django.core.management.base import BaseCommand
 
-from appname.core.models import User
+from appname.core.models import User, UserProfile
 
 
 class Command(BaseCommand):
@@ -18,6 +18,7 @@ class Command(BaseCommand):
             is_staff=True,
         )
         superuser.set_password("superuser")
+        UserProfile.objects.create(user=superuser)
         superuser.save()
 
         self.stdout.write(self.style.SUCCESS("Fresh environment is ready!"))
