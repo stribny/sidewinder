@@ -35,7 +35,7 @@ host_name ansible_user=root   ansible_host=29.38.208.180
 
 ## Configure vars.yml
 
-Now it's time to configure your server settings. Copy `deployment/ansible/vars.yml` to `deployment/ansible/myvars.yml`. You might eventually want to configure each property in the file for your production server. 
+Now it's time to configure your server settings. Copy `deployment/ansible/vars.yml` to `deployment/ansible/myvars.yml`. You might eventually want to configure each property in the file for your production server.
 
 At the minimum to run a successful test deployment you will need to change:
 
@@ -70,7 +70,7 @@ Other variables like `project_user`, `app_name`, `db_name` will be used to confi
 The provided Ansible playbook will download a copy of your Git repository and deploy the last committed version from the `master` branch to the specified server. Everything that you want to deploy needs to be pushed to your remote Git repository.
 
 ```bash
-cd deployment/ansible 
+cd deployment/ansible
 make provision
 ```
 
@@ -91,15 +91,11 @@ You can verify it by visiting your domain on https or your IP address on http in
 If the server is up and running we can create our server superuser:
 
 ```bash
-# inside deployment/ansible 
+# inside deployment/ansible
 make createsuperuser
 ```
 
 ## Final steps
 
-There are some final steps to do if you want all features to work:
-
-1. Log in to your Django admin at `ipaddress-or-domain/dj-admin/` and create a flat page for URL `/terms/`.
-
-
+Now log in to your Django admin at `ipaddress-or-domain/dj-admin/` and check that everything works.
 

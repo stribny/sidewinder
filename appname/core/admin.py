@@ -4,7 +4,7 @@ from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import gettext_lazy as _
 
 from .forms import UserChangeForm, UserCreationForm
-from .models import User, UserFeedback
+from .models import User
 
 
 class CustomUserAdmin(UserAdmin):
@@ -39,7 +39,6 @@ CustomUserAdmin.fieldsets += (
 )
 
 admin.site.register(User, CustomUserAdmin)
-admin.site.register(UserFeedback)
 
 admin_name = f"{settings.PROJECT_NAME} {_('Administration')}"
 admin.site.site_title = admin_name

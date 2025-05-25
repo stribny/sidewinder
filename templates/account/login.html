@@ -4,8 +4,10 @@
 {% block content_auth_form %}
 <h1>{% trans "Log in" %}</h1>
 <form method="post">
-  {% csrf_token %}
-  {{ form }}
+  <fieldset>
+    {% csrf_token %}
+    {{ form }}
+  </fieldset>
   <button type="submit">{% trans "Log in" %}</button>
 </form>
 <p>
@@ -15,7 +17,7 @@
   <a href="{% url 'account_reset_password' %}">{% trans "Forgot password?" %}</a>
 </p>
 {% if debug %}
-<section class="section-development-only">
+<section>
   <form method="post" action="{% url 'login_as_user' %}">
     {% csrf_token %}
     <label for="select_user">{% trans "Log in as:" %}</label>

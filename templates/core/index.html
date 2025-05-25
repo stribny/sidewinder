@@ -3,18 +3,15 @@
 {% load i18n %}
 {% block full_title %}{{ PROJECT_NAME }}{% endblock full_title %}
 {% block content %}
-<section class="page page--wide">
+<section>
     {% include "includes/messages.html" %}
     <h1>
         {{ PROJECT_NAME }}
     </h1>
-    <h3>
-        Pages
-    </h3>
     <table>
         <thead>
             <tr>
-                <td>Page</td><td>Detail</td>
+                <td>URL</td><td>Detail</td>
             </tr>
         </thead>
         <tbody>
@@ -34,47 +31,17 @@
                 <td><a href="/accounts/settings/">settings</a></td><td>Settings page</td>
             </tr>
             <tr>
-                <td><a href="/feedback/">feedback</a></td><td>Feedback form</td>
-            </tr>
-            <tr>
-                <td><a href="/terms/">terms</a></td><td>Terms (requires adding a flatpage)</td>
-            </tr>
-            <tr>
                 <td><a href="/silk/">silk</a></td><td>Silk profiling tool</td>
             </tr>
             <tr>
                 <td><a href="/api/redoc/">api/redoc</a></td><td>API docs</td>
             </tr>
-        </tbody>
-    </table>
-    <h3>
-        API endpoints
-    </h3>
-    <table>
-        <thead>
-            <tr>
-                <td>Endpoint</td><td>Detail</td>
-            </tr>
-        </thead>
-        <tbody>
             <tr>
                 <td><a href="/api/token-auth/">api/token-auth</a></td><td>Token authentication</td>
             </tr>
             <tr>
                 <td><a href="/api/protected/">api/protected</a></td><td>Example endpoint that requires token to be accessed</td>
             </tr>
-        </tbody>
-    </table>
-    <h3>
-        Tools
-    </h3>
-    <table>
-        <thead>
-            <tr>
-                <td>Tool</td><td>Detail</td>
-            </tr>
-        </thead>
-        <tbody>
             <tr>
                 <td><a href="http://localhost:8025">mailhog</a></td><td>Mailhog (has to be started via Docker Compose)</td>
             </tr>

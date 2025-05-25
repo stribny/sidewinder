@@ -6,7 +6,7 @@ from django.utils import timezone
 from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
 
-from .models import User, UserFeedback, UserProfile
+from .models import User, UserProfile
 
 
 class CustomFormRenderer(TemplatesSetting):
@@ -81,11 +81,3 @@ class UpdateAccountForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ("first_name", "last_name")
-
-
-class UserFeedbackForm(forms.ModelForm):
-    required_css_class = "required"
-
-    class Meta:
-        model = UserFeedback
-        fields = ["email", "text"]

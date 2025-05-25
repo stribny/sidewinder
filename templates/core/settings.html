@@ -2,22 +2,18 @@
 {% load i18n %}
 {% block title %}{% translate "Settings" %}{% endblock title %}
 {% block content %}
-<section class="page page--wide">
-  <h3 class="project-name"><a href="{% url 'index' %}">{{ PROJECT_NAME }}</a></h3>
+<section>
+  <h3><a href="{% url 'index' %}">{{ PROJECT_NAME }}</a></h3>
   {% include "includes/messages.html" %}
 
   <h2>{% translate "Account" %}</h2>
-  
+
   <form id="form_logout" method="post" action="{% url 'account_logout' %}">
     {% csrf_token %}
     <button type="submit">{% translate "Log out" %}</button>
   </form>
-  
-  <h2>{% translate "Profile" %}</h2>
 
-  {% if user.avatar %}
-    <img src="{{ user.avatar.url }}" class="avatar">
-  {% endif %}
+  <h2>{% translate "Profile" %}</h2>
 
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
@@ -26,7 +22,7 @@
   </form>
 
   <h2>{% translate "Delete account" %}</h2>
-  
+
   <form id="form_delete_account" method="post" action="{% url 'delete_account' %}">
     {% csrf_token %}
     <button type="submit">{% translate "Permanently delete" %}</button>

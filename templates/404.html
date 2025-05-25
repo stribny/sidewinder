@@ -2,7 +2,7 @@
 {% load i18n %}
 {% block title %}{% translate "Page not found" %}{% endblock title %}
 {% block content %}
-<section class="page">
+<section>
     <h1>{% translate "Page not found" %}</h1>
     <p>{% translate "The requested page doesn't exist on the server." %}</p>
     <p><a href="{% url 'index' %}">{% translate "Continue to home page" %}</a></p>

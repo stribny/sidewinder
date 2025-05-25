@@ -4,9 +4,11 @@
 {% block content_auth_form %}
 <h1>{% translate "Sign up" %}</h1>
 <form method="post">
-  {% csrf_token %}
-  {{ form }}
-  <button type="submit">{% translate "Sign up" %}</button>
+    <fieldset>
+        {% csrf_token %}
+        {{ form }}
+    </fieldset>
+    <button type="submit">{% translate "Sign up" %}</button>
 </form>
 <p>
   <a href="{% url 'terms' %}">{% translate "Terms of Service" %}</a>

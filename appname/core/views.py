@@ -7,7 +7,7 @@ from django.shortcuts import redirect
 from django.template.response import TemplateResponse
 from django.utils.translation import gettext as _
 
-from .forms import UpdateAccountForm, UserFeedbackForm
+from .forms import UpdateAccountForm
 from .models import User
 
 
@@ -17,22 +17,6 @@ def index(request):
 
 def terms(request):
     return TemplateResponse(request, "core/terms.html", {})
-
-
-def feedback(request):
-    form = UserFeedbackForm()
-
-    if request.method == "POST":
-        form = UserFeedbackForm(request.POST)
-
-        if form.is_valid():
-            model = form.save()
-            model.user = request.user if request.user.is_authenticated else None
-            model.save()
-            form = UserFeedbackForm()
-            messages.success(request, _("Feedback has been submitted. Thank you!"))
-
-    return TemplateResponse(request, "core/feedback.html", {"form": form})
 
 
 @login_required

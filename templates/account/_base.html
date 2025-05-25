@@ -1,8 +1,8 @@
 {% extends '_base.html' %}
 {% block content %}
-<section class="page">
+<section style="max-width: 500px;">
   {% block content_auth_info %}
-  <h3 class="project-name"><a href="{% url 'index' %}">{{ PROJECT_NAME }}</a></h3>
+  <p><a href="{% url 'index' %}">{{ PROJECT_NAME }}</a></p>
   {% include "includes/messages.html" %}
   {% endblock content_auth_info %}
   {% block content_auth_form %}
