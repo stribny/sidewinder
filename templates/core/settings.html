@@ -2,7 +2,7 @@
 {% load i18n %}
 {% block title %}{% translate "Settings" %}{% endblock title %}
 {% block content %}
-<section>
+<section style="max-width: 500px;">
   <h3><a href="{% url 'index' %}">{{ PROJECT_NAME }}</a></h3>
   {% include "includes/messages.html" %}
 
