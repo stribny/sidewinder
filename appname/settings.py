@@ -300,9 +300,7 @@ if not HUEY_DEV and DEBUG:
 
 SHELL_PLUS = "ipython"
 SHELL_PLUS_PRINT_SQL = True
-SHELL_PLUS_IMPORTS = [
-    "from appname.core.services.email import EmailService",
-]
+SHELL_PLUS_IMPORTS = []
 
 # Logging
 
