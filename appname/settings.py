@@ -170,7 +170,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "core.User"
 
-FORM_RENDERER = "appname.core.forms.CustomFormRenderer"
+FORM_RENDERER = "django.forms.renderers.TemplatesSetting"
 
 # Static files
 

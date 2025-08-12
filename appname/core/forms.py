@@ -1,16 +1,11 @@
 from allauth.account.forms import LoginForm, SignupForm
 from django import forms
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
-from django.forms.renderers import TemplatesSetting
 from django.utils import timezone
 from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
 
 from .models import User, UserProfile
-
-
-class CustomFormRenderer(TemplatesSetting):
-    field_template_name = "forms/field.html"
 
 
 class CustomUserCreationForm(UserCreationForm):
