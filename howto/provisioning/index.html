@@ -820,7 +820,7 @@
 <span class="na">host_name ansible_user</span><span class="o">=</span><span class="s">root   ansible_host=29.38.208.180</span>
 </code></pre></div>
 <h2 id="configure-varsyml">Configure vars.yml</h2>
-<p>Now it's time to configure your server settings. Copy <code>deployment/ansible/vars.yml</code> to <code>deployment/ansible/myvars.yml</code>. You might eventually want to configure each property in the file for your production server. </p>
+<p>Now it's time to configure your server settings. Copy <code>deployment/ansible/vars.yml</code> to <code>deployment/ansible/myvars.yml</code>. You might eventually want to configure each property in the file for your production server.</p>
 <p>At the minimum to run a successful test deployment you will need to change:</p>
 <ul>
 <li><code>project_name</code> to be the name of your application, website or app, e.g. <code>My website</code></li>
@@ -850,7 +850,7 @@
 </div>
 <h2 id="run-ansible-playbook">Run Ansible playbook</h2>
 <p>The provided Ansible playbook will download a copy of your Git repository and deploy the last committed version from the <code>master</code> branch to the specified server. Everything that you want to deploy needs to be pushed to your remote Git repository.</p>
-<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>deployment/ansible<span class="w"> </span>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>deployment/ansible
 make<span class="w"> </span>provision
 </code></pre></div>
 <div class="admonition warning">
@@ -865,14 +865,11 @@ make<span class="w"> </span>provision
 </div>
 <h2 id="create-a-superuser">Create a superuser</h2>
 <p>If the server is up and running we can create our server superuser:</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># inside deployment/ansible </span>
+<div class="highlight"><pre><span></span><code><span class="c1"># inside deployment/ansible</span>
 make<span class="w"> </span>createsuperuser
 </code></pre></div>
 <h2 id="final-steps">Final steps</h2>
-<p>There are some final steps to do if you want all features to work:</p>
-<ol>
-<li>Log in to your Django admin at <code>ipaddress-or-domain/dj-admin/</code> and create a flat page for URL <code>/terms/</code>.</li>
-</ol>
+<p>Now log in to your Django admin at <code>ipaddress-or-domain/dj-admin/</code> and check that everything works.</p>
 
 
 
