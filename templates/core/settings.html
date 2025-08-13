@@ -3,18 +3,16 @@
 {% block title %}{% translate "Settings" %}{% endblock title %}
 {% block content %}
 <section style="max-width: 500px;">
-  <h3><a href="{% url 'index' %}">{{ PROJECT_NAME }}</a></h3>
+  <p><a href="{% url 'index' %}">{{ PROJECT_NAME }}</a></p>
   {% include "includes/messages.html" %}
 
   <h2>{% translate "Account" %}</h2>
-
   <form id="form_logout" method="post" action="{% url 'account_logout' %}">
     {% csrf_token %}
     <button type="submit">{% translate "Log out" %}</button>
   </form>
 
   <h2>{% translate "Profile" %}</h2>
-
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form }}
@@ -22,7 +20,6 @@
   </form>
 
   <h2>{% translate "Delete account" %}</h2>
-
   <form id="form_delete_account" method="post" action="{% url 'delete_account' %}">
     {% csrf_token %}
     <button type="submit">{% translate "Permanently delete" %}</button>
