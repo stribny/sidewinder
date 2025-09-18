@@ -18,3 +18,8 @@ repos:
     - id: ruff-check
     # Run the formatter.
     - id: ruff-format
+-   repo: https://github.com/adamchainz/django-upgrade
+    rev: ae0267712cd26a78cb99c40ab4a01984072dcd29  # frozen: 1.28.0
+    hooks:
+    -   id: django-upgrade
+        args: [--target-version, "5.2"]

@@ -7,6 +7,7 @@ from .forms import UserChangeForm, UserCreationForm
 from .models import User
 
 
+@admin.register(User)
 class CustomUserAdmin(UserAdmin):
     add_form = UserCreationForm
     form = UserChangeForm
@@ -38,7 +39,6 @@ CustomUserAdmin.fieldsets += (
     ),
 )
 
-admin.site.register(User, CustomUserAdmin)
 
 admin_name = f"{settings.PROJECT_NAME} {_('Administration')}"
 admin.site.site_title = admin_name
