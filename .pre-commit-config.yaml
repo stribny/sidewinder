@@ -1,4 +1,15 @@
 repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c  # frozen: v6.0.0
+  hooks:
+    - id: check-added-large-files
+    - id: check-case-conflict
+    - id: check-merge-conflict
+    - id: check-symlinks
+    - id: check-toml
+    - id: end-of-file-fixer
+    - id: trailing-whitespace
+    - id: fix-byte-order-marker
 - repo: https://github.com/astral-sh/ruff-pre-commit
   # Ruff version.
   rev: a113f03edeabb71305f025e6e14bd2cd68660e29  # frozen: v0.13.1
