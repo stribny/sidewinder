@@ -28,5 +28,5 @@ nav:
       - Server provisioning: 'howto/provisioning.md'
       - Deployment: 'howto/deployment.md'
       - Server management: 'howto/server-management.md'
-    - Reference: 
+    - Reference:
       - Commands: 'reference/commands.md'

@@ -22,7 +22,7 @@ make deploy
 We can identify a specific application version using a git branch (like `master`), git tag (like `v1.0`), commit hash, or any other valid identifier. To deploy such specific application version we can set an environment variable called `APP_VERSION` to such identifier:
 
 ```bash
-# inside deployment/ansible 
+# inside deployment/ansible
 APP_VERSION="v1.0" make deploy
 ```
 

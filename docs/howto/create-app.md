@@ -1,7 +1,7 @@
 # Creating a new Django app
 
 [Django apps](https://docs.djangoproject.com/en/4.2/ref/applications/) make it possible to separate a Django project
-into multiple apps where each app can be dedicated to a different domain or other concern. Sidewinder comes with the `core` 
+into multiple apps where each app can be dedicated to a different domain or other concern. Sidewinder comes with the `core`
 Django application housing all the basic functionality in the kit but you are not limited to add more apps if you want to.
 
 !!! note
@@ -19,7 +19,7 @@ mkdir <appsfolder>/<newappname>
 ./manage.py startapp <newappname> <appsfolder>/<newappname>
 ```
 
-`<appsfolder>` will be either `appname` if you didn't rename anything yet or your new name if you have already renamed the project. It should be the parent directory of the `core` folder (your new app will be a sibling to `core`). 
+`<appsfolder>` will be either `appname` if you didn't rename anything yet or your new name if you have already renamed the project. It should be the parent directory of the `core` folder (your new app will be a sibling to `core`).
 
 `<newappname>` is how you want to name the new app.
 
@@ -33,6 +33,3 @@ Additionaly we will need to make some adjustments to make the new app available.
 2. Include `"<appsfolder>.<newappname>"` in the `INSTALLED_APPS` list in the `<appsfolder>/settings.py`.
 
 Now you should be able to apply the new migrations as usual and use the new app.
-
-
-

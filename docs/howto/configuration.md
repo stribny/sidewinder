@@ -53,7 +53,7 @@ DJANGO_EMAIL_HOST_PASSWORD=
 
 !!! info
 
-    The default email server values from `.env-example` refer to the local [Mailhog](https://github.com/mailhog/MailHog) instance that you can use to check outgoing email in development environment. If you 
+    The default email server values from `.env-example` refer to the local [Mailhog](https://github.com/mailhog/MailHog) instance that you can use to check outgoing email in development environment. If you
     want to test emails with MailHog you will need to set `SMTP_DEV=1` as env var and start local Mailhog with `docker compose up`.
 
 Replace to set default email prefix and origin address:
@@ -155,4 +155,3 @@ Alternatively, find and replace `appname.` with `myapp.` in all project files in
 ## Verify that everything works
 
 You can verify the configuration by [running the project](run.md).
-

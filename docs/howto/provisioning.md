@@ -98,4 +98,3 @@ make createsuperuser
 ## Final steps
 
 Now log in to your Django admin at `ipaddress-or-domain/dj-admin/` and check that everything works.
-
